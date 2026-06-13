@@ -3,12 +3,13 @@ from sqlalchemy import select
 from src.modules.orchestration.domain.entities import SessionModel, WorkflowModel
 from src.shared.ollama_client import generate_completion
 import uuid
+from typing import Optional, Any, cast
 
 class SessionMemoryService:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_or_create_session(self, session_id: str = None) -> SessionModel:
+    async def get_or_create_session(self, session_id: Optional[str] = None) -> SessionModel:
         if session_id:
             db_session = await self.session.get(SessionModel, uuid.UUID(session_id) if isinstance(session_id, str) else session_id)
             if db_session:
@@ -21,11 +22,12 @@ class SessionMemoryService:
 
     async def add_workflow_to_session(self, session_id: str, workflow_id: str, prompt: str):
         db_session = await self.get_or_create_session(session_id)
+        db_sess_any = cast(Any, db_session)
         
         # Update prompt history
-        history = list(db_session.prompt_history or [])
+        history = list(db_sess_any.prompt_history or [])
         history.append(prompt)
-        db_session.prompt_history = history
+        db_sess_any.prompt_history = history
         
         # Link workflow
         stmt = select(WorkflowModel).where(WorkflowModel.id == workflow_id)
@@ -37,7 +39,8 @@ class SessionMemoryService:
         
     async def compress_memory(self, session_id: str):
         db_session = await self.get_or_create_session(session_id)
-        prompts = db_session.prompt_history or []
+        db_sess_any = cast(Any, db_session)
+        prompts = db_sess_any.prompt_history or []
         
         if not prompts:
             return
@@ -51,8 +54,8 @@ class SessionMemoryService:
                 prompt=summary_prompt,
                 model="llama3"
             )
-            db_session.summaries = {
-                **db_session.summaries,
+            db_sess_any.summaries = {
+                **db_sess_any.summaries,
                 "intent_summary": summary.strip()
             }
             await self.session.commit()

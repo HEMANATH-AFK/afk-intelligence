@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 logger = logging.getLogger(__name__)
 
 try:
-    import chromadb
+    import chromadb  # type: ignore
     HAS_CHROMA = True
 except ImportError:
     HAS_CHROMA = False

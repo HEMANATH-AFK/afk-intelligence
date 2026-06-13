@@ -13,7 +13,7 @@ class ExecutionPolicy:
         self.max_runtime_seconds = 30
         self.max_output_bytes = 50000
 
-    def is_safe(self, command: str) -> (bool, str):
+    def is_safe(self, command: str) -> tuple[bool, str]:
         # 1. Check blocked patterns
         if any(pattern in command.lower() for pattern in self.blocked_patterns):
             return False, "Command contains blocked pattern."
