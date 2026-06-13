@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "afk-intelligence-backend"
+version = "0.1.0"
+description = "Local-first cognitive runtime for AFK-Intelligence"
+authors = ["Admin <admin@example.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.2"
+uvicorn = {extras = ["standard"], version = "^0.27.1"}
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.25"}
+asyncpg = "^0.29.0"
+pgvector = "^0.2.4"
+alembic = "^1.13.1"
+pydantic = {extras = ["email"], version = "^2.6.1"}
+pydantic-settings = "^2.1.0"
+celery = "^5.3.6"
+redis = "^5.0.1"
+ollama = "^0.1.6"
+sse-starlette = "^2.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-asyncio = "^0.23.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
