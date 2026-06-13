@@ -1,6 +1,6 @@
 import difflib
 import os
-from typing import Dict, List, Any
+from typing import Dict, List
 
 class ExecutionDiffEngine:
     def __init__(self):
@@ -14,7 +14,7 @@ class ExecutionDiffEngine:
                 try:
                     with open(path, 'r', encoding='utf-8') as f:
                         state[path] = f.read()
-                except:
+                except Exception:
                     pass
         return state
 

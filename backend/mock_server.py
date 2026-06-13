@@ -188,9 +188,9 @@ class MockHandler(http.server.SimpleHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length).decode('utf-8')
         try:
-            req = json.loads(post_data)
-        except:
-            req = {}
+            json.loads(post_data)
+        except Exception:
+            pass
 
         if self.path == '/api/v1/chat/workflows':
             # This is our new workflow creation endpoint!

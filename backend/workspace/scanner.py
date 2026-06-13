@@ -1,4 +1,3 @@
-import os
 import json
 from pathlib import Path
 
@@ -70,18 +69,27 @@ class WorkspaceScanner:
         if package_json:
             tech.append("Node.js")
             deps = {**package_json.get("dependencies", {}), **package_json.get("devDependencies", {})}
-            if "react" in deps: tech.append("React")
-            if "next" in deps: tech.append("Next.js")
-            if "express" in deps: tech.append("Express")
-            if "tailwindcss" in deps: tech.append("TailwindCSS")
-            if "typescript" in deps: tech.append("TypeScript")
-            if "mongoose" in deps or "mongodb" in deps: tech.append("MongoDB")
+            if "react" in deps:
+                tech.append("React")
+            if "next" in deps:
+                tech.append("Next.js")
+            if "express" in deps:
+                tech.append("Express")
+            if "tailwindcss" in deps:
+                tech.append("TailwindCSS")
+            if "typescript" in deps:
+                tech.append("TypeScript")
+            if "mongoose" in deps or "mongodb" in deps:
+                tech.append("MongoDB")
 
         if requirements_txt:
             tech.append("Python")
-            if "fastapi" in requirements_txt.lower(): tech.append("FastAPI")
-            if "django" in requirements_txt.lower(): tech.append("Django")
-            if "flask" in requirements_txt.lower(): tech.append("Flask")
+            if "fastapi" in requirements_txt.lower():
+                tech.append("FastAPI")
+            if "django" in requirements_txt.lower():
+                tech.append("Django")
+            if "flask" in requirements_txt.lower():
+                tech.append("Flask")
 
         return list(set(tech))
 

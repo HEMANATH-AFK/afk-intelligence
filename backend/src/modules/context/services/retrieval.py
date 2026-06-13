@@ -1,6 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from sqlalchemy.orm import selectinload
 from src.modules.context.domain.entities import DocumentChunkModel, FileMetadataModel
 from src.shared.ollama_client import get_embeddings
 from src.shared.redis_pubsub import publish_event

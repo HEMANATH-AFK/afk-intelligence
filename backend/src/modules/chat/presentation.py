@@ -39,7 +39,7 @@ async def create_workflow(body: ChatRequest, db=Depends(get_db)):
                 print(f"[OBSERVABILITY] Celery enqueue failed: {cel_err}. Running directly via asyncio task.")
                 asyncio.create_task(execute_workflow_loop(workflow_id, body.message))
         else:
-            print(f"[OBSERVABILITY] Redis/Celery is offline. Launching dynamic cognitive loop via local asyncio task.")
+            print("[OBSERVABILITY] Redis/Celery is offline. Launching dynamic cognitive loop via local asyncio task.")
             asyncio.create_task(execute_workflow_loop(workflow_id, body.message))
         
         print(f"[OBSERVABILITY] Workflow created: {workflow_id} with goal: '{body.message}'")

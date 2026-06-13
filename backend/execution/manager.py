@@ -1,10 +1,7 @@
 import asyncio
 import uuid
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from execution.risk import risk_classifier
-from execution.diff import diff_engine
-from execution.snapshots import rollback_manager
-from audit.logger import audit_logger
 
 class ExecutionManager:
     def __init__(self):

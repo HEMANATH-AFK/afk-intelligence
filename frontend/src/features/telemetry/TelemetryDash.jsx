@@ -45,8 +45,15 @@ export default function TelemetryDash() {
         {[...Array(20)].map((_, i) => (
           <motion.div 
             key={i}
-            animate={{ height: `${Math.random() * 60 + 20}%` }}
-            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            animate={{ 
+              height: [
+                `${((i * 7) % 60 + 20)}%`, 
+                `${((i * 13) % 60 + 20)}%`, 
+                `${((i * 3) % 60 + 20)}%`, 
+                `${((i * 7) % 60 + 20)}%`
+              ] 
+            }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut", delay: i * 0.05 }}
             className="flex-1 bg-cyan-500/20 rounded-t-sm"
           />
         ))}

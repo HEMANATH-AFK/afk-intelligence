@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Dict, Any
 from services.ollama_service import ollama_service
 
 class AgentRole(str, Enum):

@@ -46,7 +46,7 @@ Output ONLY JSON:
             start = response.find("{")
             end = response.rfind("}") + 1
             return json.loads(response[start:end])
-        except:
+        except Exception:
             return {"success": False, "confidence": 0.0, "analysis": "Failed to parse verification."}
 
 reflection_engine = ReflectionEngine()

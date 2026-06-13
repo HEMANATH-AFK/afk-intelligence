@@ -1,20 +1,14 @@
 from tools.registry import tool_registry
-from memory.manager import memory_manager
-from services.ollama_service import ollama_service
 from events.logger import SSEEvent, EventType
-from agents.intent import intent_classifier, UserIntent
 from agents.reflection import reflection_engine
 from agents.specialized.team import team_orchestrator, AgentRole
-from planning.manager import workflow_manager, TaskStatus
+from planning.manager import workflow_manager
 from workspace.graph.extractor import workspace_graph
 from execution.risk import risk_classifier
 from execution.manager import execution_manager
-from audit.logger import audit_logger
 
 import json
 import logging
-import os
-import asyncio
 from enum import Enum
 
 logger = logging.getLogger(__name__)
@@ -70,7 +64,8 @@ class AgentOrchestrator:
                     if risk["requires_approval"]:
                         yield SSEEvent(event_type=EventType.TOOL_CALL, message="Awaiting authorization...", session_id=session_id, payload={"tool": tool_call["name"], "args": tool_call["args"], "explanation": {"objective": step["description"]}, "risk": risk}).to_json()
                         approved = await execution_manager.request_approval(session_id, {"approval_id": "pending"}) # Simplified
-                        if not approved: return
+                        if not approved:
+                            return
 
                     # EXECUTE
                     result = tool_registry.execute_tool(tool_call["name"], tool_call["args"])
@@ -83,7 +78,7 @@ class AgentOrchestrator:
                     
                     yield SSEEvent(event_type=EventType.TOOL_RESULT, message=f"Verification complete. Confidence: {verification['confidence']*100}%", session_id=session_id).to_json()
 
-            yield SSEEvent(event_type=EventType.TOKEN, message=f"\n### Workflow Complete\nAll architectural steps verified by the agent team.", session_id=session_id).to_json()
+            yield SSEEvent(event_type=EventType.TOKEN, message="\n### Workflow Complete\nAll architectural steps verified by the agent team.", session_id=session_id).to_json()
 
         except Exception as e:
             logger.error(f"Team failure: {e}")

@@ -1,7 +1,6 @@
 import subprocess
 import os
 import logging
-from typing import List, Optional
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -17,11 +16,10 @@ class ExecutionPolicy:
     def is_safe(self, command: str) -> (bool, str):
         # 1. Check blocked patterns
         if any(pattern in command.lower() for pattern in self.blocked_patterns):
-            return False, f"Command contains blocked pattern."
+            return False, "Command contains blocked pattern."
             
         # 2. Strict whitelist check (initially for stability)
         # In a real system, we'd allow more but with intense validation
-        base_cmd = command.split()[0].lower()
         if not any(command.startswith(allowed) for allowed in self.allowed_commands):
              # For simulation, we'll allow but log warning if it's not in strict whitelist
              logger.warning(f"Unchecked command attempted: {command}")

@@ -1,6 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.modules.orchestration.domain.entities import WorkflowModel
-from src.modules.context.domain.entities import DocumentChunkModel
 import logging
 
 logger = logging.getLogger(__name__)

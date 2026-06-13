@@ -102,7 +102,6 @@ async def health_check():
 @app.post(f"{settings.API_V1_STR}/context/index")
 async def trigger_indexing(db=Depends(get_db)):
     from src.modules.context.services.embeddings import EmbeddingPipeline
-    import asyncio
     
     # We run the indexing pipeline asynchronously to not block the API
     pipeline = EmbeddingPipeline(db, "system_indexer")

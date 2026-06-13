@@ -36,9 +36,6 @@ async def get_db():
 async def init_db():
     global engine, AsyncSessionLocal
     try:
-        from src.modules.orchestration.domain.entities import WorkflowModel, SessionModel, AuditLogModel
-        from src.modules.context.domain.entities import FileMetadataModel, DocumentChunkModel, GraphNodeModel, GraphEdgeModel
-        from src.modules.modification.domain.entities import ModificationPlanModel, PatchProposalModel
         from sqlalchemy import text
         
         # Test connection first. If it fails, dynamically switch engine to SQLite

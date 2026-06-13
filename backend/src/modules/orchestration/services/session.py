@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from src.modules.orchestration.domain.entities import SessionModel, WorkflowModel
 from src.shared.ollama_client import generate_completion
-import json
+import uuid
 
 class SessionMemoryService:
     def __init__(self, session: AsyncSession):

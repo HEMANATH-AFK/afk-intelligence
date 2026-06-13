@@ -1,5 +1,4 @@
 from workspace.graph.extractor import workspace_graph
-import networkx as nx
 
 class ArchitectureSummarizer:
     def __init__(self):

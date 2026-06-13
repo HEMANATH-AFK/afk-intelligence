@@ -62,7 +62,8 @@ class WorkflowManager:
 
     async def advance_workflow(self, workflow_id: str):
         workflow = await self.get_workflow(workflow_id)
-        if not workflow: return
+        if not workflow:
+            return
         
         current_idx = workflow["current_step_index"]
         steps = workflow["steps"]

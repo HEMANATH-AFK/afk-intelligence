@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import time
 from src.core.database import AsyncSessionLocal

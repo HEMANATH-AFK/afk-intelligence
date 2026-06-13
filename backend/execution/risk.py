@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, Any, Tuple
+from typing import Dict, Any
 import re
 
 class RiskLevel(str, Enum):

@@ -1,14 +1,11 @@
-import os
 import uuid
 import logging
 from typing import List, Dict, Any
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 try:
     import chromadb
-    from chromadb.config import Settings
     HAS_CHROMA = True
 except ImportError:
     HAS_CHROMA = False
@@ -21,6 +18,7 @@ class SemanticRetrievalPipeline:
         self.client = None
         self.collection = None
         
+        global HAS_CHROMA
         if HAS_CHROMA:
             try:
                 self.client = chromadb.PersistentClient(path=self.persist_directory)

@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.core.database import get_db
 from src.modules.orchestration.domain.entities import SessionModel, WorkflowModel
-from src.modules.orchestration.services.session import SessionMemoryService
 from src.modules.orchestration.services.replay import WorkflowReplayService
 from src.workers.tasks import orchestrate_workflow_task
 

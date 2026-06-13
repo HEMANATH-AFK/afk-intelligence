@@ -1,6 +1,4 @@
-import os
 import ast
-import re
 from typing import List, Dict, Any
 from pathlib import Path
 
@@ -56,12 +54,12 @@ class CodeChunker:
             if not chunks:
                 return self.chunk_generic_file(file_path)
                 
-        except Exception as e:
+        except Exception:
             return self.chunk_generic_file(file_path)
             
         return chunks
 
-    def chunk_generic_file(self, file_path: Path) -> List[Dict[st, Any]]:
+    def chunk_generic_file(self, file_path: Path) -> List[Dict[str, Any]]:
         """Fallback line-based chunking with overlap."""
         chunks = []
         try:

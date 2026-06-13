@@ -2,7 +2,7 @@ import ast
 import os
 import networkx as nx
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Optional
 
 class GraphExtractor:
     def __init__(self, workspace_root: str):
@@ -65,7 +65,7 @@ class GraphExtractor:
                         # Module.function call
                         self.graph.add_edge(rel_path, f"{node.func.value.id}.{node.func.attr}", relationship='calls')
 
-        except Exception as e:
+        except Exception:
             # Skip unparseable files
             pass
 

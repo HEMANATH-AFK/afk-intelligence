@@ -1,5 +1,5 @@
 import json
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field, ValidationError
 from src.shared.ollama_client import generate_completion
 from src.modules.tools.registry import registry

@@ -1,8 +1,7 @@
-import uuid
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from src.core.database import get_db, AsyncSessionLocal
+from src.core.database import get_db
 from src.modules.modification.domain.entities import ModificationPlanModel, PatchProposalModel
 from src.modules.orchestration.domain.entities import WorkflowModel
 from src.modules.context.services.assembler import ContextAssembler
