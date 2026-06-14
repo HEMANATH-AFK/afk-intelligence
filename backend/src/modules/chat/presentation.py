@@ -11,6 +11,37 @@ from src.modules.orchestration.domain.entities import WorkflowModel
 
 router = APIRouter()
 
+PRESETS = [
+    {
+        "id": "refactor_auth",
+        "title": "Refactor Authentication",
+        "description": "Clean up helper functions and imports in python files",
+        "prompt": "Scan the workspace for Python auth/session helpers and refactor them to use a common validation logic."
+    },
+    {
+        "id": "write_unit_tests",
+        "title": "Write Unit Tests",
+        "description": "Generate comprehensive unit tests for our FastAPI endpoints",
+        "prompt": "Find all FastAPI routers in backend/src/modules and draft a set of Pytest test cases validating status codes."
+    },
+    {
+        "id": "optimize_queries",
+        "title": "Optimize SQL Queries",
+        "description": "Optimize raw SQL queries or DB index strategy",
+        "prompt": "Scan the DB models and find optimization opportunities for index mappings, then generate an implementation plan."
+    },
+    {
+        "id": "fix_eslint_errors",
+        "title": "Fix React Eslint Lints",
+        "description": "Detect and clean up standard frontend code linting errors",
+        "prompt": "Analyze the React components, find occurrences of impure rendering or syntax warnings, and generate a clean patch."
+    }
+]
+
+@router.get("/presets")
+async def get_presets():
+    return PRESETS
+
 class ChatRequest(BaseModel):
     message: str
     model: str = "llama3"
