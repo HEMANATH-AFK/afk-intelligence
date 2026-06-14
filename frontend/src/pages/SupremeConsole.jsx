@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useOrchestrationStore } from '../stores/useOrchestrationStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Play, Pause, RotateCcw, AlertTriangle, CheckCircle2, 
-  Terminal, ShieldCheck, Database, Compass, Settings as SettingsIcon,
-  HelpCircle, ChevronRight, MessageSquare, History, Check, X, ArrowUpRight,
-  Info, Cpu, BarChart3, AlertCircle, FileText, Search, Activity, Code
+  RotateCcw, CheckCircle2, Terminal, ShieldCheck, Database, Compass,
+  MessageSquare, History, Check, X, ArrowUpRight, Cpu, BarChart3,
+  AlertCircle, FileText, Activity, Code
 } from 'lucide-react';
 
 export default function SupremeConsole() {
@@ -72,9 +71,6 @@ export default function SupremeConsole() {
     setPrompt('');
   };
 
-  const getActiveSession = () => {
-    return sessions.find(s => s.id === activeSessionId) || sessions[0];
-  };
 
   return (
     <div className="flex h-screen w-screen bg-[#09090b] text-[#e4e4e7] font-sans overflow-hidden select-none antialiased">
