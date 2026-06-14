@@ -587,8 +587,8 @@ export default function SupremeConsole() {
                             </span>
                           </div>
 
-                          <div className="p-4 rounded bg-[#09090b] border border-white/[0.06] overflow-x-auto max-h-[250px]">
-                            <pre className="text-[11px] font-mono text-white/70 whitespace-pre">{patch.diff}</pre>
+                          <div className="p-4 rounded bg-[#09090b]/80 border border-white/[0.06] overflow-x-auto max-h-[350px]">
+                            {renderDiff(patch.diff)}
                           </div>
 
                           {/* Risk evaluation panel */}
@@ -881,6 +881,34 @@ function MetricRow({ label, value, highlight, alert }) {
       }`}>
         {value}
       </span>
+    </div>
+  );
+}
+
+function renderDiff(diffText) {
+  if (!diffText) return null;
+  const lines = diffText.split('\n');
+  return (
+    <div className="font-mono text-[11px] select-text">
+      {lines.map((line, idx) => {
+        let lineClass = 'text-white/60';
+        let bgClass = '';
+        if (line.startsWith('+') && !line.startsWith('+++')) {
+          lineClass = 'text-[#10b981] font-medium';
+          bgClass = 'bg-[#10b981]/5 px-1 rounded-sm border-l-2 border-[#10b981]/30';
+        } else if (line.startsWith('-') && !line.startsWith('---')) {
+          lineClass = 'text-[#ef4444] font-medium';
+          bgClass = 'bg-[#ef4444]/5 px-1 rounded-sm border-l-2 border-[#ef4444]/30';
+        } else if (line.startsWith('@@')) {
+          lineClass = 'text-indigo-400/80 font-semibold';
+          bgClass = 'bg-indigo-500/5 px-1 rounded-sm';
+        }
+        return (
+          <div key={idx} className={`py-0.5 leading-relaxed truncate ${bgClass} ${lineClass}`}>
+            {line}
+          </div>
+        );
+      })}
     </div>
   );
 }
