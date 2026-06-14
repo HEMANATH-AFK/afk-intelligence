@@ -34,6 +34,27 @@ export interface Session {
   workflows: Workflow[];
 }
 
+export interface ToolSchema {
+  name: string;
+  description: string;
+}
+
+export interface PresetPrompt {
+  id: string;
+  title: string;
+  description: string;
+  prompt: string;
+}
+
+export interface HealthState {
+  status: 'ok' | 'degraded' | 'error' | 'loading';
+  dependencies: {
+    postgres: 'ok' | 'error';
+    redis: 'ok' | 'error';
+    ollama: 'ok' | 'error';
+  };
+}
+
 type StreamStatus = 'CONNECTING' | 'STREAMING' | 'RECONNECTING' | 'DISCONNECTED' | 'COMPLETED' | 'FAILED';
 
 interface OrchestrationState {
@@ -51,6 +72,11 @@ interface OrchestrationState {
   // Selected patch for diff viewer
   selectedPatch: any | null;
 
+  // Premium Features state
+  tools: ToolSchema[];
+  presets: PresetPrompt[];
+  healthStatus: HealthState | null;
+
   // Actions
   createSession: () => string;
   selectSession: (sessionId: string) => void;
@@ -63,6 +89,9 @@ interface OrchestrationState {
   approvePlan: (planId: string) => Promise<void>;
   rejectPlan: (planId: string) => Promise<void>;
   triggerWorkspaceIndex: () => Promise<void>;
+  fetchTools: () => Promise<void>;
+  fetchPresets: () => Promise<void>;
+  checkHealth: () => Promise<void>;
 }
 
 // Global EventSource reference for cancellation
@@ -79,6 +108,9 @@ export const useOrchestrationStore = create<OrchestrationState>((set, get) => ({
   activeSurface: 'LIVE',
   activeInspectorTab: 'CONTEXT',
   selectedPatch: null,
+  tools: [],
+  presets: [],
+  healthStatus: null,
 
   createSession: () => {
     const newId = crypto.randomUUID();
@@ -440,6 +472,52 @@ export const useOrchestrationStore = create<OrchestrationState>((set, get) => ({
       await fetch('http://localhost:8000/api/v1/context/index', { method: 'POST' });
     } catch (err) {
       console.error('Failed to trigger indexing:', err);
+    }
+  },
+
+  fetchTools: async () => {
+    try {
+      const res = await fetch('http://localhost:8000/api/v1/orchestration/tools');
+      if (res.ok) {
+        const data = await res.json();
+        set({ tools: data });
+      }
+    } catch (err) {
+      console.error('Failed to fetch tools:', err);
+    }
+  },
+
+  fetchPresets: async () => {
+    try {
+      const res = await fetch('http://localhost:8000/api/v1/chat/presets');
+      if (res.ok) {
+        const data = await res.json();
+        set({ presets: data });
+      }
+    } catch (err) {
+      console.error('Failed to fetch presets:', err);
+    }
+  },
+
+  checkHealth: async () => {
+    try {
+      const res = await fetch('http://localhost:8000/health');
+      const data = await res.json();
+      const payload = res.status === 503 && data.detail ? data.detail : data;
+      set({
+        healthStatus: {
+          status: payload.status || 'degraded',
+          dependencies: payload.dependencies || { postgres: 'error', redis: 'error', ollama: 'error' }
+        }
+      });
+    } catch (err) {
+      console.error('Failed to check health:', err);
+      set({
+        healthStatus: {
+          status: 'error',
+          dependencies: { postgres: 'error', redis: 'error', ollama: 'error' }
+        }
+      });
     }
   }
 }));
