@@ -29,7 +29,9 @@ export default function SupremeConsole() {
     rejectPlan,
     triggerWorkspaceIndex,
     healthStatus,
-    checkHealth
+    checkHealth,
+    presets,
+    fetchPresets
   } = useOrchestrationStore();
 
   const [prompt, setPrompt] = useState('');
@@ -41,6 +43,11 @@ export default function SupremeConsole() {
       createSession();
     }
   }, [sessions, createSession]);
+
+  // Fetch prompt presets
+  useEffect(() => {
+    fetchPresets();
+  }, [fetchPresets]);
 
   // Poll dependencies health status
   useEffect(() => {
@@ -319,6 +326,29 @@ export default function SupremeConsole() {
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </form>
+
+                {/* Prompt Presets Quick-Select Bar */}
+                {presets && presets.length > 0 && (
+                  <div className="space-y-2">
+                    <span className="text-[9px] font-bold tracking-widest text-white/30 uppercase">Workflow Presets</span>
+                    <div className="grid grid-cols-2 gap-2">
+                      {presets.map(p => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => setPrompt(p.prompt)}
+                          className="p-3 rounded-lg bg-[#0f0f11] border border-white/[0.04] hover:border-indigo-500/30 text-left transition-all cursor-pointer group"
+                        >
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-indigo-400 transition-colors" />
+                            <span className="text-xs font-semibold text-white/80 group-hover:text-white transition-colors">{p.title}</span>
+                          </div>
+                          <span className="text-[10px] text-white/40 block leading-tight truncate">{p.description}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Workflow Timeline execution */}
                 {activeWorkflow ? (
