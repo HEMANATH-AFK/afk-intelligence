@@ -4,8 +4,13 @@ from src.core.database import get_db
 from src.modules.orchestration.domain.entities import SessionModel, WorkflowModel
 from src.modules.orchestration.services.replay import WorkflowReplayService
 from src.workers.tasks import orchestrate_workflow_task
+from src.modules.tools.registry import registry
 
 router = APIRouter()
+
+@router.get("/tools")
+async def get_tools():
+    return registry.get_tool_schemas()
 
 @router.get("/session/{session_id}/history")
 async def get_session_history(session_id: str, db: AsyncSession = Depends(get_db)):
