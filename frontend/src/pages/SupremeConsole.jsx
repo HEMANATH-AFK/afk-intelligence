@@ -27,7 +27,9 @@ export default function SupremeConsole() {
     loadWorkflowReplay,
     approvePlan,
     rejectPlan,
-    triggerWorkspaceIndex
+    triggerWorkspaceIndex,
+    healthStatus,
+    checkHealth
   } = useOrchestrationStore();
 
   const [prompt, setPrompt] = useState('');
@@ -39,6 +41,15 @@ export default function SupremeConsole() {
       createSession();
     }
   }, [sessions, createSession]);
+
+  // Poll dependencies health status
+  useEffect(() => {
+    checkHealth();
+    const timer = setInterval(() => {
+      checkHealth();
+    }, 10000);
+    return () => clearInterval(timer);
+  }, [checkHealth]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -162,6 +173,73 @@ export default function SupremeConsole() {
                 sidebarExpanded={sidebarExpanded}
                 onClick={() => setActiveSurface('MODIFICATION')} 
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Live System Health Widget */}
+        <div className="p-3 border-t border-white/[0.06] bg-white/[0.01]/40 space-y-2">
+          {sidebarExpanded && (
+            <div className="flex items-center justify-between text-[9px] font-bold tracking-widest text-white/30 uppercase">
+              <span>System Health</span>
+              <span className={`w-1.5 h-1.5 rounded-full ${
+                !healthStatus ? 'bg-white/20' :
+                healthStatus.status === 'ok' ? 'bg-emerald-500' :
+                healthStatus.status === 'degraded' ? 'bg-amber-500' : 'bg-rose-500'
+              }`} />
+            </div>
+          )}
+          
+          <div className="space-y-1">
+            {/* Postgres status */}
+            <div className="flex items-center justify-between text-[10px] text-white/50">
+              <div className="flex items-center gap-1.5">
+                <Database className="w-3 h-3 text-white/30" />
+                {sidebarExpanded && <span>Postgres</span>}
+              </div>
+              {sidebarExpanded && (
+                <span className={`text-[8px] font-mono px-1 rounded ${
+                  healthStatus?.dependencies?.postgres === 'ok' 
+                    ? 'bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]' 
+                    : 'bg-[#ef4444]/10 border border-[#ef4444]/20 text-[#ef4444]'
+                }`}>
+                  {healthStatus?.dependencies?.postgres === 'ok' ? 'ONLINE' : 'OFFLINE'}
+                </span>
+              )}
+            </div>
+
+            {/* Redis status */}
+            <div className="flex items-center justify-between text-[10px] text-white/50">
+              <div className="flex items-center gap-1.5">
+                <Activity className="w-3 h-3 text-white/30" />
+                {sidebarExpanded && <span>Redis PubSub</span>}
+              </div>
+              {sidebarExpanded && (
+                <span className={`text-[8px] font-mono px-1 rounded ${
+                  healthStatus?.dependencies?.redis === 'ok' 
+                    ? 'bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]' 
+                    : 'bg-[#ef4444]/10 border border-[#ef4444]/20 text-[#ef4444]'
+                }`}>
+                  {healthStatus?.dependencies?.redis === 'ok' ? 'ONLINE' : 'OFFLINE'}
+                </span>
+              )}
+            </div>
+
+            {/* Ollama status */}
+            <div className="flex items-center justify-between text-[10px] text-white/50">
+              <div className="flex items-center gap-1.5">
+                <Cpu className="w-3 h-3 text-white/30" />
+                {sidebarExpanded && <span>Ollama LLM</span>}
+              </div>
+              {sidebarExpanded && (
+                <span className={`text-[8px] font-mono px-1 rounded ${
+                  healthStatus?.dependencies?.ollama === 'ok' 
+                    ? 'bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]' 
+                    : 'bg-[#ef4444]/10 border border-[#ef4444]/20 text-[#ef4444]'
+                }`}>
+                  {healthStatus?.dependencies?.ollama === 'ok' ? 'ONLINE' : 'OFFLINE'}
+                </span>
+              )}
             </div>
           </div>
         </div>
