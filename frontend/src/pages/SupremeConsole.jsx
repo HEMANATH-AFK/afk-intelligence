@@ -31,7 +31,9 @@ export default function SupremeConsole() {
     healthStatus,
     checkHealth,
     presets,
-    fetchPresets
+    fetchPresets,
+    tools,
+    fetchTools
   } = useOrchestrationStore();
 
   const [prompt, setPrompt] = useState('');
@@ -48,6 +50,11 @@ export default function SupremeConsole() {
   useEffect(() => {
     fetchPresets();
   }, [fetchPresets]);
+
+  // Fetch tools schema registry
+  useEffect(() => {
+    fetchTools();
+  }, [fetchTools]);
 
   // Poll dependencies health status
   useEffect(() => {
@@ -641,8 +648,9 @@ export default function SupremeConsole() {
       {/* RIGHT INSPECTOR PANEL */}
       <div className="w-[340px] border-l border-white/[0.06] bg-[#0f0f11] flex flex-col h-full shrink-0">
         {/* Tabs Bar */}
-        <div className="h-14 border-b border-white/[0.06] flex items-center justify-around shrink-0 px-2">
+        <div className="h-14 border-b border-white/[0.06] flex items-center justify-around shrink-0 px-1">
           <InspectorTabButton active={activeInspectorTab === 'CONTEXT'} label="Context" onClick={() => setInspectorTab('CONTEXT')} />
+          <InspectorTabButton active={activeInspectorTab === 'TOOLS'} label="Tools" onClick={() => setInspectorTab('TOOLS')} />
           <InspectorTabButton active={activeInspectorTab === 'RELIABILITY'} label="Reliability" onClick={() => setInspectorTab('RELIABILITY')} />
           <InspectorTabButton active={activeInspectorTab === 'DIFF'} label="Patches" onClick={() => setInspectorTab('DIFF')} />
           <InspectorTabButton active={activeInspectorTab === 'AUDIT'} label="Audit" onClick={() => setInspectorTab('AUDIT')} />
@@ -673,6 +681,42 @@ export default function SupremeConsole() {
               </motion.div>
             )}
 
+            {activeInspectorTab === 'TOOLS' && (
+              <motion.div
+                key="tools"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1 }}
+                className="space-y-4"
+              >
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-white/30" />
+                  <span className="text-[10px] font-bold tracking-widest text-white/40 uppercase">Tools Registry</span>
+                </div>
+
+                <div className="space-y-2">
+                  {tools && tools.length > 0 ? (
+                    tools.map((t, idx) => (
+                      <div key={idx} className="p-3 rounded bg-[#09090b] border border-white/[0.06] space-y-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-white/90 font-mono">{t.name}</span>
+                          <span className="px-1.5 py-0.5 rounded text-[8px] font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-semibold">
+                            ACTIVE
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-white/40 leading-relaxed">{t.description}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="p-6 text-center text-xs text-white/30 border border-dashed border-white/[0.06] rounded-lg">
+                      No registered tools found.
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+
             {activeInspectorTab === 'RELIABILITY' && (
               <motion.div
                 key="reliability"
@@ -689,11 +733,61 @@ export default function SupremeConsole() {
 
                 {activeWorkflow && activeWorkflow.reliability ? (
                   <div className="space-y-4">
-                    <div className="p-5 rounded-lg bg-[#09090b] border border-white/[0.06] text-center space-y-1">
-                      <span className="text-3xl font-extrabold tracking-tight text-indigo-400">
-                        {activeWorkflow.reliability.reliability_score * 100}%
-                      </span>
-                      <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider">Overall Trustworthiness</p>
+                    <div className="p-5 rounded-lg bg-[#09090b] border border-white/[0.06] space-y-4">
+                      <div className="flex flex-col items-center justify-center space-y-2 relative">
+                        {/* Circular/Arc Gauge */}
+                        <div className="relative w-28 h-28 flex items-center justify-center">
+                          {/* Background Track */}
+                          <svg className="w-full h-full transform -rotate-90">
+                            <circle
+                              cx="56"
+                              cy="56"
+                              r="48"
+                              className="stroke-white/[0.04]"
+                              strokeWidth="8"
+                              fill="transparent"
+                            />
+                            {/* Color Boundaries Meter */}
+                            <motion.circle
+                              cx="56"
+                              cy="56"
+                              r="48"
+                              className={`${
+                                activeWorkflow.reliability.reliability_score >= 0.8 ? 'stroke-[#10b981]' :
+                                activeWorkflow.reliability.reliability_score >= 0.5 ? 'stroke-[#f59e0b]' : 'stroke-[#ef4444]'
+                              }`}
+                              strokeWidth="8"
+                              fill="transparent"
+                              strokeDasharray={2 * Math.PI * 48}
+                              initial={{ strokeDashoffset: 2 * Math.PI * 48 }}
+                              animate={{ strokeDashoffset: 2 * Math.PI * 48 * (1 - activeWorkflow.reliability.reliability_score) }}
+                              transition={{ duration: 1.2, ease: "easeOut" }}
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-2xl font-extrabold tracking-tight text-white/90">
+                              {Math.round(activeWorkflow.reliability.reliability_score * 100)}%
+                            </span>
+                            <span className="text-[8px] text-white/30 font-semibold uppercase tracking-wider">Reliability</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between text-[10px] text-white/40 border-t border-white/[0.04] pt-3">
+                        <div className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#ef4444]" />
+                          <span>Unsafe</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]" />
+                          <span>Caution</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
+                          <span>Safe</span>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="space-y-2">

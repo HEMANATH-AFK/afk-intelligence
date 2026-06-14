@@ -67,7 +67,7 @@ interface OrchestrationState {
   
   // Navigation Surfaces
   activeSurface: 'LIVE' | 'REPLAY' | 'WORKSPACE' | 'MODIFICATION' | 'SETTINGS';
-  activeInspectorTab: 'CONTEXT' | 'RELIABILITY' | 'DIFF' | 'AUDIT';
+  activeInspectorTab: 'CONTEXT' | 'RELIABILITY' | 'DIFF' | 'AUDIT' | 'TOOLS';
   
   // Selected patch for diff viewer
   selectedPatch: any | null;
@@ -81,7 +81,7 @@ interface OrchestrationState {
   createSession: () => string;
   selectSession: (sessionId: string) => void;
   setActiveSurface: (surface: 'LIVE' | 'REPLAY' | 'WORKSPACE' | 'MODIFICATION' | 'SETTINGS') => void;
-  setInspectorTab: (tab: 'CONTEXT' | 'RELIABILITY' | 'DIFF' | 'AUDIT') => void;
+  setInspectorTab: (tab: 'CONTEXT' | 'RELIABILITY' | 'DIFF' | 'AUDIT' | 'TOOLS') => void;
   setSelectedPatch: (patch: any | null) => void;
   startSSEStream: (prompt: string) => Promise<void>;
   closeWorkflowStream: () => void;
