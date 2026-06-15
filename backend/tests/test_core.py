@@ -22,3 +22,15 @@ def test_graph_extraction_basic():
     # Note: build_graph() might take time in a real repo, so we just test the object
     assert extractor.workspace_root is not None
     assert extractor.graph is not None
+
+def test_risk_classification_medium():
+    res = risk_classifier.classify("npm install")
+    assert res["level"] == RiskLevel.MEDIUM
+    assert res["requires_approval"]
+    assert not res["is_blocked"]
+
+def test_risk_classification_unknown():
+    res = risk_classifier.classify("some-random-unknown-command")
+    assert res["level"] == RiskLevel.HIGH
+    assert res["requires_approval"]
+    assert not res["is_blocked"]
