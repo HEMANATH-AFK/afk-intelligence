@@ -7,7 +7,9 @@ from database.mongodb import db_client
 logger = logging.getLogger(__name__)
 
 class AuditLogger:
+    """Audit logger responsible for recording execution activities and persisting them for tracking and compliance."""
     def __init__(self):
+        """Initialize the AuditLogger with the target MongoDB collection name."""
         self.collection_name = "audit_logs"
 
     async def log_execution(self, session_id: str, data: Dict[str, Any]):
