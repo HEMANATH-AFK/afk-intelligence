@@ -28,7 +28,7 @@ jobs:
     - name: Type check with mypy
       run: |
         cd backend
-        mypy . --ignore-missing-imports
+        mypy . --ignore-missing-imports --explicit-package-bases
     - name: Run tests
       run: |
         cd backend
