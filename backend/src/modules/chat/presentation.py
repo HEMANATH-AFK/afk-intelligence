@@ -98,25 +98,27 @@ async def stream_workflow(request: Request, workflow_id: str):
                 # Fetch message from PubSub
                 message = await pubsub.get_message(ignore_subscribe_messages=True, timeout=1.0)
                 if message:
-                    try:
-                        data = json.loads(message["data"])
-                        print(f"[OBSERVABILITY] Redis event consumed for {workflow_id}: {data.get('event_type')}")
-                        
-                        yield {
-                            "event": data.get("event_type", "info"),
-                            "data": json.dumps(data)
-                        }
-                        
-                        # Graceful finalization criteria
-                        if data.get("event_type") == "system_state" and "STORE_MEMORY" in data.get("message", ""):
-                            print(f"[OBSERVABILITY] Workflow completed successfully for: {workflow_id}")
+                    raw_data = message.get("data")
+                    if isinstance(raw_data, (str, bytes, bytearray)):
+                        try:
+                            data = json.loads(raw_data)
+                            print(f"[OBSERVABILITY] Redis event consumed for {workflow_id}: {data.get('event_type')}")
+                            
                             yield {
-                                "event": "workflow_completed",
-                                "data": json.dumps({"workflow_id": workflow_id, "status": "COMPLETED"})
+                                "event": data.get("event_type", "info"),
+                                "data": json.dumps(data)
                             }
-                            break
-                    except Exception as parse_err:
-                        print(f"[OBSERVABILITY] Error parsing Redis payload: {str(parse_err)}")
+                            
+                            # Graceful finalization criteria
+                            if data.get("event_type") == "system_state" and "STORE_MEMORY" in data.get("message", ""):
+                                print(f"[OBSERVABILITY] Workflow completed successfully for: {workflow_id}")
+                                yield {
+                                    "event": "workflow_completed",
+                                    "data": json.dumps({"workflow_id": workflow_id, "status": "COMPLETED"})
+                                }
+                                break
+                        except Exception as parse_err:
+                            print(f"[OBSERVABILITY] Error parsing Redis payload: {str(parse_err)}")
                 
                 # HEARTBEAT KEEPALIVE check (every 15 seconds)
                 now = time.time()
