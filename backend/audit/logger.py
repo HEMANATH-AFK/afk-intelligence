@@ -10,7 +10,7 @@ class AuditLogger:
     """Audit logger responsible for recording execution activities and persisting them for tracking and compliance."""
     def __init__(self):
         """Initialize the AuditLogger with the target MongoDB collection name."""
-        self.collection_name = "audit_logs"
+        self.collection_name = "audit_logs"  # Default MongoDB collection name for storing audit trails
 
     async def log_execution(self, session_id: str, data: Dict[str, Any]):
         """Persists a complete execution audit trail to MongoDB."""
