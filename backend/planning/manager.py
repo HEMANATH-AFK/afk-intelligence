@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import List, Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from database.mongodb import db_client
 import uuid
 
@@ -40,7 +40,7 @@ class WorkflowManager:
                     "result": None
                 } for step in steps
             ],
-            "created_at": datetime.utcnow().isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
         
         if db_client.db is not None:

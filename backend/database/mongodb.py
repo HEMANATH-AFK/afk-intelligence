@@ -24,3 +24,5 @@ class MongoDB:
             logger.info("Disconnected from MongoDB")
 
 mongodb = MongoDB()
+db_client = mongodb
+

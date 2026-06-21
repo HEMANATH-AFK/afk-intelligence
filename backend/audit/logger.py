@@ -1,6 +1,6 @@
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any
 from database.mongodb import db_client
 
@@ -15,7 +15,7 @@ class AuditLogger:
     async def log_execution(self, session_id: str, data: Dict[str, Any]):
         """Persists a complete execution audit trail to MongoDB."""
         audit_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "session_id": session_id,
             **data
         }
