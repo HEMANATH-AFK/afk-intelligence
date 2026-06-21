@@ -23,7 +23,7 @@ class OrchestratorState(Enum):
 
 class AgentOrchestrator:
     def __init__(self):
-        self.max_steps = 8
+        self.max_steps = 8  # Limit execution depth to prevent infinite reasoning loops
 
     async def stream_orchestrated_response(self, session_id: str, message: str, model: str):
         # 1. RECEIVE_GOAL
