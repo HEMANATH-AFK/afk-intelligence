@@ -5,6 +5,7 @@ import datetime
 from src.core.database import Base
 
 def utc_now():
+    """Returns timezone-naive current UTC time for database compatibility."""
     return datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
 
 class SessionModel(Base):
