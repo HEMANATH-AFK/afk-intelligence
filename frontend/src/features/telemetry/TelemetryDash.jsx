@@ -40,7 +40,7 @@ export default function TelemetryDash() {
         />
       </div>
 
-      {/* Real-time Oscilloscope (Simplified) */}
+      {/* Real-time Oscilloscope for live Event Bus visualizer */}
       <div className="flex-1 min-h-[100px] border border-white/5 rounded-xl bg-white/[0.01] relative overflow-hidden flex items-end px-4 pb-4 gap-1">
         {[...Array(20)].map((_, i) => (
           <motion.div 
