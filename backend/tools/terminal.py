@@ -10,7 +10,7 @@ class ExecutionPolicy:
         self.workspace_root = str(Path(workspace_root).absolute())
         self.allowed_commands = ['ls', 'dir', 'git status', 'git log', 'npm list', 'pip list', 'python --version', 'node --version']
         self.blocked_patterns = ['rm ', 'del ', 'format ', 'mkfs ', '> /dev/', 'sudo ', 'chmod ', 'chown ']
-        self.max_runtime_seconds = 30
+        self.max_runtime_seconds = 30  # Timeout limit for executing commands in seconds
         self.max_output_bytes = 50000
 
     def is_safe(self, command: str) -> tuple[bool, str]:
