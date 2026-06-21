@@ -4,7 +4,7 @@ Fully Free Local-First Cognitive Runtime.
 
 ## Stack
 - **Backend:** FastAPI, Celery, SQLAlchemy
-- **Data/Messaging:** PostgreSQL (pgvector), Redis
+- **Data/Messaging:** PostgreSQL (with pgvector), Redis (Pub/Sub broker)
 - **AI Engine:** Ollama (Local LLM)
 - **Frontend:** React + Vite
 
