@@ -24,6 +24,7 @@ def test_risk_classification_critical():
     assert res["is_blocked"]
 
 def test_graph_extraction_basic():
+    """Verify basic instantiation and properties of GraphExtractor."""
     extractor = GraphExtractor(os.getcwd())
     # Note: build_graph() might take time in a real repo, so we just test the object
     assert extractor.workspace_root is not None
