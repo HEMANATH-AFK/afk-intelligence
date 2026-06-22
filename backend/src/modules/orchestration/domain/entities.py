@@ -9,6 +9,10 @@ def utc_now():
     return datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
 
 class SessionModel(Base):
+    """
+    Database model representing a single user session, storing repo paths,
+    prompt history, and associated summaries.
+    """
     __tablename__ = "sessions"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
