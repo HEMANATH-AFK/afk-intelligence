@@ -98,6 +98,10 @@ interface OrchestrationState {
 let activeEventSource: EventSource | null = null;
 let reconnectTimer: any = null;
 
+/**
+ * Zustand store to manage multi-agent orchestration state, including SSE streaming,
+ * sessions, health checks, presets, and active workflow timelines.
+ */
 export const useOrchestrationStore = create<OrchestrationState>((set, get) => ({
   sessions: [],
   activeSessionId: null,
