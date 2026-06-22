@@ -55,7 +55,7 @@ export default function SupremeConsole() {
     fetchTools();
   }, [fetchTools]);
 
-  // Poll backend dependency health status every 10 seconds to detect offline services
+  // Poll backend dependency health status (Postgres, Redis, Ollama) every 10 seconds to detect offline services
   useEffect(() => {
     checkHealth();
     const timer = setInterval(() => {
