@@ -22,6 +22,10 @@ class OrchestratorState(Enum):
     COMPLETE = "COMPLETE"
 
 class AgentOrchestrator:
+    """
+    Coordinates multi-agent workflows, managing system state transitions
+    from planning to stepwise execution and verification.
+    """
     def __init__(self):
         self.max_steps = 8  # Limit execution depth to prevent infinite reasoning loops
 
