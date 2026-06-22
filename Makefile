@@ -1,4 +1,6 @@
+# Makefile for orchestrating local development environment services via Docker Compose
 .PHONY: up down build logs reset
+
 
 up:
 	docker compose up -d
