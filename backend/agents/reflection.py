@@ -3,6 +3,10 @@ from services.ollama_service import ollama_service
 import json
 
 class ReflectionEngine:
+    """
+    Engine responsible for analyzing the outcomes of agent actions,
+    calculating confidence scores, and providing verification feedback.
+    """
     def __init__(self):
         self.prompt_template = """You are a critical verification agent. 
 Analyze the last action taken and its result. 
