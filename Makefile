@@ -1,5 +1,5 @@
 # Makefile for orchestrating local development environment services via Docker Compose
-.PHONY: help up down build logs reset
+.PHONY: help up down build logs reset status stats
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -15,6 +15,12 @@ down: ## Stop and remove the platform containers
 
 logs: ## Follow all container logs
 	docker compose logs -f
+
+status: ## Show status of running containers
+	docker compose ps
+
+stats: ## Show container resource usage statistics
+	docker compose stats
 
 reset: ## Reset the platform (removes volumes, rebuilds, and restarts)
 	docker compose down -v
