@@ -1,5 +1,5 @@
 # Makefile for orchestrating local development environment services via Docker Compose
-.PHONY: help up down build logs logs-backend logs-frontend logs-worker reset status stats restart shell-backend shell-frontend shell-db lint test-backend lint-frontend
+.PHONY: help up down build logs logs-backend logs-frontend logs-worker reset status stats restart shell-backend shell-frontend shell-db lint test-backend lint-frontend ollama-setup
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -51,6 +51,10 @@ test-backend: ## Run unit tests inside the backend container
 
 lint-frontend: ## Run ESLint inside the frontend container
 	docker compose exec frontend npm run lint
+
+ollama-setup: ## Pull default LLM and embedding models in Ollama
+	docker compose exec ollama ollama pull llama3
+	docker compose exec ollama ollama pull nomic-embed-text
 
 reset: ## Reset the platform (removes volumes, rebuilds, and restarts)
 	docker compose down -v
