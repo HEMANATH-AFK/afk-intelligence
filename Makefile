@@ -1,5 +1,5 @@
 # Makefile for orchestrating local development environment services via Docker Compose
-.PHONY: help up down build logs logs-backend logs-frontend logs-worker reset status stats restart shell-backend shell-frontend shell-db
+.PHONY: help up down build logs logs-backend logs-frontend logs-worker reset status stats restart shell-backend shell-frontend shell-db lint
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -42,6 +42,9 @@ shell-frontend: ## Open an interactive shell inside the frontend container
 
 shell-db: ## Open interactive psql shell inside the postgres container
 	docker compose exec postgres psql -U afk -d afk_db
+
+lint: ## Run local pre-commit hooks on all files
+	pre-commit run --all-files
 
 reset: ## Reset the platform (removes volumes, rebuilds, and restarts)
 	docker compose down -v
