@@ -1,7 +1,7 @@
 # Makefile for orchestrating local development environment services via Docker Compose
 DOCKER_COMPOSE ?= docker compose
 
-.PHONY: help up down build logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db lint test-backend lint-frontend ollama-setup prune
+.PHONY: help up down build logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db lint test-backend validate lint-frontend ollama-setup prune
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -59,6 +59,8 @@ lint: ## Run local pre-commit hooks on all files
 
 test-backend: ## Run unit tests inside the backend container
 	$(DOCKER_COMPOSE) exec backend poetry run pytest
+
+validate: lint test-backend ## Run both lint and test-backend targets
 
 lint-frontend: ## Run ESLint inside the frontend container
 	$(DOCKER_COMPOSE) exec frontend npm run lint
