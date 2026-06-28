@@ -1,4 +1,9 @@
 # Makefile for orchestrating local development environment services via Docker Compose
+#
+# Customization:
+#   To override the docker compose runner (e.g. to use podman-compose), run:
+#     make DOCKER_COMPOSE="podman-compose" <target>
+#
 DOCKER_COMPOSE ?= docker compose
 
 .PHONY: help up down build rebuild logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db backend-shell frontend-shell lint test-backend validate lint-frontend ollama-setup prune
