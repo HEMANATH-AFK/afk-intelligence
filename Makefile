@@ -1,7 +1,7 @@
 # Makefile for orchestrating local development environment services via Docker Compose
 DOCKER_COMPOSE ?= docker compose
 
-.PHONY: help up down build logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db lint test-backend validate lint-frontend ollama-setup prune
+.PHONY: help up down build rebuild logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db lint test-backend validate lint-frontend ollama-setup prune
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -11,6 +11,9 @@ up: ## Start the platform containers in the background
 
 build: ## Build and start the platform containers
 	$(DOCKER_COMPOSE) up --build -d
+
+rebuild: ## Build platform container images without using cache
+	$(DOCKER_COMPOSE) build --no-cache
 
 down: ## Stop and remove the platform containers
 	$(DOCKER_COMPOSE) down
