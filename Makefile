@@ -1,7 +1,7 @@
 # Makefile for orchestrating local development environment services via Docker Compose
 DOCKER_COMPOSE ?= docker compose
 
-.PHONY: help up down build rebuild logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db lint test-backend validate lint-frontend ollama-setup prune
+.PHONY: help up down build rebuild logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db backend-shell frontend-shell lint test-backend validate lint-frontend ollama-setup prune
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -56,6 +56,10 @@ shell-frontend: ## Open an interactive shell inside the frontend container
 
 shell-db: ## Open interactive psql shell inside the postgres container
 	$(DOCKER_COMPOSE) exec postgres psql -U afk -d afk_db
+
+backend-shell: shell-backend ## Alias for shell-backend
+
+frontend-shell: shell-frontend ## Alias for shell-frontend
 
 lint: ## Run local pre-commit hooks on all files
 	pre-commit run --all-files
