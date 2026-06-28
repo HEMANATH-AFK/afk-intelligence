@@ -1,7 +1,7 @@
 # Makefile for orchestrating local development environment services via Docker Compose
 DOCKER_COMPOSE ?= docker compose
 
-.PHONY: help up down build logs logs-backend logs-frontend logs-worker reset status stats restart shell-backend shell-frontend shell-db lint test-backend lint-frontend ollama-setup prune
+.PHONY: help up down build logs logs-backend logs-frontend logs-worker logs-db logs-redis logs-ollama reset status stats restart shell-backend shell-frontend shell-db lint test-backend lint-frontend ollama-setup prune
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -26,6 +26,15 @@ logs-frontend: ## Follow frontend service logs
 
 logs-worker: ## Follow worker service logs
 	$(DOCKER_COMPOSE) logs -f worker
+
+logs-db: ## Follow postgres database service logs
+	$(DOCKER_COMPOSE) logs -f postgres
+
+logs-redis: ## Follow redis service logs
+	$(DOCKER_COMPOSE) logs -f redis
+
+logs-ollama: ## Follow ollama service logs
+	$(DOCKER_COMPOSE) logs -f ollama
 
 status: ## Show status of running containers
 	$(DOCKER_COMPOSE) ps
