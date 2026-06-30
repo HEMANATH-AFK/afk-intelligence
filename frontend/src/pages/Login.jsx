@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Mail, Loader2 } from 'lucide-react';
-import { FadeUp } from '@hemanath-afk/afk-motion';
+import { FadeUp, HoverTilt } from '@hemanath-afk/afk-motion';
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -40,13 +40,15 @@ export default function Login() {
           </div>
         </div>
 
-        <button 
-          type="submit" 
-          disabled={loading}
-          className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white py-3 rounded-xl font-medium transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] flex items-center justify-center gap-2"
-        >
-          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Authenticate'}
-        </button>
+        <HoverTilt maxTilt={10} scale={1.02}>
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white py-3 rounded-xl font-medium transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] flex items-center justify-center gap-2"
+          >
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Authenticate'}
+          </button>
+        </HoverTilt>
 
         <p className="text-center text-sm text-white/50">
           New agent? <Link to="/register" className="text-primary hover:underline">Request Access</Link>
