@@ -1,5 +1,5 @@
 import { BrainCircuit, Database, HardDrive, Share2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { HoverTilt, GlassCard } from '@hemanath-afk/afk-motion';
 
 export default function Memory() {
   const memoryBanks = [
@@ -17,43 +17,39 @@ export default function Memory() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {memoryBanks.map((bank, i) => (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            key={i}
-            className="glass-panel p-6 rounded-xl flex flex-col gap-4"
-          >
-            <div className="flex justify-between items-start">
-              <div className="p-3 bg-surface2 rounded-lg border border-white/5">
-                <bank.icon className="w-5 h-5 text-primary" />
+          <HoverTilt maxTilt={12} scale={1.03} key={i}>
+            <GlassCard className="p-6 rounded-xl flex flex-col gap-4 h-full cursor-pointer">
+              <div className="flex justify-between items-start">
+                <div className="p-3 bg-surface2 rounded-lg border border-white/5">
+                  <bank.icon className="w-5 h-5 text-primary" />
+                </div>
+                <span className={`text-xs font-mono px-2 py-1 rounded-full border ${
+                  bank.status === 'Online' ? 'border-green-500/30 text-green-400 bg-green-500/10' :
+                  'border-yellow-500/30 text-yellow-400 bg-yellow-500/10 animate-pulse'
+                }`}>
+                  {bank.status}
+                </span>
               </div>
-              <span className={`text-xs font-mono px-2 py-1 rounded-full border ${
-                bank.status === 'Online' ? 'border-green-500/30 text-green-400 bg-green-500/10' :
-                'border-yellow-500/30 text-yellow-400 bg-yellow-500/10 animate-pulse'
-              }`}>
-                {bank.status}
-              </span>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold">{bank.title}</h3>
-              <p className="text-xs text-white/50 mt-1">Capacity: {bank.capacity}</p>
-            </div>
-            
-            <div className="mt-auto space-y-2 pt-4">
-              <div className="flex justify-between text-xs text-white/60 font-mono">
-                <span>Usage</span>
-                <span>{bank.used}</span>
+              
+              <div>
+                <h3 className="font-semibold">{bank.title}</h3>
+                <p className="text-xs text-white/50 mt-1">Capacity: {bank.capacity}</p>
               </div>
-              <div className="h-1.5 w-full bg-surface2 rounded-full overflow-hidden">
-                <div 
-                  className={`h-full rounded-full ${bank.status === 'Online' ? 'bg-primary' : 'bg-yellow-500'}`} 
-                  style={{ width: bank.used.includes('%') ? bank.used : '12%' }}
-                />
+              
+              <div className="mt-auto space-y-2 pt-4">
+                <div className="flex justify-between text-xs text-white/60 font-mono">
+                  <span>Usage</span>
+                  <span>{bank.used}</span>
+                </div>
+                <div className="h-1.5 w-full bg-surface2 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full rounded-full ${bank.status === 'Online' ? 'bg-primary' : 'bg-yellow-500'}`} 
+                    style={{ width: bank.used.includes('%') ? bank.used : '12%' }}
+                  />
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </GlassCard>
+          </HoverTilt>
         ))}
       </div>
 
