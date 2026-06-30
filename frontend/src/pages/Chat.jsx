@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, BrainCircuit, Activity } from 'lucide-react';
+import { Bot, User, Loader2, BrainCircuit, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useChatStore } from '../store/chatStore';
 import ApprovalModal from '../components/ApprovalModal';
 import WorkflowTimeline from '../components/WorkflowTimeline';
+import { PromptInput, FadeIn } from '@hemanath-afk/afk-motion';
 
 export default function Chat() {
   const { messages, isTyping, currentThought, sendMessage, pendingApproval, submitApproval, activeWorkflow } = useChatStore();
@@ -14,17 +15,15 @@ export default function Chat() {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping, currentThought]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handlePromptSubmit = () => {
     if (!input.trim() || isTyping) return;
-
     const userInput = input.trim();
     setInput('');
-    await sendMessage(userInput);
+    sendMessage(userInput);
   };
 
   return (
-    <div className="h-full flex flex-col max-w-4xl mx-auto">
+    <FadeIn className="h-full flex flex-col max-w-4xl mx-auto">
       <AnimatePresence>
         {activeWorkflow && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
@@ -108,24 +107,15 @@ export default function Chat() {
       />
 
       <div className="mt-4 pt-4 border-t border-white/5">
-        <form onSubmit={handleSubmit} className="relative flex items-center">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Initialize cognitive protocol or execute command..."
-            className="w-full bg-surface2 border border-white/10 rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:border-primary/50 transition-colors font-mono"
-            disabled={isTyping}
-          />
-          <button 
-            type="submit" 
-            disabled={isTyping || !input.trim()}
-            className="absolute right-2 p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 disabled:opacity-50 disabled:hover:bg-primary/10 transition-colors"
-          >
-            <Send className="w-4 h-4" />
-          </button>
-        </form>
+        <PromptInput
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onSubmit={handlePromptSubmit}
+          placeholder="Initialize cognitive protocol or execute command..."
+          maxRows={4}
+          disabled={isTyping}
+        />
       </div>
-    </div>
+    </FadeIn>
   );
 }
