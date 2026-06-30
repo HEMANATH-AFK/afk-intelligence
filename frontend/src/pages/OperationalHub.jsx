@@ -8,6 +8,7 @@ import { useExecutionStore } from '../stores/useExecutionStore';
 import { useWorkflowStore } from '../stores/useWorkflowStore';
 import WorkflowTimeline from '../components/WorkflowTimeline';
 import { GitBranch, Box, LayoutGrid } from 'lucide-react';
+import { HoverMagnetic } from '@hemanath-afk/afk-motion';
 
 export default function OperationalHub() {
   const { pendingApprovals, submitApproval } = useExecutionStore();
@@ -71,11 +72,13 @@ function RepositoryPanel() {
 
 function NavItem({ icon, label, active }) {
   return (
-    <div className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
-      active ? 'bg-primary/10 text-primary border border-primary/20' : 'text-white/40 hover:bg-white/5'
-    }`}>
-      {icon}
-      <span className="text-[10px] font-bold tracking-tighter font-mono">{label}</span>
-    </div>
+    <HoverMagnetic>
+      <div className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+        active ? 'bg-primary/10 text-primary border border-primary/20' : 'text-white/40 hover:bg-white/5'
+      }`}>
+        {icon}
+        <span className="text-[10px] font-bold tracking-tighter font-mono">{label}</span>
+      </div>
+    </HoverMagnetic>
   );
 }
