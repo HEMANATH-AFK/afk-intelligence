@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Terminal as TerminalIcon } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { FadeLeft, TextScramble } from '@hemanath-afk/afk-motion';
 
 export default function Terminal() {
   const [history, setHistory] = useState([
@@ -32,7 +32,7 @@ export default function Terminal() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto h-[calc(100vh-120px)] flex flex-col animate-fade-in">
+    <FadeLeft className="max-w-6xl mx-auto h-[calc(100vh-120px)] flex flex-col">
       <div className="flex flex-col gap-2 mb-6 shrink-0">
         <h1 className="text-3xl font-bold tracking-tight">System Terminal</h1>
         <p className="text-white/50 text-sm">Direct command line access to the local operating environment.</p>
@@ -51,7 +51,7 @@ export default function Terminal() {
               line.type === 'success' ? 'text-green-400' :
               line.type === 'cmd' ? 'text-white' : 'text-white/60'
             }`}>
-              {line.text}
+              {line.type === 'sys' && i === 0 ? <TextScramble text={line.text} duration={1} /> : line.text}
             </div>
           ))}
           <div ref={endRef} />
@@ -68,6 +68,6 @@ export default function Terminal() {
           />
         </form>
       </div>
-    </div>
+    </FadeLeft>
   );
 }
