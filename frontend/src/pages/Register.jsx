@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Mail, User, Loader2 } from 'lucide-react';
-import { FadeDown } from '@hemanath-afk/afk-motion';
+import { FadeDown, HoverScale } from '@hemanath-afk/afk-motion';
 
 export default function Register() {
   const [loading, setLoading] = useState(false);
@@ -49,13 +49,15 @@ export default function Register() {
           </div>
         </div>
 
-        <button 
-          type="submit" 
-          disabled={loading}
-          className="w-full bg-gradient-to-r from-accent to-primary hover:opacity-90 text-white py-3 rounded-xl font-medium transition-all duration-200 shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2"
-        >
-          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Initialize Profile'}
-        </button>
+        <HoverScale scale={1.03}>
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-accent to-primary hover:opacity-90 text-white py-3 rounded-xl font-medium transition-all duration-200 shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] flex items-center justify-center gap-2"
+          >
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Initialize Profile'}
+          </button>
+        </HoverScale>
 
         <p className="text-center text-sm text-white/50">
           Already registered? <Link to="/login" className="text-primary hover:underline">Authenticate Here</Link>
