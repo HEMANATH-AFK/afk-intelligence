@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Terminal, Code, Database, Zap } from 'lucide-react';
+import { HoverTilt, GlassCard } from '@hemanath-afk/afk-motion';
 
 export default function Dashboard() {
   const cards = [
@@ -18,24 +18,20 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {cards.map((card, i) => (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            key={i}
-            className="glass-panel p-6 rounded-xl relative overflow-hidden group hover:border-white/20 transition-colors"
-          >
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <card.icon className={`w-16 h-16 ${card.color}`} />
-            </div>
-            <div className="relative z-10 flex flex-col gap-4">
-              <card.icon className={`w-6 h-6 ${card.color}`} />
-              <div>
-                <h3 className="text-white/60 text-sm font-medium mb-1">{card.title}</h3>
-                <div className="text-2xl font-semibold tracking-tight">{card.value}</div>
+          <HoverTilt maxTilt={15} scale={1.03} key={i}>
+            <GlassCard className="p-6 rounded-xl relative overflow-hidden group hover:border-white/20 transition-colors cursor-pointer">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <card.icon className={`w-16 h-16 ${card.color}`} />
               </div>
-            </div>
-          </motion.div>
+              <div className="relative z-10 flex flex-col gap-4">
+                <card.icon className={`w-6 h-6 ${card.color}`} />
+                <div>
+                  <h3 className="text-white/60 text-sm font-medium mb-1">{card.title}</h3>
+                  <div className="text-2xl font-semibold tracking-tight">{card.value}</div>
+                </div>
+              </div>
+            </GlassCard>
+          </HoverTilt>
         ))}
       </div>
 
