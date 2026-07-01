@@ -126,17 +126,17 @@ export default function SupremeConsole() {
                   <button
                     key={s.id}
                     onClick={() => selectSession(s.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all cursor-pointer ${
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer border ${
                       isActive 
-                        ? 'bg-white/[0.04] text-white border border-white/[0.06]' 
-                        : 'text-white/40 hover:bg-white/[0.02] border border-transparent'
+                        ? 'bg-surface2/80 text-white border-primary/25 shadow-[0_0_8px_var(--color-glow)]' 
+                        : 'text-white/40 hover:bg-white/[0.01] hover:text-white/75 border-transparent'
                     }`}
                   >
-                    <MessageSquare className="w-3.5 h-3.5 shrink-0" />
+                    <MessageSquare className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-primary' : 'text-white/30'}`} />
                     {sidebarExpanded && (
                       <div className="truncate flex-1">
-                        <p className="text-xs font-medium truncate">{s.repository_path}</p>
-                        <p className="text-[10px] text-white/30 truncate">
+                        <p className="text-xs font-semibold truncate">{s.repository_path}</p>
+                        <p className="text-[9px] text-white/30 truncate mt-0.5">
                           {s.prompt_history.length > 0 ? s.prompt_history[s.prompt_history.length - 1] : 'No activity yet'}
                         </p>
                       </div>
@@ -146,10 +146,10 @@ export default function SupremeConsole() {
               })}
               <button 
                 onClick={createSession}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-indigo-400 hover:bg-white/[0.02] transition-all cursor-pointer border border-transparent"
+                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-primary hover:bg-primary/5 transition-all cursor-pointer border border-transparent font-medium"
               >
                 <span className="text-xs shrink-0">+</span>
-                {sidebarExpanded && <span className="text-xs font-medium">New Session</span>}
+                {sidebarExpanded && <span className="text-xs font-semibold">New Session</span>}
               </button>
             </div>
           </div>
