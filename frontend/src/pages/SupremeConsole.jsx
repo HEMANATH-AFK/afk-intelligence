@@ -908,19 +908,19 @@ function SidebarLink({ icon, label, active, sidebarExpanded, onClick }) {
 function TimelineNode({ title, status, description, payload }) {
   return (
     <div className="relative space-y-1">
-      <div className="absolute -left-[30px] top-1.5 w-2 h-2 rounded-full border bg-[#09090b] transition-all"
+      <div className="absolute -left-[30px] top-1.5 w-2 h-2 rounded-full border bg-background transition-all"
         style={{
-          borderColor: status === 'active' ? '#6366f1' : (status === 'completed' ? '#10b981' : 'rgba(255,255,255,0.1)'),
-          boxShadow: status === 'active' ? '0 0 8px #6366f1' : 'none'
+          borderColor: status === 'active' ? 'var(--primary-color)' : (status === 'completed' ? 'var(--accent-color)' : 'var(--border-color)'),
+          boxShadow: status === 'active' ? '0 0 10px var(--color-glow)' : 'none'
         }}
       />
       <div className="flex items-center gap-2">
-        <h4 className="text-xs font-semibold text-white/80">{title}</h4>
-        {status === 'completed' && <CheckCircle2 className="w-3 h-3 text-emerald-500" />}
+        <h4 className={`text-xs font-semibold ${status === 'active' ? 'text-white text-glow' : 'text-white/80'}`}>{title}</h4>
+        {status === 'completed' && <CheckCircle2 className="w-3 h-3 text-accent" />}
       </div>
       <p className="text-[11px] text-white/40 leading-relaxed">{description}</p>
       {payload && (
-        <div className="p-3 rounded bg-white/[0.02] border border-white/[0.04] text-[10px] font-mono text-white/60 overflow-x-auto max-w-full">
+        <div className="p-3 rounded bg-surface/50 border border-border text-[10px] font-mono text-white/60 overflow-x-auto max-w-full shadow-inner backdrop-blur-sm">
           <pre>{JSON.stringify(payload, null, 2)}</pre>
         </div>
       )}
