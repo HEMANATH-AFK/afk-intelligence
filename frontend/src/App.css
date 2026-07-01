@@ -182,3 +182,34 @@
     border-right-color: var(--border);
   }
 }
+
+/* Futuristic theme-aware text-glow */
+.theme-glow-text {
+  text-shadow: 0 0 12px var(--color-glow), 0 0 4px var(--color-glow);
+}
+
+/* Pulsing ambient theme borders */
+.theme-border-pulse {
+  animation: borderPulse 3s infinite ease-in-out;
+}
+
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(var(--primary-color), 0.15); }
+  50% { border-color: var(--primary-color); }
+}
+
+/* Gradient background clip text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dynamic Glowing buttons */
+.glow-btn {
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  position: relative;
+}
+.glow-btn:hover {
+  box-shadow: 0 0 20px var(--color-glow);
+}
