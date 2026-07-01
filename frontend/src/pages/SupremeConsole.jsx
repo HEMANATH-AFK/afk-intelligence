@@ -193,30 +193,30 @@ export default function SupremeConsole() {
         </div>
 
         {/* Live System Health Widget */}
-        <div className="p-3 border-t border-white/[0.06] bg-white/[0.01]/40 space-y-2">
+        <div className="p-3 border-t border-border bg-white/[0.01]/40 space-y-2.5">
           {sidebarExpanded && (
             <div className="flex items-center justify-between text-[9px] font-bold tracking-widest text-white/30 uppercase">
-              <span>System Health</span>
-              <span className={`w-1.5 h-1.5 rounded-full ${
-                !healthStatus ? 'bg-white/20' :
-                healthStatus.status === 'ok' ? 'bg-emerald-500' :
-                healthStatus.status === 'degraded' ? 'bg-amber-500' : 'bg-rose-500'
+              <span>System Telemetry</span>
+              <span className={`w-1.5 h-1.5 rounded-full shadow-[0_0_8px_currentColor] ${
+                !healthStatus ? 'bg-white/20 text-white/20' :
+                healthStatus.status === 'ok' ? 'bg-emerald-500 text-emerald-500 animate-pulse' :
+                healthStatus.status === 'degraded' ? 'bg-amber-500 text-amber-500 animate-pulse' : 'bg-rose-500 text-rose-500 animate-ping'
               }`} />
             </div>
           )}
           
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {/* Postgres status */}
             <div className="flex items-center justify-between text-[10px] text-white/50">
               <div className="flex items-center gap-1.5">
-                <Database className="w-3 h-3 text-white/30" />
-                {sidebarExpanded && <span>Postgres</span>}
+                <Database className="w-3 h-3 text-white/20" />
+                {sidebarExpanded && <span className="font-mono">db_postgres</span>}
               </div>
               {sidebarExpanded && (
-                <span className={`text-[8px] font-mono px-1 rounded ${
+                <span className={`text-[7px] font-mono font-bold px-1.5 py-0.5 rounded tracking-wide ${
                   healthStatus?.dependencies?.postgres === 'ok' 
-                    ? 'bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]' 
-                    : 'bg-[#ef4444]/10 border border-[#ef4444]/20 text-[#ef4444]'
+                    ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.15)]' 
+                    : 'bg-rose-500/10 border border-rose-500/20 text-rose-400 animate-pulse'
                 }`}>
                   {healthStatus?.dependencies?.postgres === 'ok' ? 'ONLINE' : 'OFFLINE'}
                 </span>
@@ -226,14 +226,14 @@ export default function SupremeConsole() {
             {/* Redis status */}
             <div className="flex items-center justify-between text-[10px] text-white/50">
               <div className="flex items-center gap-1.5">
-                <Activity className="w-3 h-3 text-white/30" />
-                {sidebarExpanded && <span>Redis PubSub</span>}
+                <Activity className="w-3 h-3 text-white/20" />
+                {sidebarExpanded && <span className="font-mono">redis_pubsub</span>}
               </div>
               {sidebarExpanded && (
-                <span className={`text-[8px] font-mono px-1 rounded ${
+                <span className={`text-[7px] font-mono font-bold px-1.5 py-0.5 rounded tracking-wide ${
                   healthStatus?.dependencies?.redis === 'ok' 
-                    ? 'bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]' 
-                    : 'bg-[#ef4444]/10 border border-[#ef4444]/20 text-[#ef4444]'
+                    ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.15)]' 
+                    : 'bg-rose-500/10 border border-rose-500/20 text-rose-400 animate-pulse'
                 }`}>
                   {healthStatus?.dependencies?.redis === 'ok' ? 'ONLINE' : 'OFFLINE'}
                 </span>
@@ -243,14 +243,14 @@ export default function SupremeConsole() {
             {/* Ollama status */}
             <div className="flex items-center justify-between text-[10px] text-white/50">
               <div className="flex items-center gap-1.5">
-                <Cpu className="w-3 h-3 text-white/30" />
-                {sidebarExpanded && <span>Ollama LLM</span>}
+                <Cpu className="w-3 h-3 text-white/20" />
+                {sidebarExpanded && <span className="font-mono">ollama_llm</span>}
               </div>
               {sidebarExpanded && (
-                <span className={`text-[8px] font-mono px-1 rounded ${
+                <span className={`text-[7px] font-mono font-bold px-1.5 py-0.5 rounded tracking-wide ${
                   healthStatus?.dependencies?.ollama === 'ok' 
-                    ? 'bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]' 
-                    : 'bg-[#ef4444]/10 border border-[#ef4444]/20 text-[#ef4444]'
+                    ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.15)]' 
+                    : 'bg-rose-500/10 border border-rose-500/20 text-rose-400 animate-pulse'
                 }`}>
                   {healthStatus?.dependencies?.ollama === 'ok' ? 'ONLINE' : 'OFFLINE'}
                 </span>
