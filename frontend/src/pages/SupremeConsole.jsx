@@ -260,10 +260,10 @@ export default function SupremeConsole() {
         </div>
 
         {/* Workspace indexing trigger */}
-        <div className="p-2 border-t border-white/[0.06] bg-white/[0.01]">
+        <div className="p-2 border-t border-border bg-white/[0.01]">
           <button
             onClick={triggerWorkspaceIndex}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded bg-indigo-500/10 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all text-xs text-indigo-400 font-semibold cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:shadow-[0_0_12px_var(--color-glow)] transition-all text-xs text-primary font-bold cursor-pointer"
           >
             <Compass className="w-3.5 h-3.5" />
             {sidebarExpanded && <span>Index Workspace</span>}
