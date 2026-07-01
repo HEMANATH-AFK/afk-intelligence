@@ -48,8 +48,11 @@ export default function AuthLayout() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-md p-8"
       >
-        <div className="glass-panel glow-border rounded-2xl p-8 backdrop-blur-xl">
-          <div className="mb-8 text-center flex flex-col items-center">
+        <div className="bg-surface/50 border border-primary/25 rounded-2xl p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.4),0_0_20px_var(--color-glow)] relative overflow-hidden group">
+          {/* Subtle inside glow element */}
+          <div className="absolute -inset-px bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity" />
+          
+          <div className="mb-8 text-center flex flex-col items-center relative z-10">
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4 shadow-[0_0_20px_var(--color-glow)]">
               <span className="font-mono font-bold text-xl text-white">AFK</span>
             </div>
@@ -57,7 +60,9 @@ export default function AuthLayout() {
             <p className="text-white/50 text-sm mt-2">Initialize your local agent</p>
           </div>
           
-          <Outlet />
+          <div className="relative z-10">
+            <Outlet />
+          </div>
         </div>
       </motion.div>
     </div>
