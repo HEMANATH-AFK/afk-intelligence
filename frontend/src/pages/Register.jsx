@@ -64,8 +64,8 @@ export default function Register() {
           </button>
         </HoverScale>
 
-        <p className="text-center text-sm text-white/50">
-          Already registered? <Link to="/login" className="text-primary hover:underline">Authenticate Here</Link>
+        <p className="text-center text-xs text-white/40 font-mono tracking-tight transition-colors hover:text-white/60">
+          Already authenticated? <Link to="/login" className="text-primary hover:text-accent underline underline-offset-4 decoration-primary/30 hover:decoration-accent/60 font-semibold transition-all">Sign In Here</Link>
         </p>
       </form>
     </FadeDown>
