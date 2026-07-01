@@ -72,6 +72,9 @@ interface OrchestrationState {
   // Selected patch for diff viewer
   selectedPatch: any | null;
 
+  // UI Theme state
+  theme: 'amethyst' | 'cyber-neon' | 'aurora' | 'slate';
+
   // Premium Features state
   tools: ToolSchema[];
   presets: PresetPrompt[];
@@ -83,6 +86,7 @@ interface OrchestrationState {
   setActiveSurface: (surface: 'LIVE' | 'REPLAY' | 'WORKSPACE' | 'MODIFICATION' | 'SETTINGS') => void;
   setInspectorTab: (tab: 'CONTEXT' | 'RELIABILITY' | 'DIFF' | 'AUDIT' | 'TOOLS') => void;
   setSelectedPatch: (patch: any | null) => void;
+  setTheme: (theme: 'amethyst' | 'cyber-neon' | 'aurora' | 'slate') => void;
   startSSEStream: (prompt: string) => Promise<void>;
   closeWorkflowStream: () => void;
   loadWorkflowReplay: (workflowId: string) => Promise<void>;
