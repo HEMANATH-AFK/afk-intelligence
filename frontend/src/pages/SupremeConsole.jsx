@@ -316,7 +316,7 @@ export default function SupremeConsole() {
                 transition={{ duration: 0.15 }}
                 className="space-y-6"
               >
-                {/* Prompt Execution Bar */}
+                 {/* Prompt Execution Bar */}
                 <form onSubmit={handleSubmit} className="relative">
                   <input
                     type="text"
@@ -324,12 +324,12 @@ export default function SupremeConsole() {
                     onChange={(e) => setPrompt(e.target.value)}
                     disabled={isStreaming}
                     placeholder="Ask AFK to plan or propose changes (e.g. 'Add JWT refresh tokens')"
-                    className="w-full h-12 pl-4 pr-12 rounded-lg bg-[#0f0f11] border border-white/[0.06] focus:border-indigo-500/40 text-sm focus:outline-none text-white transition-all placeholder-white/20 shadow-inner"
+                    className="w-full h-13 pl-5 pr-14 rounded-xl bg-surface/50 border border-border focus:border-primary/80 focus:shadow-[0_0_15px_var(--color-glow)] text-sm focus:outline-none text-white transition-all placeholder-white/20 shadow-2xl backdrop-blur-md font-sans"
                   />
                   <button
                     type="submit"
                     disabled={isStreaming || !prompt.trim()}
-                    className="absolute right-2 top-2 h-8 w-8 rounded bg-indigo-500/10 border border-indigo-500/20 hover:bg-indigo-500/20 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer text-indigo-400"
+                    className="absolute right-2.5 top-2.5 h-8 w-8 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 text-primary disabled:opacity-30 disabled:hover:bg-primary/10 disabled:hover:shadow-none hover:shadow-[0_0_8px_var(--color-glow)] transition-all flex items-center justify-center cursor-pointer"
                   >
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
