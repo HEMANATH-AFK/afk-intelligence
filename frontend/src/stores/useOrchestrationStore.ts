@@ -115,7 +115,7 @@ export const useOrchestrationStore = create<OrchestrationState>((set, get) => ({
   streamLogs: [],
   activeSurface: 'LIVE',
   activeInspectorTab: 'CONTEXT',
-  selectedPatch: null,
+  theme: 'cyber-neon',
   tools: [],
   presets: [],
   healthStatus: null,
@@ -150,6 +150,7 @@ export const useOrchestrationStore = create<OrchestrationState>((set, get) => ({
   setActiveSurface: (surface) => set({ activeSurface: surface }),
   setInspectorTab: (tab) => set({ activeInspectorTab: tab }),
   setSelectedPatch: (patch) => set({ selectedPatch: patch }),
+  setTheme: (theme) => set({ theme }),
 
   closeWorkflowStream: () => {
     if (activeEventSource) {
