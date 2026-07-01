@@ -1,15 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+:root {
+  --background: #04080e;
+  --surface: #07101a;
+  --surface2: #0b1726;
+  --surface3: #102033;
+  --border-color: rgba(0, 242, 254, 0.12);
+  --border-focus: rgba(255, 0, 127, 0.4);
+  --primary-color: #00f2fe;
+  --accent-color: #ff007f;
+  --glow-color: rgba(0, 242, 254, 0.25);
+}
+
+.theme-amethyst {
+  --background: #0d0714;
+  --surface: #140b20;
+  --surface2: #1b102c;
+  --surface3: #221538;
+  --border-color: rgba(219, 39, 119, 0.15);
+  --border-focus: rgba(168, 85, 247, 0.4);
+  --primary-color: #a855f7;
+  --accent-color: #db2777;
+  --glow-color: rgba(168, 85, 247, 0.3);
+}
+
+.theme-cyber-neon {
+  --background: #04080e;
+  --surface: #07101a;
+  --surface2: #0b1726;
+  --surface3: #102033;
+  --border-color: rgba(0, 242, 254, 0.12);
+  --border-focus: rgba(255, 0, 127, 0.4);
+  --primary-color: #00f2fe;
+  --accent-color: #ff007f;
+  --glow-color: rgba(0, 242, 254, 0.25);
+}
+
+.theme-aurora {
+  --background: #050e0f;
+  --surface: #0a1718;
+  --surface2: #0f2224;
+  --surface3: #152d30;
+  --border-color: rgba(16, 185, 129, 0.15);
+  --border-focus: rgba(34, 197, 94, 0.4);
+  --primary-color: #10b981;
+  --accent-color: #34d399;
+  --glow-color: rgba(16, 185, 129, 0.3);
+}
+
+.theme-slate {
+  --background: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --surface3: #475569;
+  --border-color: rgba(148, 163, 184, 0.15);
+  --border-focus: rgba(245, 158, 11, 0.4);
+  --primary-color: #94a3b8;
+  --accent-color: #f59e0b;
+  --glow-color: rgba(148, 163, 184, 0.2);
+}
+
 @theme {
-  --color-background: #09090b;
-  --color-surface: #0f0f11;
-  --color-surface2: #161619;
-  --color-surface3: #1d1d22;
-  --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-focus: rgba(99, 102, 241, 0.2);
-  --color-primary: #6366f1;
-  --color-accent: #818cf8;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-surface3: var(--surface3);
+  --color-border: var(--border-color);
+  --color-border-focus: var(--border-focus);
+  --color-primary: var(--primary-color);
+  --color-accent: var(--accent-color);
+  --color-glow: var(--glow-color);
   --font-sans: "Plus Jakarta Sans", "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
