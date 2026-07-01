@@ -272,11 +272,11 @@ export default function SupremeConsole() {
       </motion.div>
 
       {/* CENTER WORKSPACE */}
-      <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#09090b]">
+      <div className="flex-1 flex flex-col h-full overflow-hidden bg-background">
         {/* Header Status Bar */}
-        <div className="h-14 px-6 border-b border-white/[0.06] flex items-center justify-between shrink-0 bg-[#0f0f11]">
+        <div className="h-14 px-6 border-b border-border flex items-center justify-between shrink-0 bg-surface/75 backdrop-blur-md">
           <div className="flex items-center gap-4">
-            <span className="text-xs font-semibold text-white/90">
+            <span className="text-xs font-bold text-white/95 uppercase tracking-wide theme-glow-text text-primary">
               {activeSurface === 'LIVE' && 'Active Cognition Terminal'}
               {activeSurface === 'REPLAY' && 'Historical Replay Hub'}
               {activeSurface === 'WORKSPACE' && 'Repository Graph Explorer'}
@@ -285,20 +285,20 @@ export default function SupremeConsole() {
             <div className="w-[1px] h-3 bg-white/10" />
             {activeWorkflow && (
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-white/40">ID:</span>
-                <span className="text-[10px] font-mono text-indigo-400">{activeWorkflow.workflow_id.slice(0, 8)}</span>
+                <span className="text-[9px] font-mono text-white/30 uppercase">Workflow_ID:</span>
+                <span className="text-[10px] font-mono text-accent font-semibold">{activeWorkflow.workflow_id.slice(0, 8)}</span>
               </div>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {isStreaming && (
-              <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-400 font-medium">
+              <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] text-emerald-400 font-bold uppercase tracking-wider shadow-[0_0_8px_rgba(16,185,129,0.15)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Thinking...
+                Thinking
               </div>
             )}
-            <div className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-[10px] font-mono text-white/40">
+            <div className="px-2 py-0.5 rounded bg-white/[0.02] border border-border text-[9px] font-mono text-white/30">
               V0.2.0
             </div>
           </div>
