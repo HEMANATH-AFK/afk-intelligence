@@ -890,14 +890,17 @@ function SidebarLink({ icon, label, active, sidebarExpanded, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all cursor-pointer ${
+      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer relative ${
         active 
-          ? 'bg-white/[0.04] text-white' 
-          : 'text-white/40 hover:bg-white/[0.02]'
+          ? 'bg-primary/10 border border-primary/25 text-white shadow-[0_0_12px_var(--color-glow)]' 
+          : 'text-white/40 hover:bg-white/[0.02] border border-transparent'
       }`}
     >
-      {React.cloneElement(icon, { className: 'w-3.5 h-3.5 shrink-0' })}
-      {sidebarExpanded && <span className="text-xs font-medium">{label}</span>}
+      {React.cloneElement(icon, { className: `w-3.5 h-3.5 shrink-0 transition-colors ${active ? 'text-primary' : 'text-white/40'}` })}
+      {sidebarExpanded && <span className="text-xs font-semibold tracking-tight">{label}</span>}
+      {active && sidebarExpanded && (
+        <span className="absolute right-2.5 w-1 h-3.5 rounded bg-primary shadow-[0_0_8px_var(--color-glow)]" />
+      )}
     </button>
   );
 }
