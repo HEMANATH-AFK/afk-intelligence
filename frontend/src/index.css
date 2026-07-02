@@ -18,6 +18,7 @@
   --grid-color: rgba(255, 255, 255, 0.02);
   --scanline-opacity: 0.04;
   --glass-bg: rgba(7, 16, 26, 0.6);
+  --selection-bg: rgba(0, 242, 254, 0.3);
 }
 
 .theme-amethyst {
@@ -37,6 +38,7 @@
   --grid-color: rgba(255, 255, 255, 0.02);
   --scanline-opacity: 0.04;
   --glass-bg: rgba(20, 11, 32, 0.6);
+  --selection-bg: rgba(168, 85, 247, 0.3);
 }
 
 .theme-cyber-neon {
@@ -56,6 +58,7 @@
   --grid-color: rgba(255, 255, 255, 0.02);
   --scanline-opacity: 0.04;
   --glass-bg: rgba(7, 16, 26, 0.6);
+  --selection-bg: rgba(0, 242, 254, 0.3);
 }
 
 .theme-aurora {
@@ -75,6 +78,7 @@
   --grid-color: rgba(255, 255, 255, 0.02);
   --scanline-opacity: 0.04;
   --glass-bg: rgba(10, 23, 24, 0.6);
+  --selection-bg: rgba(16, 185, 129, 0.3);
 }
 
 .theme-slate {
@@ -94,6 +98,7 @@
   --grid-color: rgba(255, 255, 255, 0.02);
   --scanline-opacity: 0.04;
   --glass-bg: rgba(30, 41, 59, 0.6);
+  --selection-bg: rgba(148, 163, 184, 0.3);
 }
 
 .theme-light-nordic {
@@ -113,6 +118,7 @@
   --grid-color: rgba(15, 23, 42, 0.04);
   --scanline-opacity: 0.005;
   --glass-bg: rgba(255, 255, 255, 0.7);
+  --selection-bg: rgba(79, 70, 229, 0.2);
 }
 
 .theme-light-cyber {
@@ -132,6 +138,7 @@
   --grid-color: rgba(219, 39, 119, 0.03);
   --scanline-opacity: 0.008;
   --glass-bg: rgba(255, 255, 255, 0.75);
+  --selection-bg: rgba(219, 39, 119, 0.2);
 }
 
 @theme {
@@ -183,6 +190,16 @@
                 color 0.3s ease, 
                 box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: inherit;
+  }
+
+  /* Input, Select, Textarea compatibility overrides */
+  input, textarea, select {
+    color: var(--color-white);
+  }
 }
 
 @layer utilities {
@@ -230,8 +247,8 @@
   }
   
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
   }
   
   ::-webkit-scrollbar-track {
@@ -239,11 +256,11 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--color-border);
     border-radius: 9999px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--color-primary);
   }
 }
