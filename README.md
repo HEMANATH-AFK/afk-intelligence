@@ -49,3 +49,14 @@ curl http://localhost:8000/api/v1/debug/workflow/{uuid}
 
 ### 5. Architectural Philosophy
 This project purposefully avoids cloud infrastructure lock-in (no AWS, no Kubernetes). The competitive edge is in **cognitive orchestration**, **developer UX**, and **execution safety**, not distributed microservices. All LLM inferences are kept locally via Ollama to guarantee privacy and $0/month operational costs.
+
+## Themes & UI Styling
+AFK features a dynamic, fully functional design system with theme-aware custom properties that support both dark and light modes out of the box:
+- **Dark Themes:** Cyber-Neon (Default), Amethyst (Purple), Aurora Polar (Emerald), Space Slate (Slate Gray).
+- **Light Themes:** Nordic Light (Clean Indigo/Slate), Cyber Light (High-Contrast Rosy/Indigo).
+
+### Key Features
+- **Glassmorphism:** Styled via `.glass-panel` helper classes.
+- **Theme-Aware Selections & Scrollbars:** Highlight and scrolling components automatically adjust theme accents.
+- **Form Inputs Legibility:** Focus rings and placeholders transition smoothly.
+
