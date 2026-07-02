@@ -75,7 +75,7 @@ export default function SupremeConsole() {
 
 
   return (
-    <div className={`theme-${theme} flex h-screen w-screen bg-background text-[#e4e4e7] font-sans overflow-hidden select-none antialiased relative`}>
+    <div className={`theme-${theme} flex h-screen w-screen bg-background text-white/90 font-sans overflow-hidden select-none antialiased relative`}>
       {/* Scanline CRT overlay */}
       <div className="absolute inset-0 scanlines pointer-events-none opacity-[0.04] z-50" />
 
@@ -372,7 +372,7 @@ export default function SupremeConsole() {
                 {activeWorkflow ? (
                   <div className="space-y-6">
                     {/* Stage Header */}
-                    <div className="p-5 rounded-lg bg-[#0f0f11] border border-white/[0.06] space-y-3">
+                    <div className="p-5 rounded-lg bg-panel-bg1 border border-white/[0.06] space-y-3">
                       <div className="flex items-center justify-between">
                         <h2 className="text-sm font-semibold text-white/90 truncate mr-4">{activeWorkflow.goal}</h2>
                         <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
@@ -421,7 +421,7 @@ export default function SupremeConsole() {
                     </div>
 
                     {/* Active streaming response */}
-                    <div className="p-5 rounded-lg bg-[#0f0f11] border border-white/[0.06] space-y-4">
+                    <div className="p-5 rounded-lg bg-panel-bg1 border border-white/[0.06] space-y-4">
                       <div className="flex items-center gap-2 border-b border-white/[0.06] pb-3">
                         <Terminal className="w-4 h-4 text-white/30" />
                         <h4 className="text-xs font-semibold text-white/80">Cognitive Stream Output</h4>
@@ -472,7 +472,7 @@ export default function SupremeConsole() {
                       <button
                         key={w.workflow_id}
                         onClick={() => loadWorkflowReplay(w.workflow_id)}
-                        className="p-4 rounded-lg bg-[#0f0f11] border border-white/[0.06] hover:border-indigo-500/20 text-left transition-all cursor-pointer group"
+                        className="p-4 rounded-lg bg-panel-bg1 border border-white/[0.06] hover:border-indigo-500/20 text-left transition-all cursor-pointer group"
                       >
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[10px] font-mono text-indigo-400 group-hover:text-indigo-300">
@@ -538,7 +538,7 @@ export default function SupremeConsole() {
                 className="space-y-6"
               >
                 {/* Repository Graph Explorer */}
-                <div className="p-6 rounded-lg bg-[#0f0f11] border border-white/[0.06] space-y-4">
+                <div className="p-6 rounded-lg bg-panel-bg1 border border-white/[0.06] space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <h3 className="text-xs font-semibold text-white/90">Structural Architecture Map</h3>
@@ -551,7 +551,7 @@ export default function SupremeConsole() {
                   </div>
 
                   {/* Dummy high-fidelity structural representation */}
-                  <div className="h-[320px] rounded bg-[#09090b] border border-white/[0.06] flex items-center justify-center p-8 relative overflow-hidden">
+                  <div className="h-[320px] rounded bg-panel-bg2 border border-white/[0.06] flex items-center justify-center p-8 relative overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(#1e1b4b_1px,transparent_1px)] [background-size:16px_16px] opacity-20" />
                     
                     <div className="relative flex flex-col items-center gap-8">
@@ -594,7 +594,7 @@ export default function SupremeConsole() {
                   {activeWorkflow && activeWorkflow.patches && activeWorkflow.patches.length > 0 ? (
                     <div className="space-y-4">
                       {activeWorkflow.patches.map((patch, idx) => (
-                        <div key={idx} className="p-5 rounded-lg bg-[#0f0f11] border border-white/[0.06] space-y-4">
+                        <div key={idx} className="p-5 rounded-lg bg-panel-bg1 border border-white/[0.06] space-y-4">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <FileText className="w-4 h-4 text-white/30" />
@@ -605,7 +605,7 @@ export default function SupremeConsole() {
                             </span>
                           </div>
 
-                          <div className="p-4 rounded bg-[#09090b]/80 border border-white/[0.06] overflow-x-auto max-h-[350px]">
+                          <div className="p-4 rounded bg-panel-bg2/80 border border-white/[0.06] overflow-x-auto max-h-[350px]">
                             {renderDiff(patch.diff)}
                           </div>
 
@@ -657,7 +657,7 @@ export default function SupremeConsole() {
       </div>
 
       {/* RIGHT INSPECTOR PANEL */}
-      <div className="w-[340px] border-l border-white/[0.06] bg-[#0f0f11] flex flex-col h-full shrink-0">
+      <div className="w-[340px] border-l border-white/[0.06] bg-panel-bg1 flex flex-col h-full shrink-0">
         {/* Tabs Bar */}
         <div className="h-14 border-b border-white/[0.06] flex items-center justify-around shrink-0 px-1">
           <InspectorTabButton active={activeInspectorTab === 'CONTEXT'} label="Context" onClick={() => setInspectorTab('CONTEXT')} />
@@ -709,7 +709,7 @@ export default function SupremeConsole() {
                 <div className="space-y-2">
                   {tools && tools.length > 0 ? (
                     tools.map((t, idx) => (
-                      <div key={idx} className="p-3 rounded bg-[#09090b] border border-white/[0.06] space-y-1">
+                      <div key={idx} className="p-3 rounded bg-panel-bg2 border border-white/[0.06] space-y-1">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-bold text-white/90 font-mono">{t.name}</span>
                           <span className="px-1.5 py-0.5 rounded text-[8px] font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-semibold">
@@ -744,7 +744,7 @@ export default function SupremeConsole() {
 
                 {activeWorkflow && activeWorkflow.reliability ? (
                   <div className="space-y-4">
-                    <div className="p-5 rounded-lg bg-[#09090b] border border-white/[0.06] space-y-4">
+                    <div className="p-5 rounded-lg bg-panel-bg2 border border-white/[0.06] space-y-4">
                       <div className="flex flex-col items-center justify-center space-y-2 relative">
                         {/* Circular/Arc Gauge */}
                         <div className="relative w-28 h-28 flex items-center justify-center">
@@ -806,7 +806,7 @@ export default function SupremeConsole() {
                       <MetricRow label="Hallucination Risk" value={activeWorkflow.reliability.hallucination_risk} alert={activeWorkflow.reliability.hallucination_risk === 'HIGH'} />
                     </div>
 
-                    <div className="p-4 rounded-lg bg-[#09090b] border border-white/[0.06] space-y-2">
+                    <div className="p-4 rounded-lg bg-panel-bg2 border border-white/[0.06] space-y-2">
                       <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Confidence Breakdown</span>
                       <ul className="space-y-1 text-[11px] text-white/60 list-disc list-inside leading-relaxed">
                         {activeWorkflow.reliability.confidence_breakdown.map((item, i) => (
@@ -845,8 +845,8 @@ export default function SupremeConsole() {
                         onClick={() => setSelectedPatch(p)}
                         className={`w-full p-3 rounded-lg text-left border transition-all cursor-pointer ${
                           selectedPatch?.filepath === p.filepath 
-                            ? 'bg-[#09090b] border-indigo-500/30' 
-                            : 'bg-[#09090b]/40 border-white/[0.06] hover:border-white/[0.1]'
+                            ? 'bg-panel-bg2 border-indigo-500/30' 
+                            : 'bg-panel-bg2/40 border-white/[0.06] hover:border-white/[0.1]'
                         }`}
                       >
                         <p className="text-xs font-semibold text-white/80 truncate">{p.filepath.split('/').pop()}</p>
@@ -943,7 +943,7 @@ function GraphNode({ label, type, active }) {
     <div className={`px-3 py-1.5 rounded border text-[10px] font-mono transition-all flex items-center gap-1.5 ${
       active 
         ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400' 
-        : 'bg-[#0f0f11] border-white/[0.06] text-white/60'
+        : 'bg-panel-bg1 border-white/[0.06] text-white/60'
     }`}>
       {type === 'file' ? <FileText className="w-3 h-3 shrink-0 text-white/30" /> : <Code className="w-3 h-3 shrink-0 text-indigo-400" />}
       {label}
@@ -968,7 +968,7 @@ function InspectorTabButton({ active, label, onClick }) {
 
 function EvidenceCard({ path, score, type }) {
   return (
-    <div className="p-3 rounded bg-[#09090b] border border-white/[0.06] flex items-center justify-between">
+    <div className="p-3 rounded bg-panel-bg2 border border-white/[0.06] flex items-center justify-between">
       <div className="flex items-center gap-2 min-w-0">
         {type === 'file' ? <FileText className="w-3.5 h-3.5 text-white/20 shrink-0" /> : <Code className="w-3.5 h-3.5 text-indigo-500 shrink-0" />}
         <span className="text-[11px] font-medium text-white/70 truncate">{path.split('/').pop()}</span>
@@ -982,7 +982,7 @@ function EvidenceCard({ path, score, type }) {
 
 function MetricRow({ label, value, highlight, alert }) {
   return (
-    <div className="flex items-center justify-between p-3 rounded bg-[#09090b] border border-white/[0.06]">
+    <div className="flex items-center justify-between p-3 rounded bg-panel-bg2 border border-white/[0.06]">
       <span className="text-[11px] text-white/40 font-medium">{label}</span>
       <span className={`text-[10px] font-bold uppercase ${
         alert ? 'text-rose-400' : (highlight ? 'text-indigo-400' : 'text-emerald-400')
