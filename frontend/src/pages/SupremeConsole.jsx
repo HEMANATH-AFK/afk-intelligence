@@ -307,6 +307,8 @@ export default function SupremeConsole() {
               <option value="amethyst" className="bg-[#140b20] text-purple-400 font-mono">Amethyst</option>
               <option value="aurora" className="bg-[#0a1718] text-emerald-400 font-mono">Aurora Polar</option>
               <option value="slate" className="bg-[#1e293b] text-slate-400 font-mono">Space Slate</option>
+              <option value="light-nordic" className="bg-[#f8fafc] text-slate-900 font-mono">Nordic Light</option>
+              <option value="light-cyber" className="bg-[#fdfafb] text-[#1e1b4b] font-mono">Cyber Light</option>
             </select>
             <div className="px-2 py-0.5 rounded bg-white/[0.02] border border-border text-[9px] font-mono text-white/30">
               V0.2.0
