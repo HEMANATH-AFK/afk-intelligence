@@ -73,7 +73,7 @@ interface OrchestrationState {
   selectedPatch: any | null;
 
   // UI Theme state
-  theme: 'amethyst' | 'cyber-neon' | 'aurora' | 'slate';
+  theme: 'amethyst' | 'cyber-neon' | 'aurora' | 'slate' | 'light-nordic' | 'light-cyber';
 
   // Premium Features state
   tools: ToolSchema[];
@@ -86,7 +86,7 @@ interface OrchestrationState {
   setActiveSurface: (surface: 'LIVE' | 'REPLAY' | 'WORKSPACE' | 'MODIFICATION' | 'SETTINGS') => void;
   setInspectorTab: (tab: 'CONTEXT' | 'RELIABILITY' | 'DIFF' | 'AUDIT' | 'TOOLS') => void;
   setSelectedPatch: (patch: any | null) => void;
-  setTheme: (theme: 'amethyst' | 'cyber-neon' | 'aurora' | 'slate') => void;
+  setTheme: (theme: 'amethyst' | 'cyber-neon' | 'aurora' | 'slate' | 'light-nordic' | 'light-cyber') => void;
   startSSEStream: (prompt: string) => Promise<void>;
   closeWorkflowStream: () => void;
   loadWorkflowReplay: (workflowId: string) => Promise<void>;
