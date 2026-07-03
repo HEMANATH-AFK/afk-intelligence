@@ -60,3 +60,19 @@ AFK features a dynamic, fully functional design system with theme-aware custom p
 - **Theme-Aware Selections & Scrollbars:** Highlight and scrolling components automatically adjust theme accents.
 - **Form Inputs Legibility:** Focus rings and placeholders transition smoothly.
 
+## Documentation Hub
+
+Explore detailed documentation files for each system layer of the AFK-Intelligence application:
+
+1. [Getting Started Guide](file:///docs/getting_started.md) — Local prerequisites, installation steps, and health verification.
+2. [High-Level System Architecture](file:///docs/architecture.md) — System boundaries, topology, and runtime communication flow.
+3. [Multi-Agent Orchestrator](file:///docs/agents.md) — Persona configurations and workflow state machine.
+4. [Intent & Reflection Engine](file:///docs/intent_reflection.md) — Intent classification rules and output validation.
+5. [Workspace Scanning & Retrieval](file:///docs/workspace.md) — File crawler indexing, AST parser, chunking, and embeddings.
+6. [Code Execution Safety](file:///docs/execution.md) — Safe terminal runners, risk classifiers, and manual approvals.
+7. [Database & Settings Configuration](file:///docs/database.md) — MongoDB connections and environment settings.
+8. [API Endpoints Reference](file:///docs/api.md) — FastAPI HTTP endpoints and payload models.
+9. [Frontend & Styling Systems](file:///docs/frontend.md) — React client directory structure and theme configs.
+10. [Build & Deployment Tools](file:///docs/deployment.md) — Docker-Compose container setups and Makefile target references.
+
+
