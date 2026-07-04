@@ -335,12 +335,12 @@ export default function SupremeConsole() {
                     onChange={(e) => setPrompt(e.target.value)}
                     disabled={isStreaming}
                     placeholder="Ask AFK to plan or propose changes (e.g. 'Add JWT refresh tokens')"
-                    className="w-full h-13 pl-5 pr-14 rounded-xl bg-surface/50 border border-border focus:border-primary/80 focus:shadow-[0_0_15px_var(--color-glow)] text-sm focus:outline-none text-white transition-all placeholder-white/20 shadow-2xl backdrop-blur-md font-sans"
+                    className="w-full h-12 pl-5 pr-14 rounded-xl bg-white border border-slate-250 focus:border-primary focus:ring-4 focus:ring-primary/10 text-sm focus:outline-none text-slate-900 transition-all placeholder-slate-400 shadow-md shadow-slate-100/65 font-sans"
                   />
                   <button
                     type="submit"
                     disabled={isStreaming || !prompt.trim()}
-                    className="absolute right-2.5 top-2.5 h-8 w-8 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 text-primary disabled:opacity-30 disabled:hover:bg-primary/10 disabled:hover:shadow-none hover:shadow-[0_0_8px_var(--color-glow)] transition-all flex items-center justify-center cursor-pointer"
+                    className="absolute right-2 top-2 h-8 w-8 rounded-lg bg-primary hover:bg-primary/95 text-white disabled:bg-slate-100 disabled:text-slate-400 transition-all flex items-center justify-center cursor-pointer shadow-sm"
                   >
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
