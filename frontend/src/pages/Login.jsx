@@ -21,25 +21,25 @@ export default function Login() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-4">
           <div className="relative group/input">
-            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/50 group-focus-within/input:text-primary transition-colors" />
+            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within/input:text-primary transition-colors" />
             <input 
               type="email" 
               required
               placeholder="Agent Designation (Email)" 
-              className="w-full bg-surface2/30 border border-primary/20 rounded-xl pl-11 pr-4 py-3.5 text-sm focus:outline-none focus:border-primary/80 focus:shadow-[0_0_15px_var(--color-glow)] text-white transition-all font-mono placeholder-white/20"
+              className="w-full bg-surface2 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 text-slate-900 transition-all font-sans placeholder-slate-450"
             />
-            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-primary/20 group-focus-within/input:bg-primary transition-colors" />
+            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-slate-200 group-focus-within/input:bg-primary transition-colors" />
           </div>
           
           <div className="relative group/input">
-            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/50 group-focus-within/input:text-primary transition-colors" />
+            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within/input:text-primary transition-colors" />
             <input 
               type="password" 
               required
               placeholder="Neural Passcode" 
-              className="w-full bg-surface2/30 border border-primary/20 rounded-xl pl-11 pr-4 py-3.5 text-sm focus:outline-none focus:border-primary/80 focus:shadow-[0_0_15px_var(--color-glow)] text-white transition-all font-mono placeholder-white/20"
+              className="w-full bg-surface2 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 text-slate-900 transition-all font-sans placeholder-slate-450"
             />
-            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-primary/20 group-focus-within/input:bg-primary transition-colors" />
+            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-slate-200 group-focus-within/input:bg-primary transition-colors" />
           </div>
         </div>
 
