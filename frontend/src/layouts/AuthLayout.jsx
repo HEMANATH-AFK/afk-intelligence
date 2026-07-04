@@ -7,30 +7,27 @@ export default function AuthLayout() {
 
   return (
     <div className={`theme-${theme} min-h-screen bg-background relative flex items-center justify-center overflow-hidden cyber-grid`}>
-      {/* Scanline CRT overlay */}
-      <div className="absolute inset-0 scanlines pointer-events-none opacity-[0.07]" />
-
       {/* Futuristic Animated Glow Orbs */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/[0.02] via-background to-accent/[0.02]" />
         <motion.div 
           animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+            x: [0, 30, 0],
+            y: [0, -25, 0],
           }}
           transition={{
             duration: 12,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[120px]" 
+          className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary/[0.04] rounded-full mix-blend-multiply filter blur-[90px]" 
         />
         <motion.div 
           animate={{
-            scale: [1.2, 1, 1.2],
-            x: [0, -40, 0],
-            y: [0, 40, 0],
+            scale: [1.1, 1, 1.1],
+            x: [0, -30, 0],
+            y: [0, 25, 0],
           }}
           transition={{
             duration: 15,
@@ -38,7 +35,7 @@ export default function AuthLayout() {
             ease: "easeInOut",
             delay: 1
           }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full mix-blend-screen filter blur-[120px]" 
+          className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-accent/[0.04] rounded-full mix-blend-multiply filter blur-[90px]" 
         />
       </div>
 
