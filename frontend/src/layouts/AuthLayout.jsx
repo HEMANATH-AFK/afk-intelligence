@@ -48,10 +48,10 @@ export default function AuthLayout() {
         <div className="bg-surface/90 border border-slate-200/80 rounded-2xl p-8 backdrop-blur-2xl shadow-xl shadow-slate-100/50 relative overflow-hidden group">
           
           <div className="mb-8 text-center flex flex-col items-center relative z-10">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4 shadow-[0_0_20px_var(--color-glow)]">
-              <span className="font-mono font-bold text-xl text-white">AFK</span>
+            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-4">
+              <span className="font-sans font-bold text-xl text-white">AFK</span>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white text-glow">Intelligence Layer</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-white">Intelligence Layer</h1>
             <p className="text-white/50 text-sm mt-2">Initialize your local agent</p>
           </div>
           
