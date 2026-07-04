@@ -115,7 +115,7 @@ export const useOrchestrationStore = create<OrchestrationState>((set, get) => ({
   streamLogs: [],
   activeSurface: 'LIVE',
   activeInspectorTab: 'CONTEXT',
-  theme: 'cyber-neon',
+  theme: 'light-nordic',
   tools: [],
   presets: [],
   healthStatus: null,
