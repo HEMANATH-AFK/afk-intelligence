@@ -349,20 +349,20 @@ export default function SupremeConsole() {
                 {/* Prompt Presets Quick-Select Bar */}
                 {presets && presets.length > 0 && (
                   <div className="space-y-2">
-                    <span className="text-[9px] font-bold tracking-widest text-white/30 uppercase">Workflow Presets</span>
+                    <span className="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Workflow Presets</span>
                     <div className="grid grid-cols-2 gap-2">
                       {presets.map(p => (
                         <button
                           key={p.id}
                           type="button"
                           onClick={() => setPrompt(p.prompt)}
-                          className="p-3 rounded-lg bg-surface/40 backdrop-blur-sm border border-border hover:border-primary/45 hover:shadow-[0_0_12px_var(--color-glow)] text-left transition-all cursor-pointer group"
+                          className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-primary/50 hover:shadow-md hover:shadow-slate-100/60 text-left transition-all cursor-pointer group shadow-sm shadow-slate-100/40"
                         >
                           <div className="flex items-center gap-1.5 mb-1">
-                            <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-primary transition-colors" />
-                            <span className="text-xs font-semibold text-white/80 group-hover:text-white transition-colors">{p.title}</span>
+                            <ArrowUpRight className="w-3 h-3 text-slate-400 group-hover:text-primary transition-colors" />
+                            <span className="text-xs font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">{p.title}</span>
                           </div>
-                          <span className="text-[10px] text-white/40 block leading-tight truncate">{p.description}</span>
+                          <span className="text-[10px] text-slate-400 block leading-tight truncate">{p.description}</span>
                         </button>
                       ))}
                     </div>
