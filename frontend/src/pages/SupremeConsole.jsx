@@ -74,16 +74,15 @@ export default function SupremeConsole() {
   };
 
 
-  return (
-    <div className={`theme-${theme} flex h-screen w-screen bg-background text-white/90 font-sans overflow-hidden select-none antialiased relative`}>
+    <div className={`theme-${theme} flex h-screen w-screen bg-background text-slate-800 font-sans overflow-hidden select-none antialiased relative`}>
       {/* Scanline CRT overlay */}
-      <div className="absolute inset-0 scanlines pointer-events-none opacity-[0.04] z-50" />
+      <div className="absolute inset-0 scanlines pointer-events-none opacity-0 z-50" />
 
       {/* LEFT SIDEBAR */}
       <motion.div 
         animate={{ width: sidebarExpanded ? 240 : 64 }}
         transition={{ duration: 0.2, cubicBezier: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col h-full bg-surface/90 border-r border-border shrink-0 backdrop-blur-md z-10"
+        className="flex flex-col h-full bg-surface border-r border-slate-200 shrink-0 z-10 shadow-sm"
       >
         {/* Workspace Title */}
         <div className="flex items-center justify-between h-14 px-4 border-b border-border">
