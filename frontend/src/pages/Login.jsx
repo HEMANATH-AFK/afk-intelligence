@@ -53,8 +53,8 @@ export default function Login() {
           </button>
         </HoverTilt>
 
-        <p className="text-center text-sm text-white/50">
-          New agent? <Link to="/register" className="text-primary hover:underline">Request Access</Link>
+        <p className="text-center text-xs text-slate-500 font-sans mt-4">
+          New agent? <Link to="/register" className="text-primary font-semibold hover:underline transition-all">Request Access</Link>
         </p>
       </form>
     </FadeUp>
