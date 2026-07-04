@@ -116,7 +116,7 @@ export default function SupremeConsole() {
         <div className="flex-1 overflow-y-auto px-2 py-4 space-y-4">
           <div>
             {sidebarExpanded && (
-              <h3 className="px-2 text-[9px] font-bold tracking-widest text-white/30 uppercase mb-2">Sessions</h3>
+              <h3 className="px-2 text-[9px] font-bold tracking-widest text-slate-400 uppercase mb-2">Sessions</h3>
             )}
             <div className="space-y-0.5">
               {sessions.map(s => {
@@ -127,15 +127,15 @@ export default function SupremeConsole() {
                     onClick={() => selectSession(s.id)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer border ${
                       isActive 
-                        ? 'bg-surface2/80 text-white border-primary/25 shadow-[0_0_8px_var(--color-glow)]' 
-                        : 'text-white/40 hover:bg-white/[0.01] hover:text-white/75 border-transparent'
+                        ? 'bg-slate-100/80 text-slate-900 border-slate-200 shadow-sm' 
+                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800 border-transparent'
                     }`}
                   >
-                    <MessageSquare className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-primary' : 'text-white/30'}`} />
+                    <MessageSquare className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-primary' : 'text-slate-450'}`} />
                     {sidebarExpanded && (
                       <div className="truncate flex-1">
                         <p className="text-xs font-semibold truncate">{s.repository_path}</p>
-                        <p className="text-[9px] text-white/30 truncate mt-0.5">
+                        <p className="text-[9px] text-slate-400 truncate mt-0.5">
                           {s.prompt_history.length > 0 ? s.prompt_history[s.prompt_history.length - 1] : 'No activity yet'}
                         </p>
                       </div>
@@ -145,9 +145,9 @@ export default function SupremeConsole() {
               })}
               <button 
                 onClick={createSession}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-primary hover:bg-primary/5 transition-all cursor-pointer border border-transparent font-medium"
+                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-primary hover:bg-slate-50 transition-all cursor-pointer border border-transparent font-medium"
               >
-                <span className="text-xs shrink-0">+</span>
+                <span className="text-xs shrink-0 font-bold">+</span>
                 {sidebarExpanded && <span className="text-xs font-semibold">New Session</span>}
               </button>
             </div>
