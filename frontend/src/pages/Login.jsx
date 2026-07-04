@@ -43,11 +43,11 @@ export default function Login() {
           </div>
         </div>
 
-        <HoverTilt maxTilt={8} scale={1.015}>
+        <HoverTilt maxTilt={5} scale={1.01}>
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white py-3 rounded-xl font-bold tracking-wide uppercase text-xs transition-all duration-300 shadow-[0_0_15px_var(--color-glow)] hover:shadow-[0_0_25px_var(--color-glow)] flex items-center justify-center gap-2 border border-primary/20 hover:border-primary/50 cursor-pointer"
+            className="w-full bg-primary hover:bg-primary/95 text-white py-3 rounded-xl font-bold tracking-wide uppercase text-xs transition-all duration-300 shadow-md shadow-primary/15 hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Authenticate Agent'}
           </button>
