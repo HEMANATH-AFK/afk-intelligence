@@ -387,8 +387,8 @@ export default function SupremeConsole() {
 
                     {/* Timeline representation */}
                     <div className="space-y-4">
-                      <h3 className="text-[10px] font-bold tracking-widest text-white/30 uppercase">Cognitive Stages</h3>
-                      <div className="relative pl-6 border-l border-white/[0.06] space-y-6">
+                      <h3 className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Cognitive Stages</h3>
+                      <div className="relative pl-6 border-l border-slate-200 space-y-6">
                         {/* 1. Context Retrieval Stage */}
                         <TimelineNode 
                           title="Semantic & Structural Context Retrieval"
@@ -922,16 +922,16 @@ function TimelineNode({ title, status, description, payload }) {
       <div className="absolute -left-[30px] top-1.5 w-2 h-2 rounded-full border bg-background transition-all"
         style={{
           borderColor: status === 'active' ? 'var(--primary-color)' : (status === 'completed' ? 'var(--accent-color)' : 'var(--border-color)'),
-          boxShadow: status === 'active' ? '0 0 10px var(--color-glow)' : 'none'
+          boxShadow: status === 'active' ? '0 0 0 4px var(--color-glow)' : 'none'
         }}
       />
       <div className="flex items-center gap-2">
-        <h4 className={`text-xs font-semibold ${status === 'active' ? 'text-white text-glow' : 'text-white/80'}`}>{title}</h4>
+        <h4 className={`text-xs font-semibold ${status === 'active' ? 'text-primary font-bold' : 'text-slate-700'}`}>{title}</h4>
         {status === 'completed' && <CheckCircle2 className="w-3 h-3 text-accent" />}
       </div>
-      <p className="text-[11px] text-white/40 leading-relaxed">{description}</p>
+      <p className="text-[11px] text-slate-500 leading-relaxed">{description}</p>
       {payload && (
-        <div className="p-3 rounded bg-surface/50 border border-border text-[10px] font-mono text-white/60 overflow-x-auto max-w-full shadow-inner backdrop-blur-sm">
+        <div className="p-3 rounded bg-slate-50 border border-slate-200 text-[10px] font-mono text-slate-700 overflow-x-auto max-w-full shadow-sm">
           <pre>{JSON.stringify(payload, null, 2)}</pre>
         </div>
       )}
