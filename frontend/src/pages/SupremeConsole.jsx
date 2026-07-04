@@ -156,7 +156,7 @@ export default function SupremeConsole() {
           {/* Navigation links */}
           <div>
             {sidebarExpanded && (
-              <h3 className="px-2 text-[9px] font-bold tracking-widest text-white/30 uppercase mb-2">Views</h3>
+              <h3 className="px-2 text-[9px] font-bold tracking-widest text-slate-400 uppercase mb-2">Views</h3>
             )}
             <div className="space-y-0.5">
               <SidebarLink 
@@ -903,14 +903,14 @@ function SidebarLink({ icon, label, active, sidebarExpanded, onClick }) {
       onClick={onClick}
       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer relative ${
         active 
-          ? 'bg-primary/10 border border-primary/25 text-white shadow-[0_0_12px_var(--color-glow)]' 
-          : 'text-white/40 hover:bg-white/[0.02] border border-transparent'
+          ? 'bg-primary/10 border border-primary/20 text-primary shadow-sm font-semibold' 
+          : 'text-slate-500 hover:bg-slate-50 border border-transparent'
       }`}
     >
-      {React.cloneElement(icon, { className: `w-3.5 h-3.5 shrink-0 transition-colors ${active ? 'text-primary' : 'text-white/40'}` })}
+      {React.cloneElement(icon, { className: `w-3.5 h-3.5 shrink-0 transition-colors ${active ? 'text-primary' : 'text-slate-400'}` })}
       {sidebarExpanded && <span className="text-xs font-semibold tracking-tight">{label}</span>}
       {active && sidebarExpanded && (
-        <span className="absolute right-2.5 w-1 h-3.5 rounded bg-primary shadow-[0_0_8px_var(--color-glow)]" />
+        <span className="absolute right-2.5 w-1 h-3.5 rounded bg-primary" />
       )}
     </button>
   );
