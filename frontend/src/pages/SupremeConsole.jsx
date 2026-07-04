@@ -85,19 +85,19 @@ export default function SupremeConsole() {
         className="flex flex-col h-full bg-surface border-r border-slate-200 shrink-0 z-10 shadow-sm"
       >
         {/* Workspace Title */}
-        <div className="flex items-center justify-between h-14 px-4 border-b border-border">
+        <div className="flex items-center justify-between h-14 px-4 border-b border-slate-200">
           <div className="flex items-center gap-2 overflow-hidden">
             <div className="w-5 h-5 rounded bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
               <Cpu className="w-3 h-3 text-primary" />
             </div>
             {sidebarExpanded && (
-              <span className="text-xs font-bold tracking-tight text-white/90 truncate theme-glow-text">AFK Cognitive Layer</span>
+              <span className="text-xs font-bold tracking-tight text-slate-900 truncate">AFK Cognitive Layer</span>
             )}
           </div>
           {sidebarExpanded && (
             <button 
               onClick={() => setSidebarExpanded(false)}
-              className="text-white/30 hover:text-white/60 text-[10px] uppercase font-mono px-1.5 py-0.5 border border-white/[0.06] rounded cursor-pointer"
+              className="text-slate-400 hover:text-slate-600 text-[10px] uppercase font-mono px-1.5 py-0.5 border border-slate-200 rounded cursor-pointer"
             >
               Collapse
             </button>
@@ -105,7 +105,7 @@ export default function SupremeConsole() {
           {!sidebarExpanded && (
             <button 
               onClick={() => setSidebarExpanded(true)}
-              className="text-white/30 hover:text-white/60 text-xs shrink-0 cursor-pointer"
+              className="text-slate-400 hover:text-slate-650 text-xs shrink-0 cursor-pointer"
             >
               →
             </button>
@@ -273,18 +273,18 @@ export default function SupremeConsole() {
       {/* CENTER WORKSPACE */}
       <div className="flex-1 flex flex-col h-full overflow-hidden bg-background">
         {/* Header Status Bar */}
-        <div className="h-14 px-6 border-b border-border flex items-center justify-between shrink-0 bg-surface/75 backdrop-blur-md">
+        <div className="h-14 px-6 border-b border-slate-200 flex items-center justify-between shrink-0 bg-surface">
           <div className="flex items-center gap-4">
-            <span className="text-xs font-bold text-white/95 uppercase tracking-wide theme-glow-text text-primary">
+            <span className="text-xs font-bold text-slate-800 uppercase tracking-wide text-primary">
               {activeSurface === 'LIVE' && 'Active Cognition Terminal'}
               {activeSurface === 'REPLAY' && 'Historical Replay Hub'}
               {activeSurface === 'WORKSPACE' && 'Repository Graph Explorer'}
               {activeSurface === 'MODIFICATION' && 'Modification Approvals Sandbox'}
             </span>
-            <div className="w-[1px] h-3 bg-white/10" />
+            <div className="w-[1px] h-3 bg-slate-200" />
             {activeWorkflow && (
               <div className="flex items-center gap-2">
-                <span className="text-[9px] font-mono text-white/30 uppercase">Workflow_ID:</span>
+                <span className="text-[9px] font-mono text-slate-400 uppercase">Workflow_ID:</span>
                 <span className="text-[10px] font-mono text-accent font-semibold">{activeWorkflow.workflow_id.slice(0, 8)}</span>
               </div>
             )}
@@ -292,24 +292,24 @@ export default function SupremeConsole() {
 
           <div className="flex items-center gap-3">
             {isStreaming && (
-              <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] text-emerald-400 font-bold uppercase tracking-wider shadow-[0_0_8px_rgba(16,185,129,0.15)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-[9px] text-emerald-600 font-bold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Thinking
               </div>
             )}
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
-              className="px-2.5 py-0.5 rounded bg-surface border border-border text-[9px] font-mono text-white/50 hover:text-white/80 hover:border-primary/50 focus:outline-none transition-all cursor-pointer"
+              className="px-2.5 py-0.5 rounded bg-white border border-slate-200 text-[9px] font-mono text-slate-600 hover:text-slate-800 hover:border-slate-350 focus:outline-none transition-all cursor-pointer"
             >
-              <option value="cyber-neon" className="bg-[#07101a] text-cyan-400 font-mono">Cyber-Neon</option>
-              <option value="amethyst" className="bg-[#140b20] text-purple-400 font-mono">Amethyst</option>
-              <option value="aurora" className="bg-[#0a1718] text-emerald-400 font-mono">Aurora Polar</option>
-              <option value="slate" className="bg-[#1e293b] text-slate-400 font-mono">Space Slate</option>
-              <option value="light-nordic" className="bg-[#f8fafc] text-slate-900 font-mono">Nordic Light</option>
-              <option value="light-cyber" className="bg-[#fdfafb] text-[#1e1b4b] font-mono">Cyber Light</option>
+              <option value="cyber-neon" className="bg-[#ffffff] text-slate-900 font-mono">Cyber-Neon</option>
+              <option value="amethyst" className="bg-[#ffffff] text-slate-900 font-mono">Amethyst</option>
+              <option value="aurora" className="bg-[#ffffff] text-slate-900 font-mono">Aurora Polar</option>
+              <option value="slate" className="bg-[#ffffff] text-slate-900 font-mono">Space Slate</option>
+              <option value="light-nordic" className="bg-[#ffffff] text-slate-900 font-mono">Nordic Light</option>
+              <option value="light-cyber" className="bg-[#ffffff] text-slate-900 font-mono">Cyber Light</option>
             </select>
-            <div className="px-2 py-0.5 rounded bg-white/[0.02] border border-border text-[9px] font-mono text-white/30">
+            <div className="px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-[9px] font-mono text-slate-400">
               V0.2.0
             </div>
           </div>
