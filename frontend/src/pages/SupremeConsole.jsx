@@ -74,6 +74,7 @@ export default function SupremeConsole() {
   };
 
 
+  return (
     <div className={`theme-${theme} flex h-screen w-screen bg-background text-slate-800 font-sans overflow-hidden select-none antialiased relative`}>
       {/* Scanline CRT overlay */}
       <div className="absolute inset-0 scanlines pointer-events-none opacity-0 z-50" />
@@ -300,14 +301,14 @@ export default function SupremeConsole() {
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
-              className="px-2.5 py-0.5 rounded bg-white border border-slate-200 text-[9px] font-mono text-slate-600 hover:text-slate-800 hover:border-slate-350 focus:outline-none transition-all cursor-pointer"
+              className="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-sans text-slate-600 hover:text-slate-800 hover:border-slate-350 focus:outline-none transition-all cursor-pointer shadow-sm"
             >
-              <option value="cyber-neon" className="bg-[#ffffff] text-slate-900 font-mono">Cyber-Neon</option>
-              <option value="amethyst" className="bg-[#ffffff] text-slate-900 font-mono">Amethyst</option>
-              <option value="aurora" className="bg-[#ffffff] text-slate-900 font-mono">Aurora Polar</option>
-              <option value="slate" className="bg-[#ffffff] text-slate-900 font-mono">Space Slate</option>
-              <option value="light-nordic" className="bg-[#ffffff] text-slate-900 font-mono">Nordic Light</option>
-              <option value="light-cyber" className="bg-[#ffffff] text-slate-900 font-mono">Cyber Light</option>
+              <option value="cyber-neon" className="bg-[#ffffff] text-slate-900">Cobalt Slate</option>
+              <option value="amethyst" className="bg-[#ffffff] text-slate-900">Orchid Purple</option>
+              <option value="aurora" className="bg-[#ffffff] text-slate-900">Sage Emerald</option>
+              <option value="slate" className="bg-[#ffffff] text-slate-900">Obsidian Amber</option>
+              <option value="light-nordic" className="bg-[#ffffff] text-slate-900">Nordic Indigo</option>
+              <option value="light-cyber" className="bg-[#ffffff] text-slate-900">Crimson Rose</option>
             </select>
             <div className="px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-[9px] font-mono text-slate-400">
               V0.2.0
