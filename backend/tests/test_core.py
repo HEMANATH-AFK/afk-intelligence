@@ -33,6 +33,16 @@ def test_risk_classification_critical():
     assert res["level"] == RiskLevel.CRITICAL
     assert res["is_blocked"]
 
+def test_risk_classification_critical_extra():
+    """Verify that dd and rmdir are blocked as CRITICAL risk."""
+    res_dd = risk_classifier.classify("dd if=/dev/zero of=/dev/sdb")
+    res_rmdir = risk_classifier.classify("rmdir /s /q testdir")
+    assert res_dd["level"] == RiskLevel.CRITICAL
+    assert res_dd["is_blocked"]
+    assert res_rmdir["level"] == RiskLevel.CRITICAL
+    assert res_rmdir["is_blocked"]
+
+
 def test_graph_extraction_basic():
     """Verify basic instantiation and properties of GraphExtractor."""
     extractor = GraphExtractor(os.getcwd())
