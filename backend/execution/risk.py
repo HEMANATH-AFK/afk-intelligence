@@ -9,8 +9,10 @@ class RiskLevel(str, Enum):
     CRITICAL = "CRITICAL"
 
 class RiskClassifier:
-    def __init__(self):
-        self.rules = {
+    """Classifies terminal commands into distinct safety tiers based on predefined pattern rules."""
+
+    def __init__(self) -> None:
+        self.rules: Dict[RiskLevel, Dict[str, Any]] = {
             RiskLevel.LOW: {
                 "patterns": [r"^ls", r"^dir", r"^git status", r"^git log", r"^pwd", r"^cat ", r"^grep ", r"^echo", r"^git diff"],
                 "description": "Read-only operations"
