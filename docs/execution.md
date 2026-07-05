@@ -20,9 +20,10 @@ graph TD
 ## 2. Risk Classification (`risk.py`)
 
 Every command is statically scanned before execution:
-- **`LOW_RISK`**: Read-only queries like `git status`, `ls`, or project build checks. These run without manual approval.
+- **`LOW_RISK`**: Read-only queries like `git status`, `ls`, `git diff`, `echo`, or project build checks. These run without manual approval.
 - **`MEDIUM_RISK`**: Includes standard compiler/build commands like `npm run build` or file modifications.
 - **`HIGH_RISK`**: Commands containing patterns like `rm -rf`, `docker-compose down`, global installations (`npm install -g`), or force pushes. These strictly block execution until the user manually clicks "Approve" in the dashboard.
+- **`CRITICAL_RISK`**: Highly dangerous system-level operations such as `sudo`, `dd`, `rmdir`, `mkfs`, or `shutdown`. These are strictly blocked and cannot be executed even with approval.
 
 ---
 
