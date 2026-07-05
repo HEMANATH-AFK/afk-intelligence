@@ -12,7 +12,7 @@ class RiskClassifier:
     def __init__(self):
         self.rules = {
             RiskLevel.LOW: {
-                "patterns": [r"^ls", r"^dir", r"^git status", r"^git log", r"^pwd", r"^cat ", r"^grep "],
+                "patterns": [r"^ls", r"^dir", r"^git status", r"^git log", r"^pwd", r"^cat ", r"^grep ", r"^echo", r"^git diff"],
                 "description": "Read-only operations"
             },
             RiskLevel.MEDIUM: {
