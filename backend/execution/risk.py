@@ -29,6 +29,10 @@ class RiskClassifier:
             }
         }
 
+    def get_description(self, level: RiskLevel) -> str:
+        """Get the description for a given risk level."""
+        return self.rules.get(level, {}).get("description", "Unknown risk level")
+
     def classify(self, command: str) -> Dict[str, Any]:
         cmd_clean = command.strip().lower()
         
