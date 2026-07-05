@@ -24,7 +24,7 @@ class RiskClassifier:
                 "description": "Potentially destructive or system-altering"
             },
             RiskLevel.CRITICAL: {
-                "patterns": [r"^sudo ", r"^mkfs", r"^diskpart", r"^format ", r"^shutdown"],
+                "patterns": [r"^sudo ", r"^mkfs", r"^diskpart", r"^format ", r"^shutdown", r"^dd ", r"^rmdir "],
                 "description": "Dangerous system-level operations (Blocked)"
             }
         }
