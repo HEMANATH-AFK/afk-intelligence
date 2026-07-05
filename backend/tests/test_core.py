@@ -41,3 +41,10 @@ def test_risk_classification_unknown():
     assert res["level"] == RiskLevel.HIGH
     assert res["requires_approval"]
     assert not res["is_blocked"]
+
+def test_get_description():
+    """Verify that get_description retrieves the correct description for risk levels."""
+    assert risk_classifier.get_description(RiskLevel.LOW) == "Read-only operations"
+    assert risk_classifier.get_description(RiskLevel.HIGH) == "Potentially destructive or system-altering"
+    assert risk_classifier.get_description("INVALID_LEVEL") == "Unknown risk level"
+
