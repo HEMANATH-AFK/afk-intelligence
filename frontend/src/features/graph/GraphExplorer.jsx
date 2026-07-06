@@ -1,10 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useGraphStore } from '../../stores/useGraphStore';
-import { Share2, Zap, Target, Box } from 'lucide-react';
+import { Share2 } from 'lucide-react';
 
 export default function GraphExplorer() {
-  const { nodes, blastRadius, selectedNodeId, selectNode } = useGraphStore();
+  const { selectedNodeId, selectNode } = useGraphStore();
 
   return (
     <div className="h-full flex flex-col bg-[#050505] relative overflow-hidden">
@@ -85,7 +84,7 @@ export default function GraphExplorer() {
   );
 }
 
-function Node({ x, y, label, type, active, pulse }) {
+function Node({ x, y, label, active, pulse }) {
   const { selectNode } = useGraphStore();
   
   return (
