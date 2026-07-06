@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useOrchestrationStore } from '../../stores/useOrchestrationStore';
 import { AgentRole } from '../../types/system';
