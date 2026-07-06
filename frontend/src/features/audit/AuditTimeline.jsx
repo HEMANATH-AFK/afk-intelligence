@@ -1,6 +1,5 @@
-import React from 'react';
 import { useOrchestrationStore } from '../../stores/useOrchestrationStore';
-import { ShieldAlert, Activity, Command, CheckCircle2 } from 'lucide-react';
+import { ShieldAlert } from 'lucide-react';
 
 export default function AuditTimeline() {
   const { messages } = useOrchestrationStore();
