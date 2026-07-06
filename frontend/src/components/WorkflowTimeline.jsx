@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { CheckCircle2, Circle, Loader2, AlertCircle, ArrowRight, Search, Bug } from 'lucide-react';
+import { CheckCircle2, Circle, Loader2, ArrowRight, Search, Bug } from 'lucide-react';
 
 export default function WorkflowTimeline({ steps, currentStepIndex }) {
   if (!steps || steps.length === 0) return null;
