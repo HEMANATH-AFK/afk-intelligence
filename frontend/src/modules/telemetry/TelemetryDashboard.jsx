@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTelemetryStore } from '../../stores/useTelemetryStore';
 import { Activity, Cpu, Database, Zap } from 'lucide-react';
 

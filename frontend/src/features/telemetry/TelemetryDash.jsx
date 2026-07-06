@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useTelemetryStore } from '../../stores/useTelemetryStore';
 import { Activity, Zap, Cpu, Clock } from 'lucide-react';
