@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Save, Sliders, Monitor, Cpu } from 'lucide-react';
+import { Save, Monitor, Cpu } from 'lucide-react';
 
 export default function Settings() {
   const [model, setModel] = useState('gemma:2b');
-  const [theme, setTheme] = useState('dark');
   const [animations, setAnimations] = useState(true);
 
   return (

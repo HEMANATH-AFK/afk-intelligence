@@ -97,7 +97,7 @@ export const useChatStore = create((set, get) => ({
               setCurrentThought(data.message);
               updateLastMessage(msg => ({ ...msg, events: [...(msg.events || []), data.message] }));
             }
-          } catch (e) { updateLastMessage(msg => ({ ...msg, content: msg.content + line })); }
+          } catch { updateLastMessage(msg => ({ ...msg, content: msg.content + line })); }
         }
       }
     } catch (error) {
