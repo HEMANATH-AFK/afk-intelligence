@@ -1,6 +1,5 @@
-import React from 'react';
 import { useOrchestratorStore } from '../../stores/useOrchestratorStore';
-import { Shield, Clock, FileDiff } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 export default function AuditCenter() {
   const { eventLog } = useOrchestratorStore();

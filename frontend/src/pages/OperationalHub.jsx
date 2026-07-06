@@ -1,4 +1,3 @@
-import React from 'react';
 import OperationalShell from '../components/layout/OperationalShell';
 import CognitiveChat from '../modules/chat/CognitiveChat';
 import TelemetryDashboard from '../modules/telemetry/TelemetryDashboard';

@@ -1,12 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useOrchestratorStore } from '../../stores/useOrchestratorStore';
-import { useExecutionStore } from '../../stores/useExecutionStore';
 import { EventParser } from '../../core/events/parser';
-import { BrainCircuit, Loader2, Play, AlertCircle } from 'lucide-react';
+import { BrainCircuit, Loader2 } from 'lucide-react';
 
 export default function CognitiveChat() {
-  const { messages, isStreaming, currentThought, addMessage, setStreaming } = useOrchestratorStore();
+  const { messages, currentThought, addMessage, setStreaming } = useOrchestratorStore();
   const endRef = useRef(null);
 
   useEffect(() => {
