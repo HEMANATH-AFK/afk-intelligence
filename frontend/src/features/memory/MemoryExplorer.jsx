@@ -1,5 +1,3 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import { Database, Clock, Target, Box } from 'lucide-react';
 
 const MOCK_MEMORIES = [

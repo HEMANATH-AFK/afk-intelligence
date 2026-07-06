@@ -1,4 +1,3 @@
-import React from 'react';
 import { useContextStore } from '../../stores/useContextStore';
 import { Brain, FileText, Share2, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
