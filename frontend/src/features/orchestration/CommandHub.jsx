@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useOrchestrationStore } from '../../stores/useOrchestrationStore';
 import { EventParser } from '../../core/events/parser';
 import PipelineMonitor from './PipelineMonitor';
 import WorkflowTimeline from '../../components/WorkflowTimeline';
-import { BrainCircuit, Command, Loader2, Sparkles, TerminalSquare } from 'lucide-react';
+import { BrainCircuit, Command, Loader2, Sparkles } from 'lucide-react';
 
 export default function CommandHub() {
   const { messages, isStreaming, currentStage, activeWorkflow, addMessage, setStreaming, processEvent } = useOrchestrationStore();
