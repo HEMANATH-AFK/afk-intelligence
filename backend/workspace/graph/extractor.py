@@ -47,6 +47,18 @@ class GraphExtractor:
                     # Edge: File CONTAINS Class/Function
                     self.graph.add_edge(rel_path, node_id, relationship='contains')
 
+                    # Parse base classes for class inheritance relations
+                    if isinstance(node, ast.ClassDef):
+                        for base in node.bases:
+                            base_name = None
+                            if isinstance(base, ast.Name):
+                                base_name = base.id
+                            elif isinstance(base, ast.Attribute) and isinstance(base.value, ast.Name):
+                                base_name = f"{base.value.id}.{base.attr}"
+                            
+                            if base_name:
+                                self.graph.add_edge(node_id, base_name, relationship='inherits')
+
                 # 3. Add Import Edges
                 if isinstance(node, ast.Import):
                     for alias in node.names:
