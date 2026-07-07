@@ -29,13 +29,37 @@ class ExecutionPolicy:
 class TerminalSandbox:
     def __init__(self, workspace_root: str):
         self.policy = ExecutionPolicy(workspace_root)
-        self.cwd = workspace_root
+        self.cwd = str(Path(workspace_root).absolute())
 
     def execute(self, command: str) -> str:
         # Check security policy
         safe, reason = self.policy.is_safe(command)
         if not safe:
             return f"[SECURITY ALERT] Execution blocked: {reason}"
+
+        # Intercept simulated 'cd' commands
+        cmd_stripped = command.strip()
+        if cmd_stripped.startswith("cd ") or cmd_stripped == "cd":
+            if cmd_stripped == "cd":
+                target_absolute = Path(self.policy.workspace_root).resolve()
+                target_dir_str = ""
+            else:
+                target_dir_str = cmd_stripped[3:].strip().strip('"').strip("'")
+                target_absolute = (Path(self.cwd) / target_dir_str).resolve()
+            
+            # Check existence and type
+            if not target_absolute.exists():
+                return f"[ERROR] Directory not found: {target_dir_str}"
+            if not target_absolute.is_dir():
+                return f"[ERROR] Not a directory: {target_dir_str}"
+            
+            # Prevent sandbox escape (directory traversal check)
+            ws_root_path = Path(self.policy.workspace_root).resolve()
+            if ws_root_path != target_absolute and ws_root_path not in target_absolute.parents:
+                return "[SECURITY ALERT] Navigation blocked: Destination directory is outside workspace root."
+            
+            self.cwd = str(target_absolute)
+            return f"[CWD CHANGED] {self.cwd}"
 
         try:
             # Execute with restricted environment and shell=False where possible
