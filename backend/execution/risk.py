@@ -14,7 +14,11 @@ class RiskClassifier:
     def __init__(self) -> None:
         self.rules: Dict[RiskLevel, Dict[str, Any]] = {
             RiskLevel.LOW: {
-                "patterns": [r"^ls", r"^dir", r"^git status", r"^git log", r"^pwd", r"^cat ", r"^grep ", r"^echo", r"^git diff"],
+                "patterns": [
+                    r"^ls", r"^dir", r"^git status", r"^git log", r"^pwd",
+                    r"^cat ", r"^grep ", r"^echo", r"^git diff", r"^git show",
+                    r"^git branch"
+                ],
                 "description": "Read-only operations"
             },
             RiskLevel.MEDIUM: {

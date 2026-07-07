@@ -12,13 +12,19 @@ def test_risk_classification_low():
     assert not res["requires_approval"]
 
 def test_risk_classification_low_extra():
-    """Verify that echo and git diff also classify as LOW risk."""
+    """Verify that echo, git diff, git show, and git branch also classify as LOW risk."""
     res_echo = risk_classifier.classify("echo hello")
     res_diff = risk_classifier.classify("git diff HEAD")
+    res_show = risk_classifier.classify("git show e0aca27")
+    res_branch = risk_classifier.classify("git branch -a")
     assert res_echo["level"] == RiskLevel.LOW
     assert res_diff["level"] == RiskLevel.LOW
+    assert res_show["level"] == RiskLevel.LOW
+    assert res_branch["level"] == RiskLevel.LOW
     assert not res_echo["requires_approval"]
     assert not res_diff["requires_approval"]
+    assert not res_show["requires_approval"]
+    assert not res_branch["requires_approval"]
 
 
 def test_risk_classification_high():
