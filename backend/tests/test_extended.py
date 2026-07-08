@@ -119,3 +119,13 @@ def test_terminal_sandbox_history():
         sandbox.execute("git status")
         sandbox.execute("cd nonexistent")
         assert sandbox.history == ["git status", "cd nonexistent"]
+
+def test_terminal_sandbox_duration_and_env():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        sandbox = TerminalSandbox(tmpdir, env={"TEST_VAR": "hello_from_test"})
+        assert sandbox.env == {"TEST_VAR": "hello_from_test"}
+        assert sandbox.last_duration == 0.0
+        
+        sandbox.execute("git status")
+        assert sandbox.last_duration >= 0.0
+        assert sandbox.history[-1] == "git status"
