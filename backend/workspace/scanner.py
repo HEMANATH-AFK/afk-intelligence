@@ -13,8 +13,9 @@ class WorkspaceScanner:
         structure = self._get_directory_structure(path_obj)
         package_json = self._read_json_file(path_obj / "package.json")
         requirements_txt = self._read_text_file(path_obj / "requirements.txt")
+        pyproject_toml = self._read_text_file(path_obj / "pyproject.toml")
         
-        technologies = self._detect_technologies(package_json, requirements_txt)
+        technologies = self._detect_technologies(package_json, requirements_txt, pyproject_toml)
         architecture = self._infer_architecture(structure, technologies)
 
         return {
@@ -64,7 +65,7 @@ class WorkspaceScanner:
                 pass
         return ""
 
-    def _detect_technologies(self, package_json: dict, requirements_txt: str) -> list:
+    def _detect_technologies(self, package_json: dict, requirements_txt: str, pyproject_toml: str = "") -> list:
         tech = []
         if package_json:
             tech.append("Node.js")
@@ -82,13 +83,14 @@ class WorkspaceScanner:
             if "mongoose" in deps or "mongodb" in deps:
                 tech.append("MongoDB")
 
-        if requirements_txt:
+        if requirements_txt or pyproject_toml:
             tech.append("Python")
-            if "fastapi" in requirements_txt.lower():
+            combined_python_config = (requirements_txt + "\n" + pyproject_toml).lower()
+            if "fastapi" in combined_python_config:
                 tech.append("FastAPI")
-            if "django" in requirements_txt.lower():
+            if "django" in combined_python_config:
                 tech.append("Django")
-            if "flask" in requirements_txt.lower():
+            if "flask" in combined_python_config:
                 tech.append("Flask")
 
         return list(set(tech))
