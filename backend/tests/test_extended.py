@@ -144,3 +144,17 @@ def test_workspace_scanner_enhancements():
         assert "Celery" in techs
         assert "Redis" in techs
         assert "Docker" in techs
+        
+        # Verify metrics counts
+        metrics = res["metrics"]
+        assert metrics["file_count"] == 2
+        assert metrics["directory_count"] == 0
+        
+        # Create a nested folder with a file to test depth and counting
+        subdir = Path(tmpdir) / "src"
+        subdir.mkdir()
+        Path(subdir / "test.py").write_text("print(1)", encoding="utf-8")
+        
+        res2 = scanner.analyze_project(tmpdir)
+        assert res2["metrics"]["file_count"] == 3
+        assert res2["metrics"]["directory_count"] == 1
