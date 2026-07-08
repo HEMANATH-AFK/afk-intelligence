@@ -30,10 +30,11 @@ class ExecutionPolicy:
         return True, ""
 
 class TerminalSandbox:
-    def __init__(self, workspace_root: str):
+    def __init__(self, workspace_root: str, env: dict = None):
         self.policy = ExecutionPolicy(workspace_root)
         self.cwd = str(Path(workspace_root).absolute())
         self.history = []
+        self.env = env or {}
 
     def execute(self, command: str) -> str:
         self.history.append(command)
@@ -76,7 +77,7 @@ class TerminalSandbox:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                env={**os.environ, "PAGER": "cat"} # Prevent interactive pagers
+                env={**os.environ, "PAGER": "cat", **self.env} # Prevent interactive pagers
             )
 
             try:
