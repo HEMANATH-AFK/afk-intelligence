@@ -62,6 +62,16 @@ def test_risk_classification_medium():
     assert res["requires_approval"]
     assert not res["is_blocked"]
 
+    res_poetry = risk_classifier.classify("poetry run pytest")
+    assert res_poetry["level"] == RiskLevel.MEDIUM
+    assert res_poetry["requires_approval"]
+    assert not res_poetry["is_blocked"]
+
+    res_py = risk_classifier.classify("python -m pytest")
+    assert res_py["level"] == RiskLevel.MEDIUM
+    assert res_py["requires_approval"]
+    assert not res_py["is_blocked"]
+
 def test_risk_classification_unknown():
     res = risk_classifier.classify("some-random-unknown-command")
     assert res["level"] == RiskLevel.HIGH
