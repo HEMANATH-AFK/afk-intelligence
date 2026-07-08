@@ -22,7 +22,10 @@ class RiskClassifier:
                 "description": "Read-only operations"
             },
             RiskLevel.MEDIUM: {
-                "patterns": [r"^npm install", r"^pip install", r"^pytest", r"^npm test", r"^vite build"],
+                "patterns": [
+                    r"^npm install", r"^pip install", r"^pytest", r"^npm test",
+                    r"^vite build", r"^poetry run", r"^poetry install", r"^python -m pytest"
+                ],
                 "description": "Project-local mutations or tests"
             },
             RiskLevel.HIGH: {
