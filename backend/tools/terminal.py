@@ -1,6 +1,7 @@
 import subprocess
 import os
 import logging
+import time
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -35,6 +36,7 @@ class TerminalSandbox:
         self.cwd = str(Path(workspace_root).absolute())
         self.history = []
         self.env = env or {}
+        self.last_duration = 0.0
 
     def execute(self, command: str) -> str:
         self.history.append(command)
@@ -67,6 +69,7 @@ class TerminalSandbox:
             self.cwd = str(target_absolute)
             return f"[CWD CHANGED] {self.cwd}"
 
+        start_time = time.time()
         try:
             # Execute with restricted environment and shell=False where possible
             # Note: on Windows, some commands need shell=True for path resolution
@@ -84,6 +87,7 @@ class TerminalSandbox:
                 stdout, stderr = process.communicate(timeout=self.policy.max_runtime_seconds)
             except subprocess.TimeoutExpired:
                 process.kill()
+                self.last_duration = time.time() - start_time
                 return f"[ERROR] Execution timed out after {self.policy.max_runtime_seconds}s."
 
             output = stdout if stdout else ""
@@ -93,10 +97,12 @@ class TerminalSandbox:
             if len(output) > self.policy.max_output_bytes:
                 output = output[:self.policy.max_output_bytes] + "\n... [Output truncated]"
 
+            self.last_duration = time.time() - start_time
             return output.strip() if output.strip() else "[Success - No Output]"
 
         except Exception as e:
             logger.error(f"Execution failed: {e}")
+            self.last_duration = time.time() - start_time
             return f"[ERROR] Execution failed: {str(e)}"
 
 # Global instance for simulation
