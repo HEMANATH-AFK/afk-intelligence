@@ -111,3 +111,11 @@ def test_graph_extractor_class_inheritance():
         assert extractor.graph.has_edge(remote_child_node_id, "module.RemoteParent")
         edge_data_remote = extractor.graph.get_edge_data(remote_child_node_id, "module.RemoteParent")
         assert edge_data_remote["relationship"] == "inherits"
+
+def test_terminal_sandbox_history():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        sandbox = TerminalSandbox(tmpdir)
+        assert len(sandbox.history) == 0
+        sandbox.execute("git status")
+        sandbox.execute("cd nonexistent")
+        assert sandbox.history == ["git status", "cd nonexistent"]
