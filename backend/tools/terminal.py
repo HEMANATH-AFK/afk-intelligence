@@ -8,7 +8,10 @@ logger = logging.getLogger(__name__)
 class ExecutionPolicy:
     def __init__(self, workspace_root: str):
         self.workspace_root = str(Path(workspace_root).absolute())
-        self.allowed_commands = ['ls', 'dir', 'git status', 'git log', 'npm list', 'pip list', 'python --version', 'node --version']
+        self.allowed_commands = [
+            'ls', 'dir', 'git status', 'git log', 'npm list', 'pip list',
+            'python --version', 'node --version', 'git diff', 'git show', 'git branch'
+        ]
         self.blocked_patterns = ['rm ', 'del ', 'format ', 'mkfs ', '> /dev/', 'sudo ', 'chmod ', 'chown ']
         self.max_runtime_seconds = 30  # Timeout limit for executing commands in seconds
         self.max_output_bytes = 50000
