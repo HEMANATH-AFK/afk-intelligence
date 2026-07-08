@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 class WorkspaceScanner:
@@ -18,6 +19,7 @@ class WorkspaceScanner:
         
         technologies = self._detect_technologies(package_json, requirements_txt, pyproject_toml, docker_present)
         architecture = self._infer_architecture(structure, technologies)
+        file_count, dir_count = self._count_elements(path_obj)
 
         return {
             "path": str(path_obj.absolute()),
@@ -25,8 +27,24 @@ class WorkspaceScanner:
             "technologies": technologies,
             "architecture_summary": architecture,
             "dependencies": package_json.get("dependencies", {}) if package_json else {},
-            "structure": structure
+            "structure": structure,
+            "metrics": {
+                "file_count": file_count,
+                "directory_count": dir_count
+            }
         }
+
+    def _count_elements(self, path_obj: Path) -> tuple[int, int]:
+        file_count = 0
+        dir_count = 0
+        try:
+            for root, dirs, files in os.walk(path_obj):
+                dirs[:] = [d for d in dirs if d not in self.ignore_dirs]
+                dir_count += len(dirs)
+                file_count += len(files)
+        except Exception:
+            pass
+        return file_count, dir_count
 
     def _get_directory_structure(self, root_path: Path, max_depth=3) -> dict:
         def build_tree(current_path: Path, current_depth: int) -> dict:
