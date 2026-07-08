@@ -2,9 +2,17 @@ import json
 import os
 from pathlib import Path
 
+
 class WorkspaceScanner:
     def __init__(self, ignore_dirs=None):
-        self.ignore_dirs = ignore_dirs or ['.git', 'node_modules', 'venv', '__pycache__', 'dist', 'build']
+        self.ignore_dirs = ignore_dirs or [
+            ".git",
+            "node_modules",
+            "venv",
+            "__pycache__",
+            "dist",
+            "build",
+        ]
 
     def analyze_project(self, path: str):
         path_obj = Path(path)
@@ -15,9 +23,13 @@ class WorkspaceScanner:
         package_json = self._read_json_file(path_obj / "package.json")
         requirements_txt = self._read_text_file(path_obj / "requirements.txt")
         pyproject_toml = self._read_text_file(path_obj / "pyproject.toml")
-        docker_present = (path_obj / "Dockerfile").exists() or (path_obj / "docker-compose.yml").exists()
-        
-        technologies = self._detect_technologies(package_json, requirements_txt, pyproject_toml, docker_present)
+        docker_present = (path_obj / "Dockerfile").exists() or (
+            path_obj / "docker-compose.yml"
+        ).exists()
+
+        technologies = self._detect_technologies(
+            package_json, requirements_txt, pyproject_toml, docker_present
+        )
         architecture = self._infer_architecture(structure, technologies)
         file_count, dir_count = self._count_elements(path_obj)
 
@@ -26,12 +38,11 @@ class WorkspaceScanner:
             "name": path_obj.name,
             "technologies": technologies,
             "architecture_summary": architecture,
-            "dependencies": package_json.get("dependencies", {}) if package_json else {},
+            "dependencies": package_json.get("dependencies", {})
+            if package_json
+            else {},
             "structure": structure,
-            "metrics": {
-                "file_count": file_count,
-                "directory_count": dir_count
-            }
+            "metrics": {"file_count": file_count, "directory_count": dir_count},
         }
 
     def _count_elements(self, path_obj: Path) -> tuple[int, int]:
@@ -50,7 +61,7 @@ class WorkspaceScanner:
         def build_tree(current_path: Path, current_depth: int) -> dict:
             if current_depth > max_depth:
                 return {"type": "directory", "name": current_path.name, "children": []}
-            
+
             tree = {"type": "directory", "name": current_path.name, "children": []}
             try:
                 for item in current_path.iterdir():
@@ -69,7 +80,7 @@ class WorkspaceScanner:
     def _read_json_file(self, file_path: Path) -> dict:
         if file_path.exists():
             try:
-                with open(file_path, 'r', encoding='utf-8') as f:
+                with open(file_path, "r", encoding="utf-8") as f:
                     return json.load(f)
             except Exception:
                 pass
@@ -78,17 +89,26 @@ class WorkspaceScanner:
     def _read_text_file(self, file_path: Path) -> str:
         if file_path.exists():
             try:
-                with open(file_path, 'r', encoding='utf-8') as f:
+                with open(file_path, "r", encoding="utf-8") as f:
                     return f.read()
             except Exception:
                 pass
         return ""
 
-    def _detect_technologies(self, package_json: dict, requirements_txt: str, pyproject_toml: str = "", docker_present: bool = False) -> list:
+    def _detect_technologies(
+        self,
+        package_json: dict,
+        requirements_txt: str,
+        pyproject_toml: str = "",
+        docker_present: bool = False,
+    ) -> list:
         tech = []
         if package_json:
             tech.append("Node.js")
-            deps = {**package_json.get("dependencies", {}), **package_json.get("devDependencies", {})}
+            deps = {
+                **package_json.get("dependencies", {}),
+                **package_json.get("devDependencies", {}),
+            }
             if "react" in deps:
                 tech.append("React")
             if "next" in deps:
@@ -131,7 +151,8 @@ class WorkspaceScanner:
             return "Modern Decoupled Architecture: React Frontend with FastAPI Backend"
         if "Next.js" in technologies:
             return "Server-Side Rendered React Application (Next.js)"
-        
+
         return "Standard Directory Structure"
+
 
 workspace_scanner = WorkspaceScanner()

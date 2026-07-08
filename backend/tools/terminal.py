@@ -6,14 +6,33 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+
 class ExecutionPolicy:
     def __init__(self, workspace_root: str):
         self.workspace_root = str(Path(workspace_root).absolute())
         self.allowed_commands = [
-            'ls', 'dir', 'git status', 'git log', 'npm list', 'pip list',
-            'python --version', 'node --version', 'git diff', 'git show', 'git branch'
+            "ls",
+            "dir",
+            "git status",
+            "git log",
+            "npm list",
+            "pip list",
+            "python --version",
+            "node --version",
+            "git diff",
+            "git show",
+            "git branch",
         ]
-        self.blocked_patterns = ['rm ', 'del ', 'format ', 'mkfs ', '> /dev/', 'sudo ', 'chmod ', 'chown ']
+        self.blocked_patterns = [
+            "rm ",
+            "del ",
+            "format ",
+            "mkfs ",
+            "> /dev/",
+            "sudo ",
+            "chmod ",
+            "chown ",
+        ]
         self.max_runtime_seconds = 30  # Timeout limit for executing commands in seconds
         self.max_output_bytes = 50000
 
@@ -21,14 +40,15 @@ class ExecutionPolicy:
         # 1. Check blocked patterns
         if any(pattern in command.lower() for pattern in self.blocked_patterns):
             return False, "Command contains blocked pattern."
-            
+
         # 2. Strict whitelist check (initially for stability)
         # In a real system, we'd allow more but with intense validation
         if not any(command.startswith(allowed) for allowed in self.allowed_commands):
-             # For simulation, we'll allow but log warning if it's not in strict whitelist
-             logger.warning(f"Unchecked command attempted: {command}")
-             
+            # For simulation, we'll allow but log warning if it's not in strict whitelist
+            logger.warning(f"Unchecked command attempted: {command}")
+
         return True, ""
+
 
 class TerminalSandbox:
     def __init__(self, workspace_root: str, env: dict = None):
@@ -54,18 +74,21 @@ class TerminalSandbox:
             else:
                 target_dir_str = cmd_stripped[3:].strip().strip('"').strip("'")
                 target_absolute = (Path(self.cwd) / target_dir_str).resolve()
-            
+
             # Check existence and type
             if not target_absolute.exists():
                 return f"[ERROR] Directory not found: {target_dir_str}"
             if not target_absolute.is_dir():
                 return f"[ERROR] Not a directory: {target_dir_str}"
-            
+
             # Prevent sandbox escape (directory traversal check)
             ws_root_path = Path(self.policy.workspace_root).resolve()
-            if ws_root_path != target_absolute and ws_root_path not in target_absolute.parents:
+            if (
+                ws_root_path != target_absolute
+                and ws_root_path not in target_absolute.parents
+            ):
                 return "[SECURITY ALERT] Navigation blocked: Destination directory is outside workspace root."
-            
+
             self.cwd = str(target_absolute)
             return f"[CWD CHANGED] {self.cwd}"
 
@@ -75,16 +98,22 @@ class TerminalSandbox:
             # Note: on Windows, some commands need shell=True for path resolution
             process = subprocess.Popen(
                 command,
-                shell=True, # Need True for built-ins and combined commands on Windows
+                shell=True,  # Need True for built-ins and combined commands on Windows
                 cwd=self.cwd,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                env={**os.environ, "PAGER": "cat", **self.env} # Prevent interactive pagers
+                env={
+                    **os.environ,
+                    "PAGER": "cat",
+                    **self.env,
+                },  # Prevent interactive pagers
             )
 
             try:
-                stdout, stderr = process.communicate(timeout=self.policy.max_runtime_seconds)
+                stdout, stderr = process.communicate(
+                    timeout=self.policy.max_runtime_seconds
+                )
             except subprocess.TimeoutExpired:
                 process.kill()
                 self.last_duration = time.time() - start_time
@@ -93,9 +122,11 @@ class TerminalSandbox:
             output = stdout if stdout else ""
             if stderr:
                 output += f"\n[STDERR]\n{stderr}"
-            
+
             if len(output) > self.policy.max_output_bytes:
-                output = output[:self.policy.max_output_bytes] + "\n... [Output truncated]"
+                output = (
+                    output[: self.policy.max_output_bytes] + "\n... [Output truncated]"
+                )
 
             self.last_duration = time.time() - start_time
             return output.strip() if output.strip() else "[Success - No Output]"
@@ -104,6 +135,7 @@ class TerminalSandbox:
             logger.error(f"Execution failed: {e}")
             self.last_duration = time.time() - start_time
             return f"[ERROR] Execution failed: {str(e)}"
+
 
 # Global instance for simulation
 # In production, this would be scoped per session/workspace
