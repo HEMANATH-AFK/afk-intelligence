@@ -129,3 +129,18 @@ def test_terminal_sandbox_duration_and_env():
         sandbox.execute("git status")
         assert sandbox.last_duration >= 0.0
         assert sandbox.history[-1] == "git status"
+
+def test_workspace_scanner_enhancements():
+    from workspace.scanner import WorkspaceScanner
+    with tempfile.TemporaryDirectory() as tmpdir:
+        Path(tmpdir).joinpath("pyproject.toml").write_text("sqlalchemy\ncelery\nredis", encoding="utf-8")
+        Path(tmpdir).joinpath("Dockerfile").write_text("FROM python:3.9", encoding="utf-8")
+        
+        scanner = WorkspaceScanner()
+        res = scanner.analyze_project(tmpdir)
+        techs = res["technologies"]
+        assert "Python" in techs
+        assert "SQLAlchemy" in techs
+        assert "Celery" in techs
+        assert "Redis" in techs
+        assert "Docker" in techs
