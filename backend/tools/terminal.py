@@ -33,8 +33,10 @@ class TerminalSandbox:
     def __init__(self, workspace_root: str):
         self.policy = ExecutionPolicy(workspace_root)
         self.cwd = str(Path(workspace_root).absolute())
+        self.history = []
 
     def execute(self, command: str) -> str:
+        self.history.append(command)
         # Check security policy
         safe, reason = self.policy.is_safe(command)
         if not safe:
