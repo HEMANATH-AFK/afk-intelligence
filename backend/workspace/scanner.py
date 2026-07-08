@@ -14,8 +14,9 @@ class WorkspaceScanner:
         package_json = self._read_json_file(path_obj / "package.json")
         requirements_txt = self._read_text_file(path_obj / "requirements.txt")
         pyproject_toml = self._read_text_file(path_obj / "pyproject.toml")
+        docker_present = (path_obj / "Dockerfile").exists() or (path_obj / "docker-compose.yml").exists()
         
-        technologies = self._detect_technologies(package_json, requirements_txt, pyproject_toml)
+        technologies = self._detect_technologies(package_json, requirements_txt, pyproject_toml, docker_present)
         architecture = self._infer_architecture(structure, technologies)
 
         return {
@@ -65,7 +66,7 @@ class WorkspaceScanner:
                 pass
         return ""
 
-    def _detect_technologies(self, package_json: dict, requirements_txt: str, pyproject_toml: str = "") -> list:
+    def _detect_technologies(self, package_json: dict, requirements_txt: str, pyproject_toml: str = "", docker_present: bool = False) -> list:
         tech = []
         if package_json:
             tech.append("Node.js")
@@ -92,6 +93,15 @@ class WorkspaceScanner:
                 tech.append("Django")
             if "flask" in combined_python_config:
                 tech.append("Flask")
+            if "redis" in combined_python_config:
+                tech.append("Redis")
+            if "celery" in combined_python_config:
+                tech.append("Celery")
+            if "sqlalchemy" in combined_python_config:
+                tech.append("SQLAlchemy")
+
+        if docker_present:
+            tech.append("Docker")
 
         return list(set(tech))
 
