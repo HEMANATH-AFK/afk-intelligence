@@ -217,3 +217,25 @@ def test_graph_extractor_sloc():
         
         assert extractor.graph.nodes[parent_node]["sloc"] == 3
         assert extractor.graph.nodes[func_node]["sloc"] == 3
+
+def test_graph_extractor_param_count():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        file_path = Path(tmpdir) / "app.py"
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(
+                "def func_no_args():\n"
+                "    pass\n\n"
+                "def func_args(a, b, *c, d=1, **e):\n"
+                "    pass\n"
+            )
+        extractor = GraphExtractor(tmpdir)
+        extractor.build_graph()
+        
+        node_no_args = "app.py::func_no_args"
+        node_args = "app.py::func_args"
+        
+        assert node_no_args in extractor.graph.nodes
+        assert node_args in extractor.graph.nodes
+        
+        assert extractor.graph.nodes[node_no_args]["param_count"] == 0
+        assert extractor.graph.nodes[node_args]["param_count"] == 5
