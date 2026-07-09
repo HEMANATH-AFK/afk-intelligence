@@ -239,3 +239,25 @@ def test_graph_extractor_param_count():
         
         assert extractor.graph.nodes[node_no_args]["param_count"] == 0
         assert extractor.graph.nodes[node_args]["param_count"] == 5
+
+def test_graph_extractor_is_async():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        file_path = Path(tmpdir) / "app.py"
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(
+                "def regular_func():\n"
+                "    pass\n\n"
+                "async def async_func():\n"
+                "    pass\n"
+            )
+        extractor = GraphExtractor(tmpdir)
+        extractor.build_graph()
+        
+        reg_node = "app.py::regular_func"
+        async_node = "app.py::async_func"
+        
+        assert reg_node in extractor.graph.nodes
+        assert async_node in extractor.graph.nodes
+        
+        assert not extractor.graph.nodes[reg_node]["is_async"]
+        assert extractor.graph.nodes[async_node]["is_async"]
