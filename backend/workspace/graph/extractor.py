@@ -43,7 +43,9 @@ class GraphExtractor:
                         sloc = node.end_lineno - node.lineno + 1
                     
                     param_count = 0
+                    is_async = False
                     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        is_async = isinstance(node, ast.AsyncFunctionDef)
                         param_count += len(node.args.args)
                         if hasattr(node.args, "posonlyargs") and node.args.posonlyargs:
                             param_count += len(node.args.posonlyargs)
@@ -61,7 +63,8 @@ class GraphExtractor:
                                        lineno=node.lineno,
                                        docstring=docstring,
                                        sloc=sloc,
-                                       param_count=param_count)
+                                       param_count=param_count,
+                                       is_async=is_async)
                     
                     # Edge: File CONTAINS Class/Function
                     self.graph.add_edge(rel_path, node_id, relationship='contains')
