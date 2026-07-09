@@ -32,8 +32,14 @@ class WorkspaceScanner:
         )
         architecture = self._infer_architecture(structure, technologies)
         file_count, dir_count = self._count_elements(path_obj)
-        
-        config_files_to_check = ["setup.py", "pyproject.toml", "requirements.txt", "setup.cfg", "tox.ini"]
+
+        config_files_to_check = [
+            "setup.py",
+            "pyproject.toml",
+            "requirements.txt",
+            "setup.cfg",
+            "tox.ini",
+        ]
         config_files = [f for f in config_files_to_check if (path_obj / f).exists()]
 
         return {

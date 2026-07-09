@@ -170,29 +170,34 @@ def test_workspace_scanner_enhancements():
         assert res2["metrics"]["file_count"] == 3
         assert res2["metrics"]["directory_count"] == 1
 
+
 def test_graph_extractor_docstring():
     with tempfile.TemporaryDirectory() as tmpdir:
         file_path = Path(tmpdir) / "app.py"
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(
                 "class Parent:\n"
-                "    \"\"\"This is Parent docstring\"\"\"\n"
+                '    """This is Parent docstring"""\n'
                 "    pass\n\n"
                 "def func():\n"
-                "    \"\"\"This is func docstring\"\"\"\n"
+                '    """This is func docstring"""\n'
                 "    pass\n"
             )
         extractor = GraphExtractor(tmpdir)
         extractor.build_graph()
-        
+
         parent_node = "app.py::Parent"
         func_node = "app.py::func"
-        
+
         assert parent_node in extractor.graph.nodes
         assert func_node in extractor.graph.nodes
-        
-        assert extractor.graph.nodes[parent_node]["docstring"] == "This is Parent docstring"
+
+        assert (
+            extractor.graph.nodes[parent_node]["docstring"]
+            == "This is Parent docstring"
+        )
         assert extractor.graph.nodes[func_node]["docstring"] == "This is func docstring"
+
 
 def test_graph_extractor_sloc():
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -208,15 +213,16 @@ def test_graph_extractor_sloc():
             )
         extractor = GraphExtractor(tmpdir)
         extractor.build_graph()
-        
+
         parent_node = "app.py::Parent"
         func_node = "app.py::func"
-        
+
         assert parent_node in extractor.graph.nodes
         assert func_node in extractor.graph.nodes
-        
+
         assert extractor.graph.nodes[parent_node]["sloc"] == 3
         assert extractor.graph.nodes[func_node]["sloc"] == 3
+
 
 def test_graph_extractor_param_count():
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -230,45 +236,45 @@ def test_graph_extractor_param_count():
             )
         extractor = GraphExtractor(tmpdir)
         extractor.build_graph()
-        
+
         node_no_args = "app.py::func_no_args"
         node_args = "app.py::func_args"
-        
+
         assert node_no_args in extractor.graph.nodes
         assert node_args in extractor.graph.nodes
-        
+
         assert extractor.graph.nodes[node_no_args]["param_count"] == 0
         assert extractor.graph.nodes[node_args]["param_count"] == 5
+
 
 def test_graph_extractor_is_async():
     with tempfile.TemporaryDirectory() as tmpdir:
         file_path = Path(tmpdir) / "app.py"
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(
-                "def regular_func():\n"
-                "    pass\n\n"
-                "async def async_func():\n"
-                "    pass\n"
+                "def regular_func():\n    pass\n\nasync def async_func():\n    pass\n"
             )
         extractor = GraphExtractor(tmpdir)
         extractor.build_graph()
-        
+
         reg_node = "app.py::regular_func"
         async_node = "app.py::async_func"
-        
+
         assert reg_node in extractor.graph.nodes
         assert async_node in extractor.graph.nodes
-        
+
         assert not extractor.graph.nodes[reg_node]["is_async"]
         assert extractor.graph.nodes[async_node]["is_async"]
 
+
 def test_workspace_scanner_config_files():
     from workspace.scanner import WorkspaceScanner
+
     with tempfile.TemporaryDirectory() as tmpdir:
         Path(tmpdir).joinpath("setup.py").write_text("# setup", encoding="utf-8")
         Path(tmpdir).joinpath("setup.cfg").write_text("# config", encoding="utf-8")
         Path(tmpdir).joinpath("random.txt").write_text("# random", encoding="utf-8")
-        
+
         scanner = WorkspaceScanner()
         res = scanner.analyze_project(tmpdir)
         configs = res["config_files"]
