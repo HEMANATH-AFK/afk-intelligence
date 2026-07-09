@@ -42,13 +42,26 @@ class GraphExtractor:
                     if hasattr(node, "end_lineno") and node.end_lineno is not None:
                         sloc = node.end_lineno - node.lineno + 1
                     
+                    param_count = 0
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        param_count += len(node.args.args)
+                        if hasattr(node.args, "posonlyargs") and node.args.posonlyargs:
+                            param_count += len(node.args.posonlyargs)
+                        if node.args.kwonlyargs:
+                            param_count += len(node.args.kwonlyargs)
+                        if node.args.vararg:
+                            param_count += 1
+                        if node.args.kwarg:
+                            param_count += 1
+                    
                     self.graph.add_node(node_id, 
                                        type=node_type, 
                                        name=node.name, 
                                        file=rel_path,
                                        lineno=node.lineno,
                                        docstring=docstring,
-                                       sloc=sloc)
+                                       sloc=sloc,
+                                       param_count=param_count)
                     
                     # Edge: File CONTAINS Class/Function
                     self.graph.add_edge(rel_path, node_id, relationship='contains')
