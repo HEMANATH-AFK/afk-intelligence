@@ -169,3 +169,27 @@ def test_workspace_scanner_enhancements():
         res2 = scanner.analyze_project(tmpdir)
         assert res2["metrics"]["file_count"] == 3
         assert res2["metrics"]["directory_count"] == 1
+
+def test_graph_extractor_docstring():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        file_path = Path(tmpdir) / "app.py"
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(
+                "class Parent:\n"
+                "    \"\"\"This is Parent docstring\"\"\"\n"
+                "    pass\n\n"
+                "def func():\n"
+                "    \"\"\"This is func docstring\"\"\"\n"
+                "    pass\n"
+            )
+        extractor = GraphExtractor(tmpdir)
+        extractor.build_graph()
+        
+        parent_node = "app.py::Parent"
+        func_node = "app.py::func"
+        
+        assert parent_node in extractor.graph.nodes
+        assert func_node in extractor.graph.nodes
+        
+        assert extractor.graph.nodes[parent_node]["docstring"] == "This is Parent docstring"
+        assert extractor.graph.nodes[func_node]["docstring"] == "This is func docstring"
