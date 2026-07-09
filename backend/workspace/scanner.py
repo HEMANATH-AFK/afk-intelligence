@@ -32,6 +32,9 @@ class WorkspaceScanner:
         )
         architecture = self._infer_architecture(structure, technologies)
         file_count, dir_count = self._count_elements(path_obj)
+        
+        config_files_to_check = ["setup.py", "pyproject.toml", "requirements.txt", "setup.cfg", "tox.ini"]
+        config_files = [f for f in config_files_to_check if (path_obj / f).exists()]
 
         return {
             "path": str(path_obj.absolute()),
@@ -43,6 +46,7 @@ class WorkspaceScanner:
             else {},
             "structure": structure,
             "metrics": {"file_count": file_count, "directory_count": dir_count},
+            "config_files": config_files,
         }
 
     def _count_elements(self, path_obj: Path) -> tuple[int, int]:
