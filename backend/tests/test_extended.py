@@ -261,3 +261,17 @@ def test_graph_extractor_is_async():
         
         assert not extractor.graph.nodes[reg_node]["is_async"]
         assert extractor.graph.nodes[async_node]["is_async"]
+
+def test_workspace_scanner_config_files():
+    from workspace.scanner import WorkspaceScanner
+    with tempfile.TemporaryDirectory() as tmpdir:
+        Path(tmpdir).joinpath("setup.py").write_text("# setup", encoding="utf-8")
+        Path(tmpdir).joinpath("setup.cfg").write_text("# config", encoding="utf-8")
+        Path(tmpdir).joinpath("random.txt").write_text("# random", encoding="utf-8")
+        
+        scanner = WorkspaceScanner()
+        res = scanner.analyze_project(tmpdir)
+        configs = res["config_files"]
+        assert "setup.py" in configs
+        assert "setup.cfg" in configs
+        assert "random.txt" not in configs
