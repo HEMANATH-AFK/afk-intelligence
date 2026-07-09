@@ -38,13 +38,17 @@ class GraphExtractor:
                     node_id = f"{rel_path}::{node.name}"
                     node_type = 'class' if isinstance(node, ast.ClassDef) else 'function'
                     docstring = ast.get_docstring(node) or ""
+                    sloc = 0
+                    if hasattr(node, "end_lineno") and node.end_lineno is not None:
+                        sloc = node.end_lineno - node.lineno + 1
                     
                     self.graph.add_node(node_id, 
                                        type=node_type, 
                                        name=node.name, 
                                        file=rel_path,
                                        lineno=node.lineno,
-                                       docstring=docstring)
+                                       docstring=docstring,
+                                       sloc=sloc)
                     
                     # Edge: File CONTAINS Class/Function
                     self.graph.add_edge(rel_path, node_id, relationship='contains')
