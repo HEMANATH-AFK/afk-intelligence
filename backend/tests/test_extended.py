@@ -193,3 +193,27 @@ def test_graph_extractor_docstring():
         
         assert extractor.graph.nodes[parent_node]["docstring"] == "This is Parent docstring"
         assert extractor.graph.nodes[func_node]["docstring"] == "This is func docstring"
+
+def test_graph_extractor_sloc():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        file_path = Path(tmpdir) / "app.py"
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(
+                "class Parent:\n"
+                "    def test(self):\n"
+                "        pass\n\n"
+                "def func():\n"
+                "    x = 1\n"
+                "    return x\n"
+            )
+        extractor = GraphExtractor(tmpdir)
+        extractor.build_graph()
+        
+        parent_node = "app.py::Parent"
+        func_node = "app.py::func"
+        
+        assert parent_node in extractor.graph.nodes
+        assert func_node in extractor.graph.nodes
+        
+        assert extractor.graph.nodes[parent_node]["sloc"] == 3
+        assert extractor.graph.nodes[func_node]["sloc"] == 3
