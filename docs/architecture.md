@@ -73,3 +73,6 @@ Memory is composed of a long-term semantic vector database combined with short-t
 
 ### Security: Sandbox Isolation Boundary
 The TerminalSandbox isolates all shell execution. Path resolution checks prevent directory traversal, ensuring command operations are limited to the configured workspace root directory.
+
+### State: Serialization and Snapshot Backups
+Before execution, file systems state is preserved by caching file contents under the snapshot manager. This enables automatic recovery if an unexpected execution error occurs.
