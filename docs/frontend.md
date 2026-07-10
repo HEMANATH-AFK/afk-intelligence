@@ -56,3 +56,6 @@ Telemetry displays metrics in dynamic cards mapping to throughput rates, respons
 
 ### Motion: Micro-Animations Guidelines
 All navigation button hovers, dropdown transitions, and slide-in drawers use framer-motion with smooth, subtle damping settings.
+
+### Tailwinds: Color Palette Configurations
+Custom colors mapped in configuration files: `primary` (blue-500), `surface` (slate-50), and `border` (slate-200) coordinates for minimal light-mode layouts.
