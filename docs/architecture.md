@@ -67,3 +67,6 @@ The system operates on a state machine loop: `PARSE_INTENT` -> `PLAN_ACTION` -> 
 
 ### Events: Pub-Sub Architecture
 All tool runs and execution steps broadcast structured event payloads to a Redis channel. The API server listens to this channel and streams events directly to the frontend clients in real time.
+
+### Memory: Hybrid Fusion Model
+Memory is composed of a long-term semantic vector database combined with short-term episodic snapshot logs. High-relevance context is selected based on cosine similarity scores.
