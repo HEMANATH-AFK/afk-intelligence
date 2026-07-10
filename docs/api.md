@@ -50,3 +50,6 @@ All chat requests sent to `/api/chat/` must validate against the Pydantic schema
 
 ### API: Stream Event Serialization format
 SSE stream events follow the format `data: {"event": "event_type", "message": "text", "payload": {}}`. Clients should parse each text line as JSON if prefix matching occurs.
+
+### API: Workspace Scan Endpoint
+The `/api/workspace/scan` endpoint returns details on detected programming technologies, recursive file metrics, and standard configuration files found in root.
