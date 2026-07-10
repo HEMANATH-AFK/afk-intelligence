@@ -53,3 +53,6 @@ Commands classified as `MEDIUM` or `HIGH` risk trigger an approval requirement, 
 
 ### Snapshots: Backups before modification
 Before performing file-write operations, the snapshot manager copies the original files to a session directory, preserving system state.
+
+### Recovery: Rollback Operations
+If a runtime action fails, the operator can request a rollback. The snapshot manager recovers cached file copies and overwrites modified versions.
