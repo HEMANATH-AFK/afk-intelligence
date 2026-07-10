@@ -50,3 +50,6 @@ When changing directories (`cd`), the target path is resolved to its absolute pa
 
 ### Safety: Approval Workflows
 Commands classified as `MEDIUM` or `HIGH` risk trigger an approval requirement, pausing execution until the operator clicks approve in the UI.
+
+### Snapshots: Backups before modification
+Before performing file-write operations, the snapshot manager copies the original files to a session directory, preserving system state.
