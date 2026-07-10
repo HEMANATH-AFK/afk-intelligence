@@ -25,3 +25,6 @@ Indexes are configured on the `messages` collection for fields `session_id` and 
 
 ### Relational: PostgreSQL SQLAlchemy Connections
 The SQLAlchemy engine uses an asyncpg driver. Connection pool limits are set to 20 connections max with an idle recycle timeout of 3600 seconds.
+
+### Migrations: Database Schema Operations
+Execute database migrations using Alembic commands. Apply pending changes inside the container via: `poetry run alembic upgrade head`.
