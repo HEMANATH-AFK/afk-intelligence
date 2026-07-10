@@ -40,3 +40,6 @@ Metadata for snapshots and rollbacks are persisted in SQLite (`afk_local.db`), r
 
 ### Search: Vector Embeddings Index
 Cosine distance matches are calculated in PostgreSQL using the pgvector extension. Index type HNSW is used for high-dimensional vector search operations.
+
+### Schema: Immutable Audit DB requirements
+Audit entries contain immutable attributes: auto-increment ID, SHA-256 integrity hash of event context, creation timestamp, and operator signature.
