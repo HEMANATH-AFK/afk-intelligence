@@ -56,3 +56,6 @@ The `/api/workspace/scan` endpoint returns details on detected programming techn
 
 ### API: Execution Approval Schema
 When a tool action requires approval, the API generates a response with status code `202 Accepted` and returns an approval payload with a unique ID.
+
+### API: Chat Session History Retrieval
+Retrieve conversation history using the `/api/chat/history` endpoint, supporting optional query parameters `limit` and `offset` for pagination.
