@@ -34,3 +34,6 @@ Redis caches parsed AST directory metadata of workspace scanning. Cache entries 
 
 ### Reliability: Database Connection Retry Logic
 If the database connection fails on startup, the application attempts reconnection up to 5 times with exponential backoff delays (1s, 2s, 4s, 8s, 16s).
+
+### Backups: Snapshot Backup Storage
+Metadata for snapshots and rollbacks are persisted in SQLite (`afk_local.db`), recording original paths, backup locations, and active session tags.
