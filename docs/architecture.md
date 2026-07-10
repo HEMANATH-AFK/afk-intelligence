@@ -82,3 +82,6 @@ Long-running tasks such as large workspace indexings or deep code refactorings a
 
 ### Telemetry: Continuous Monitoring Aggregator
 The telemetry engine tracks token generation rates, model inference latency, and system memory consumption, presenting real-time graphs on the front-end interface.
+
+### Audit: Immutable Event Logs
+Every execution event, model prompt, and system response is stored in a append-only database collection to guarantee tracking transparency and compliance reviews.
