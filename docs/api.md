@@ -62,3 +62,8 @@ Retrieve conversation history using the `/api/chat/history` endpoint, supporting
 
 ### API: Real-Time Telemetry Retrieval
 Fetch active telemetry records from the `/api/telemetry` endpoint, returning metrics like current CPU usage, RAM capacity, and active agent threads.
+
+### Errors: HTTP Status Code Reference
+- `400 Bad Request`: Input syntax issues.
+- `403 Forbidden`: Blocked execution command.
+- `500 Internal Error`: Backend runtime failures.
