@@ -70,3 +70,6 @@ All tool runs and execution steps broadcast structured event payloads to a Redis
 
 ### Memory: Hybrid Fusion Model
 Memory is composed of a long-term semantic vector database combined with short-term episodic snapshot logs. High-relevance context is selected based on cosine similarity scores.
+
+### Security: Sandbox Isolation Boundary
+The TerminalSandbox isolates all shell execution. Path resolution checks prevent directory traversal, ensuring command operations are limited to the configured workspace root directory.
