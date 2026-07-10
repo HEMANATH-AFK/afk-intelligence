@@ -79,3 +79,6 @@ Before execution, file systems state is preserved by caching file contents under
 
 ### Tasks: Celery Task Queuing
 Long-running tasks such as large workspace indexings or deep code refactorings are dispatched asynchronously to Celery workers using Redis as the broker.
+
+### Telemetry: Continuous Monitoring Aggregator
+The telemetry engine tracks token generation rates, model inference latency, and system memory consumption, presenting real-time graphs on the front-end interface.
