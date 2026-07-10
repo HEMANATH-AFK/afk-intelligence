@@ -42,3 +42,6 @@ The design system is fully theme-aware, utilizing CSS custom properties declared
 
 ### Style: Minimal Premium Visual System
 The user interface uses a high-contrast white layout base. Accent styling changes colors based on the cobalt, lavender, or emerald themes.
+
+### Routing: Component Structure Map
+Routing is managed via react-router. Main app frames are wrapped in the `AuthLayout` for sign-in steps and `OperationalShell` for cognitive operations.
