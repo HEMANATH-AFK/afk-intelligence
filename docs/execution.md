@@ -44,3 +44,6 @@ Commands matching `rm`, `del`, `format`, `mkfs`, redirection to dev directories,
 
 ### Monitoring: Execution Duration Tracking
 The TerminalSandbox measures execution time for every command run, logging values in the history records to flag slow processing steps.
+
+### Security: Path Traversal Safeguards
+When changing directories (`cd`), the target path is resolved to its absolute path. The sandbox verifies it lies strictly within the project workspace.
