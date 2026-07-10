@@ -34,3 +34,7 @@ When a high-risk tool execution is requested:
 2. Yields a real-time `TOOL_CALL` event to the frontend client via Server-Sent Events (SSE).
 3. The UI renders a modal highlighting the command, the agent's explanation, and the risk classification.
 4. If approved, the socket returns a confirmation and execution resumes. If rejected, the workflow step is aborted safely.
+
+
+### Policy: Whitelisted Sandbox Commands
+The sandbox permits basic commands: `ls`, `dir`, `git status`, `git log`, `npm list`, `pip list`, `python --version`, and core read-only git operations.
