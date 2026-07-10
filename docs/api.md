@@ -67,3 +67,8 @@ Fetch active telemetry records from the `/api/telemetry` endpoint, returning met
 - `400 Bad Request`: Input syntax issues.
 - `403 Forbidden`: Blocked execution command.
 - `500 Internal Error`: Backend runtime failures.
+
+### Example: Workspace Scan API curl request
+```bash
+curl -X POST http://localhost:8000/api/workspace/scan -H "Content-Type: application/json" -d '{"path": "/workspace"}'
+```
