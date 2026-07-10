@@ -37,3 +37,6 @@ If the database connection fails on startup, the application attempts reconnecti
 
 ### Backups: Snapshot Backup Storage
 Metadata for snapshots and rollbacks are persisted in SQLite (`afk_local.db`), recording original paths, backup locations, and active session tags.
+
+### Search: Vector Embeddings Index
+Cosine distance matches are calculated in PostgreSQL using the pgvector extension. Index type HNSW is used for high-dimensional vector search operations.
