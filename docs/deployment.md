@@ -52,3 +52,6 @@ To enable HTTPS in production deployments, configure Certbot certificates and ma
 
 ### System: Systemd Autostart Configuration
 Create a systemd unit configuration file `afk-runtime.service` mapping executable directories to launch the docker compose process during system boot cycles.
+
+### Storage: Persistent Storage Bindings
+Always mount persistent volumes for postgres data (`/var/lib/postgresql/data`) and mongodb directories to prevent session data loss during container upgrades.
