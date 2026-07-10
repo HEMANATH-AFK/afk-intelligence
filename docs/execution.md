@@ -56,3 +56,6 @@ Before performing file-write operations, the snapshot manager copies the origina
 
 ### Recovery: Rollback Operations
 If a runtime action fails, the operator can request a rollback. The snapshot manager recovers cached file copies and overwrites modified versions.
+
+### Env: Context Variable Propagation
+The Sandbox merges custom environment settings configured for the workspace session, enabling path alignments for dependencies.
