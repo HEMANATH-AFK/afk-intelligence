@@ -75,3 +75,7 @@ Expected response:
   "status": "online"
 }
 ```
+
+
+### Troubleshooting: Custom Ollama Host URL
+If Ollama is running on a different port or server, set the `OLLAMA_URL` environment variable to point to the correct endpoint (e.g., `http://192.168.1.50:11434`).
