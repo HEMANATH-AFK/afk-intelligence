@@ -85,3 +85,6 @@ To run Llama3 or larger models efficiently, ensure at least 8GB of VRAM is avail
 
 ### Troubleshooting: Docker Network Conflicts
 If port `8000` or `5173` is already in use, modify the port mappings in your `docker-compose.yml` or check for active processes with `netstat -aon` on Windows.
+
+### Troubleshooting: Docker Socket Permissions
+On Linux or macOS, if you encounter permission errors accessing the Docker socket, add your user to the `docker` group or run the command with `sudo` prefix where appropriate.
