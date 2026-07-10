@@ -41,3 +41,6 @@ The evaluation result is parsed as a structured JSON object containing:
 
 ### Intents: Command Classifier Logic
 The parser classifies operator instructions. Safe commands execute immediately, while modification tasks request tool plans.
+
+### Reflection: Output Evaluation Checklist
+The reflection agent evaluates output results against criteria: does code compile, do tests pass, does syntax meet quality guidelines.
