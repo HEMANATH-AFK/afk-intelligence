@@ -49,3 +49,6 @@ An Nginx routing reverse proxy is recommended to map port 80 requests to fronten
 
 ### Security: Let's Encrypt SSL Certificates
 To enable HTTPS in production deployments, configure Certbot certificates and map key credentials in the web server configurations.
+
+### System: Systemd Autostart Configuration
+Create a systemd unit configuration file `afk-runtime.service` mapping executable directories to launch the docker compose process during system boot cycles.
