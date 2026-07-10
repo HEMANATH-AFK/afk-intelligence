@@ -46,3 +46,6 @@ Specify standard json-file logging limits: max-size set to `10m` and max-file co
 
 ### Network: Reverse Proxy Routing Setup
 An Nginx routing reverse proxy is recommended to map port 80 requests to frontend (5173) and `/api/*` endpoints to the FastAPI backend (8000).
+
+### Security: Let's Encrypt SSL Certificates
+To enable HTTPS in production deployments, configure Certbot certificates and map key credentials in the web server configurations.
