@@ -55,3 +55,6 @@ Create a systemd unit configuration file `afk-runtime.service` mapping executabl
 
 ### Storage: Persistent Storage Bindings
 Always mount persistent volumes for postgres data (`/var/lib/postgresql/data`) and mongodb directories to prevent session data loss during container upgrades.
+
+### Guidelines: Staging Environment Deployments
+Before main production releases, deploy images on a staging instance with test workspace folders configured to verify tool execute operations.
