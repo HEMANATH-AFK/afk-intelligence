@@ -91,3 +91,6 @@ On Linux or macOS, if you encounter permission errors accessing the Docker socke
 
 ### Testing: Running Backend Unit Tests
 You can run unit tests using the make command: `make test-backend`. This will execute pytest inside the running backend container.
+
+### Setup: VSCode Python Virtual Environment
+Ensure your editor recognizes the virtual environment inside `backend/venv` by selecting it as the workspace Python interpreter via the command palette (`Ctrl+Shift+P` -> Python: Select Interpreter).
