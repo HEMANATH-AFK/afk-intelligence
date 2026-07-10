@@ -41,3 +41,6 @@ The sandbox permits basic commands: `ls`, `dir`, `git status`, `git log`, `npm l
 
 ### Policy: Blacklisted Destructive Operations
 Commands matching `rm`, `del`, `format`, `mkfs`, redirection to dev directories, or prefix commands like `sudo` are strictly blocked immediately.
+
+### Monitoring: Execution Duration Tracking
+The TerminalSandbox measures execution time for every command run, logging values in the history records to flag slow processing steps.
