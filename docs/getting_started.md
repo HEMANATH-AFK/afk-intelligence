@@ -82,3 +82,6 @@ If Ollama is running on a different port or server, set the `OLLAMA_URL` environ
 
 ### Resource Tip: Ollama Memory Allocation
 To run Llama3 or larger models efficiently, ensure at least 8GB of VRAM is available. You can optimize memory usage by stopping background applications that consume GPU resources.
+
+### Troubleshooting: Docker Network Conflicts
+If port `8000` or `5173` is already in use, modify the port mappings in your `docker-compose.yml` or check for active processes with `netstat -aon` on Windows.
