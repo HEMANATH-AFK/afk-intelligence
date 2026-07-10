@@ -40,3 +40,6 @@ Configure limits in `docker-compose.yml` to prevent Out-Of-Memory events: backen
 
 ### Compose: Service Restart Policies
 Services use `restart: unless-stopped` with active healthchecks checking database responsiveness every 30 seconds before starting dependent containers.
+
+### Compose: Log Rotation Drivers
+Specify standard json-file logging limits: max-size set to `10m` and max-file count set to `3` to protect local disks from log overflows.
