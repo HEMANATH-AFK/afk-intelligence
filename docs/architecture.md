@@ -76,3 +76,6 @@ The TerminalSandbox isolates all shell execution. Path resolution checks prevent
 
 ### State: Serialization and Snapshot Backups
 Before execution, file systems state is preserved by caching file contents under the snapshot manager. This enables automatic recovery if an unexpected execution error occurs.
+
+### Tasks: Celery Task Queuing
+Long-running tasks such as large workspace indexings or deep code refactorings are dispatched asynchronously to Celery workers using Redis as the broker.
