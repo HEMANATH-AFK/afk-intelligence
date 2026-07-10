@@ -62,3 +62,6 @@ Custom colors mapped in configuration files: `primary` (blue-500), `surface` (sl
 
 ### CSS: Custom Scrollbars Styling
 Scrollable timeline panels use custom scrollbar styling in `index.css` to hide standard fat bars, replacing them with thin slate-200 lines.
+
+### Components: Modal Animation Wrappers
+Modals like the manual approval dialog use `AnimatePresence` to enable fade-in and slide-down animations during display state toggles.
