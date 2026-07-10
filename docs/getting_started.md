@@ -94,3 +94,6 @@ You can run unit tests using the make command: `make test-backend`. This will ex
 
 ### Setup: VSCode Python Virtual Environment
 Ensure your editor recognizes the virtual environment inside `backend/venv` by selecting it as the workspace Python interpreter via the command palette (`Ctrl+Shift+P` -> Python: Select Interpreter).
+
+### Setup: Frontend Dependency Setup
+To run the frontend locally without docker, install dependencies using `npm install` inside the `frontend` directory, and start the development server using `npm run dev`.
