@@ -38,3 +38,6 @@ When a high-risk tool execution is requested:
 
 ### Policy: Whitelisted Sandbox Commands
 The sandbox permits basic commands: `ls`, `dir`, `git status`, `git log`, `npm list`, `pip list`, `python --version`, and core read-only git operations.
+
+### Policy: Blacklisted Destructive Operations
+Commands matching `rm`, `del`, `format`, `mkfs`, redirection to dev directories, or prefix commands like `sudo` are strictly blocked immediately.
