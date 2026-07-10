@@ -28,3 +28,6 @@ The SQLAlchemy engine uses an asyncpg driver. Connection pool limits are set to 
 
 ### Migrations: Database Schema Operations
 Execute database migrations using Alembic commands. Apply pending changes inside the container via: `poetry run alembic upgrade head`.
+
+### Cache: Redis Schema Caching Layer
+Redis caches parsed AST directory metadata of workspace scanning. Cache entries expire automatically after a 10-minute TTL or on file change notifications.
