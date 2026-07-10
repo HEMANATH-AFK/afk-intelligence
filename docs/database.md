@@ -22,3 +22,6 @@ Settings are managed via a Pydantic `BaseSettings` schema that parses environmen
 
 ### Indexes: MongoDB Session Collections
 Indexes are configured on the `messages` collection for fields `session_id` and `timestamp` to ensure swift lookup speeds during chat history loading.
+
+### Relational: PostgreSQL SQLAlchemy Connections
+The SQLAlchemy engine uses an asyncpg driver. Connection pool limits are set to 20 connections max with an idle recycle timeout of 3600 seconds.
