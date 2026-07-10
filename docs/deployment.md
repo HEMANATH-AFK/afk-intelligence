@@ -33,3 +33,7 @@ The root `Makefile` automates repetitive workflows for local operators.
 * **`make build`**
   - Triggers Docker Compose build commands for all container configurations.
   - Command: `docker compose up --build`
+
+
+### Compose: Container Resource Limitations
+Configure limits in `docker-compose.yml` to prevent Out-Of-Memory events: backend containers should limit memory usage to 2GB, frontend to 512MB.
