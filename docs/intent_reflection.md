@@ -44,3 +44,6 @@ The parser classifies operator instructions. Safe commands execute immediately, 
 
 ### Reflection: Output Evaluation Checklist
 The reflection agent evaluates output results against criteria: does code compile, do tests pass, does syntax meet quality guidelines.
+
+### Prompts: Validation Verification Steps
+System prompts are periodically scanned using validation metrics to prevent prompt injections or command escapes.
