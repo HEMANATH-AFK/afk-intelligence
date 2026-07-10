@@ -48,3 +48,8 @@ Routing is managed via react-router. Main app frames are wrapped in the `AuthLay
 
 ### Telemetry: Visual Metrics Dashboards
 Telemetry displays metrics in dynamic cards mapping to throughput rates, response latency, memory occupancy, and active task queues.
+
+### State: Zustand Stores Map
+- `useOrchestrationStore`: Logs messages, stages, active workflows.
+- `useTelemetryStore`: Logs real-time metrics.
+- `useContextStore`: Manages hypothesis context.
