@@ -31,3 +31,6 @@ Execute database migrations using Alembic commands. Apply pending changes inside
 
 ### Cache: Redis Schema Caching Layer
 Redis caches parsed AST directory metadata of workspace scanning. Cache entries expire automatically after a 10-minute TTL or on file change notifications.
+
+### Reliability: Database Connection Retry Logic
+If the database connection fails on startup, the application attempts reconnection up to 5 times with exponential backoff delays (1s, 2s, 4s, 8s, 16s).
