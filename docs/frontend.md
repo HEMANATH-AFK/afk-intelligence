@@ -38,3 +38,7 @@ The design system is fully theme-aware, utilizing CSS custom properties declared
 ### Implementation Helpers
 - `.glass-panel`: Applies standard CSS backdrop-blur rules for visual layers.
 - Accented highlights, scrollbars, focus states, and select dropdowns automatically morph variables based on the active theme class attached to the root document.
+
+
+### Style: Minimal Premium Visual System
+The user interface uses a high-contrast white layout base. Accent styling changes colors based on the cobalt, lavender, or emerald themes.
