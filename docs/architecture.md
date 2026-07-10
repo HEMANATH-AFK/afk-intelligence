@@ -64,3 +64,6 @@ Statically extracts codebase semantics to build a directed graph of workspace co
 
 ### Core: Cognitive State Loop
 The system operates on a state machine loop: `PARSE_INTENT` -> `PLAN_ACTION` -> `EXECUTE_STEP` -> `REFLECT_RESULT`. This sequence is tracked and broadcasted via the SSE streaming endpoint.
+
+### Events: Pub-Sub Architecture
+All tool runs and execution steps broadcast structured event payloads to a Redis channel. The API server listens to this channel and streams events directly to the frontend clients in real time.
