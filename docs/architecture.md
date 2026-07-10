@@ -60,3 +60,7 @@ Maintains local directory snapshots under `.afk_backups`:
 Statically extracts codebase semantics to build a directed graph of workspace components:
 - **Entity Representation:** Files, classes, and functions are represented as nodes.
 - **Relationship Scanning:** Identifies imports, file containment, module calls, and **class inheritance (`inherits`)** hierarchies to mapped symbols.
+
+
+### Core: Cognitive State Loop
+The system operates on a state machine loop: `PARSE_INTENT` -> `PLAN_ACTION` -> `EXECUTE_STEP` -> `REFLECT_RESULT`. This sequence is tracked and broadcasted via the SSE streaming endpoint.
