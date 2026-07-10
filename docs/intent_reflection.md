@@ -37,3 +37,7 @@ The evaluation result is parsed as a structured JSON object containing:
 - `analysis` (string details)
 - `requires_remediation` (boolean)
 - `next_suggestion` (string)
+
+
+### Intents: Command Classifier Logic
+The parser classifies operator instructions. Safe commands execute immediately, while modification tasks request tool plans.
