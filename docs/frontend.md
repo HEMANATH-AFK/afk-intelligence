@@ -59,3 +59,6 @@ All navigation button hovers, dropdown transitions, and slide-in drawers use fra
 
 ### Tailwinds: Color Palette Configurations
 Custom colors mapped in configuration files: `primary` (blue-500), `surface` (slate-50), and `border` (slate-200) coordinates for minimal light-mode layouts.
+
+### CSS: Custom Scrollbars Styling
+Scrollable timeline panels use custom scrollbar styling in `index.css` to hide standard fat bars, replacing them with thin slate-200 lines.
