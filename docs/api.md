@@ -59,3 +59,6 @@ When a tool action requires approval, the API generates a response with status c
 
 ### API: Chat Session History Retrieval
 Retrieve conversation history using the `/api/chat/history` endpoint, supporting optional query parameters `limit` and `offset` for pagination.
+
+### API: Real-Time Telemetry Retrieval
+Fetch active telemetry records from the `/api/telemetry` endpoint, returning metrics like current CPU usage, RAM capacity, and active agent threads.
