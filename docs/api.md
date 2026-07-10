@@ -53,3 +53,6 @@ SSE stream events follow the format `data: {"event": "event_type", "message": "t
 
 ### API: Workspace Scan Endpoint
 The `/api/workspace/scan` endpoint returns details on detected programming technologies, recursive file metrics, and standard configuration files found in root.
+
+### API: Execution Approval Schema
+When a tool action requires approval, the API generates a response with status code `202 Accepted` and returns an approval payload with a unique ID.
