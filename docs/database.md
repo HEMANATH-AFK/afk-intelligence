@@ -18,3 +18,7 @@ Settings are managed via a Pydantic `BaseSettings` schema that parses environmen
 - `DB_NAME`: The database namespace to store sessions (defaults to `afk_intelligence`).
 - `OLLAMA_URL`: Local endpoint routing LLM requests (defaults to `http://localhost:11434`).
 - `DEFAULT_MODEL`: The default inference model loaded for chat orchestration (defaults to `gemma:2b`).
+
+
+### Indexes: MongoDB Session Collections
+Indexes are configured on the `messages` collection for fields `session_id` and `timestamp` to ensure swift lookup speeds during chat history loading.
