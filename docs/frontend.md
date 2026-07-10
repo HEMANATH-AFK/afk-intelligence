@@ -45,3 +45,6 @@ The user interface uses a high-contrast white layout base. Accent styling change
 
 ### Routing: Component Structure Map
 Routing is managed via react-router. Main app frames are wrapped in the `AuthLayout` for sign-in steps and `OperationalShell` for cognitive operations.
+
+### Telemetry: Visual Metrics Dashboards
+Telemetry displays metrics in dynamic cards mapping to throughput rates, response latency, memory occupancy, and active task queues.
