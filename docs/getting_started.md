@@ -88,3 +88,6 @@ If port `8000` or `5173` is already in use, modify the port mappings in your `do
 
 ### Troubleshooting: Docker Socket Permissions
 On Linux or macOS, if you encounter permission errors accessing the Docker socket, add your user to the `docker` group or run the command with `sudo` prefix where appropriate.
+
+### Testing: Running Backend Unit Tests
+You can run unit tests using the make command: `make test-backend`. This will execute pytest inside the running backend container.
