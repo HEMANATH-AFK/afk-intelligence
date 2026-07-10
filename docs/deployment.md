@@ -37,3 +37,6 @@ The root `Makefile` automates repetitive workflows for local operators.
 
 ### Compose: Container Resource Limitations
 Configure limits in `docker-compose.yml` to prevent Out-Of-Memory events: backend containers should limit memory usage to 2GB, frontend to 512MB.
+
+### Compose: Service Restart Policies
+Services use `restart: unless-stopped` with active healthchecks checking database responsiveness every 30 seconds before starting dependent containers.
