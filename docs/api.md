@@ -47,3 +47,6 @@ Connects human-in-the-loop validation checkpoints.
 
 ### Validation: Chat Input Constraints
 All chat requests sent to `/api/chat/` must validate against the Pydantic schema requiring a non-empty `message` string and a valid model identifier.
+
+### API: Stream Event Serialization format
+SSE stream events follow the format `data: {"event": "event_type", "message": "text", "payload": {}}`. Clients should parse each text line as JSON if prefix matching occurs.
