@@ -53,3 +53,6 @@ Telemetry displays metrics in dynamic cards mapping to throughput rates, respons
 - `useOrchestrationStore`: Logs messages, stages, active workflows.
 - `useTelemetryStore`: Logs real-time metrics.
 - `useContextStore`: Manages hypothesis context.
+
+### Motion: Micro-Animations Guidelines
+All navigation button hovers, dropdown transitions, and slide-in drawers use framer-motion with smooth, subtle damping settings.
