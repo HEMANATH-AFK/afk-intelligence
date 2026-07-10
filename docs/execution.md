@@ -47,3 +47,6 @@ The TerminalSandbox measures execution time for every command run, logging value
 
 ### Security: Path Traversal Safeguards
 When changing directories (`cd`), the target path is resolved to its absolute path. The sandbox verifies it lies strictly within the project workspace.
+
+### Safety: Approval Workflows
+Commands classified as `MEDIUM` or `HIGH` risk trigger an approval requirement, pausing execution until the operator clicks approve in the UI.
