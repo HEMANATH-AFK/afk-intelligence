@@ -97,3 +97,6 @@ Ensure your editor recognizes the virtual environment inside `backend/venv` by s
 
 ### Setup: Frontend Dependency Setup
 To run the frontend locally without docker, install dependencies using `npm install` inside the `frontend` directory, and start the development server using `npm run dev`.
+
+### OS Specific: Windows PowerShell execution policy
+If running scripts inside PowerShell fails with an execution policy error, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in your active shell session.
