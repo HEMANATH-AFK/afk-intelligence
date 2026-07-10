@@ -43,3 +43,7 @@ Connects human-in-the-loop validation checkpoints.
 
 * **POST `/api/execution/approve/{approval_id}`**: Signals that the user has authorized a pending command.
 * **POST `/api/execution/reject/{approval_id}`**: Rejects/aborts a pending agent command.
+
+
+### Validation: Chat Input Constraints
+All chat requests sent to `/api/chat/` must validate against the Pydantic schema requiring a non-empty `message` string and a valid model identifier.
